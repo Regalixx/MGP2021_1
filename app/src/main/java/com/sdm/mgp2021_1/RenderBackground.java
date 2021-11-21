@@ -31,7 +31,7 @@ public class RenderBackground implements EntityBase { //renderbackground is an e
 
     @Override
     public void Init(SurfaceView _view) {
-        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.gamescene); //LOAD GAME SCENE BACKGROUND
+        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.cyberbackground); //LOAD GAME SCENE BACKGROUND
 
         //Find the screen height and width
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
@@ -46,10 +46,10 @@ public class RenderBackground implements EntityBase { //renderbackground is an e
     @Override
     public void Update(float _dt) {
 
-        xPos -= _dt *  500; //deals w the speed of moving the screen
+        yPos -= _dt *  500; //deals w the speed of moving the screen
 
-        if (xPos < - ScreenWidth) { //if image position goes less than the widh of screen, set it to 0
-            xPos = 0;
+        if (yPos < - ScreenHeight) { //if image position goes less than the widh of screen, set it to 0
+            yPos = 0;
         }
 
     }
@@ -59,7 +59,7 @@ public class RenderBackground implements EntityBase { //renderbackground is an e
         // to draw things on the screen
 
         _canvas.drawBitmap(scaledbmp, xPos, yPos, null); // 1st image
-        _canvas.drawBitmap(scaledbmp, xPos + ScreenWidth, yPos, null); //2nd image, draw the next one if it goes off screen
+        _canvas.drawBitmap(scaledbmp, xPos , yPos + ScreenHeight, null); //2nd image, draw the next one if it goes off screen
 
 
     }
