@@ -3,12 +3,13 @@ package com.sdm.mgp2021_1;
 // Created by TanSiewLan2021
 
 public interface Collidable {
-    String GetType();
 
-    float GetPosX();
-    float GetPosY();
-    float GetRadius();
+    public String GetType();
 
-    void OnHit(Collidable _other);
+    public float GetPosX();
+    public float GetPosY();
+    public float GetRadius();
+
+    public void OnHit(Collidable _other);
 }
 
