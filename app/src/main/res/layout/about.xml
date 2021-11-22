@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/cyber">
+    android:background="@drawable/cyberborder">
 
 
     <ImageButton
@@ -34,36 +34,36 @@
 
     <TextView
         android:id="@+id/AboutDesc"
-        android:layout_width="400dp"
-        android:layout_height="75dp"
+        android:layout_width="354dp"
+        android:layout_height="65dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="140dp"
-        android:layout_marginRight="2dp"
+        android:layout_marginTop="154dp"
+        android:layout_marginRight="19dp"
         android:text="Your objective is to fight against the cyber threats that come at you by dodging or attacking them."
         android:textColor="#00d933"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/AboutDesc2"
-        android:layout_width="391dp"
-        android:layout_height="96dp"
+        android:layout_width="358dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="229dp"
-        android:layout_marginRight="6dp"
+        android:layout_marginTop="252dp"
+        android:layout_marginRight="14dp"
         android:text="Encounter different types of cyber threats such as scammers, bullies, and addiction. Each cyber threat has their own attack patterns and weaknesses."
         android:textColor="#00d933"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/AboutDesc3"
-        android:layout_width="391dp"
-        android:layout_height="96dp"
+        android:layout_width="325dp"
+        android:layout_height="77dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="351dp"
-        android:layout_marginRight="6dp"
+        android:layout_marginTop="375dp"
+        android:layout_marginRight="43dp"
         android:text="Clear all 3 waves in order to win the game."
         android:textColor="#00d933"
         android:textSize="18sp" />

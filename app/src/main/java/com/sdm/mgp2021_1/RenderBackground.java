@@ -46,7 +46,7 @@ public class RenderBackground implements EntityBase { //renderbackground is an e
     @Override
     public void Update(float _dt) {
 
-        yPos -= _dt *  500; //deals w the speed of moving the screen
+        yPos -= _dt *  1000; //deals w the speed of moving the screen
 
         if (yPos < - ScreenHeight) { //if image position goes less than the widh of screen, set it to 0
             yPos = 0;

@@ -17,17 +17,17 @@ public interface EntityBase
         ENT_DEFAULT,
     }
 
-    boolean IsDone();
-    void SetIsDone(boolean _isDone);
+        boolean IsDone();
+        void SetIsDone(boolean _isDone);
 
-    void Init(SurfaceView _view);
-    void Update(float _dt);
-    void Render(Canvas _canvas);
+        void Init(SurfaceView _view);
+        void Update(float _dt);
+        void Render(Canvas _canvas);
 
-    boolean IsInit();
+        boolean IsInit();
 
-    int GetRenderLayer();
-    void SetRenderLayer(int _newLayer);
+        int GetRenderLayer();
+        void SetRenderLayer(int _newLayer);
 
 	ENTITY_TYPE GetEntityType();
 }

@@ -62,6 +62,8 @@ public class UpdateThread extends Thread {
 
         StateManager.Instance.Start("MainGame");  // To edit to whichever state to start with.
 
+
+        //Change splashPage to be a state -->Then this field is  here will be "SplashState";
         // This is the game loop
         while (isRunning && StateManager.Instance.GetCurrentState() != "INVALID")
         {
