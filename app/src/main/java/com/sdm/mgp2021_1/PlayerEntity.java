@@ -79,10 +79,10 @@ public class PlayerEntity implements EntityBase, Collidable {
                     0.0f,xPos,yPos,imgRadius ) || hasCollided){
 
                 hasCollided = true;
-
-                xPos = TouchManager.Instance.GetPosX();
-                yPos = TouchManager.Instance.GetPosY();
             }
+
+            xPos = TouchManager.Instance.GetPosX();
+            yPos = TouchManager.Instance.GetPosY();
         }
         //Do nothing if it is not the main game state
         //if(StateManager.Instance.GetCurrentState()=="Default"){

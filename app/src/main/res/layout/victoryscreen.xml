@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/victory">
+
+
+    <TextView
+        android:id="@+id/GameOver"
+
+        android:layout_width="375dp"
+        android:layout_height="116dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="42dp"
+        android:layout_marginRight="-71dp"
+        android:text="YOU WIN!"
+        android:textColor="#ff0000"
+        android:textSize="45dp" />
+
+    <TextView
+        android:id="@+id/TotalScore"
+
+        android:layout_width="375dp"
+        android:layout_height="116dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="130dp"
+        android:layout_marginRight="-99dp"
+        android:text="Total Score:"
+        android:textColor="#fcfc00"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/waves"
+
+        android:layout_width="375dp"
+        android:layout_height="116dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="195dp"
+        android:layout_marginRight="-42dp"
+        android:text="Waves survived:"
+        android:textColor="#00ff2a"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btn_retry"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="299dp"
+        android:layout_marginRight="128dp"
+        android:background="@drawable/button"
+        android:text="RETRY"
+        android:textColor="#32faf7"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_menu"
+        android:layout_width="147dp"
+        android:layout_height="52dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="382dp"
+        android:layout_marginRight="128dp"
+        android:background="@drawable/button"
+        android:text="MENU"
+        android:textColor="#32faf7"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_quit"
+        android:layout_width="147dp"
+        android:layout_height="52dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="468dp"
+        android:layout_marginRight="130dp"
+        android:background="@drawable/button"
+        android:text="QUIT"
+        android:textColor="#32faf7"
+        android:textSize="18dp" />
+</RelativeLayout>
