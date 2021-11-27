@@ -178,7 +178,7 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     @Override
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "NextEntity") //Change this to enemy entity
+        if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
             lives -= 1;
             SetIsDone(true);

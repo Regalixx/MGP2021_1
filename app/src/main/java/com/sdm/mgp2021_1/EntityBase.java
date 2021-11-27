@@ -9,25 +9,23 @@ public interface EntityBase
 {
  	 //used for entities such as background
     enum ENTITY_TYPE{
-        ENT_PLAYER,
-        //ENT_SMURF,
-        //ENT_PAUSE,
-        //ENT_TEXT,
-        //ENT_NEXT,
+        ENT_PLAYER, //our titular main character
+         ENT_EVIL, //things that kill the player
+         ENT_PAUSE, //pause button
         ENT_DEFAULT,
     }
 
-        boolean IsDone();
-        void SetIsDone(boolean _isDone);
+        public boolean IsDone();
+        public void SetIsDone(boolean _isDone);
 
-        void Init(SurfaceView _view);
-        void Update(float _dt);
-        void Render(Canvas _canvas);
+        public void Init(SurfaceView _view);
+        public void Update(float _dt);
+        public void Render(Canvas _canvas);
 
-        boolean IsInit();
+        public boolean IsInit();
 
-        int GetRenderLayer();
-        void SetRenderLayer(int _newLayer);
+        public int GetRenderLayer();
+        public void SetRenderLayer(int _newLayer);
 
-	ENTITY_TYPE GetEntityType();
+	public ENTITY_TYPE GetEntityType();
 }
