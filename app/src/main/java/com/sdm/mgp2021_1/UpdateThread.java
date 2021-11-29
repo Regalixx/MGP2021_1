@@ -25,6 +25,7 @@ public class UpdateThread extends Thread {
 
 		// Manage your managers if there is any
         StateManager.Instance.Init(_view); // State manager
+        ResourceManager.Instance.Init(_view); //Resource Manager
         EntityManager.Instance.Init(_view); // Entity Manager
         GameSystem.Instance.Init(_view); // GameSystem Manager
 

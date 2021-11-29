@@ -29,6 +29,7 @@ public class MainGameSceneState implements StateBase {
         RenderBackground.Create(); //Background is an entity
         PlayerEntity.Create();
         BulletEntity.Create();
+        RenderTextEntity.Create(); // This  is the text
         // Example to include another Renderview for Pause Button
     }
 

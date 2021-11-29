@@ -11,6 +11,7 @@ public class RenderBackground implements EntityBase { //renderbackground is an e
 
     private boolean isDone = false;
     private Bitmap bmp = null;
+    //private Bitmap ship = null;
 
     private Bitmap scaledbmp;
     int ScreenWidth, ScreenHeight;
@@ -32,7 +33,6 @@ public class RenderBackground implements EntityBase { //renderbackground is an e
     @Override
     public void Init(SurfaceView _view) {
         bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.cyberbackground); //LOAD GAME SCENE BACKGROUND
-
         //Find the screen height and width
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
         ScreenWidth = metrics.widthPixels; //get the width of screen
@@ -40,6 +40,7 @@ public class RenderBackground implements EntityBase { //renderbackground is an e
 
         scaledbmp = Bitmap.createScaledBitmap(bmp, ScreenWidth, ScreenHeight, true);
 
+       // ship = ResourceManager.Instance.GetBitmap(R.drawable.ship2_1);
 
     }
 

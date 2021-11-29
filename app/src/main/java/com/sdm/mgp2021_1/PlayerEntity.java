@@ -56,7 +56,8 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     @Override
     public void Init(SurfaceView _view){
-        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.sans2);
+        //bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.sans2);
+        bmp = ResourceManager.Instance.GetBitmap(R.drawable.sans2);
 
         isInit = true;
 
