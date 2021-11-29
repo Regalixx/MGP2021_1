@@ -3,42 +3,37 @@ package com.sdm.mgp2021_1;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.util.DisplayMetrics;
-import android.view.SurfaceView;
 import android.graphics.Matrix;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.SurfaceView;
 
-import androidx.constraintlayout.helper.widget.Layer;
+public class BulletEntity implements EntityBase, Collidable {
 
-import org.w3c.dom.Entity;
+    public static final BulletEntity Instance = new BulletEntity();
 
-public class PlayerEntity implements EntityBase, Collidable {
     public Bitmap bmp = null;
     private Bitmap scaledbmp = null;
+    public boolean shoot = false;
 
     private boolean isDone = false;
 
     int screenWidth,screenHeight;
 
+
     public float yStart;
 
-    private int lives = 3;
-    private int wavesurvived = 0;
     public float xPos = 0;
     public float yPos = 0;
 
     private float yLimit = 0;
     private float xLimit = 0;
 
-    private float flapAmount = 0;
-    private float gravityVec = 0;
-    private boolean tapGuard = false;
+    int damage = 0;
 
     private int RenderLayer = 0; //Layer1 to be rendered.  Check layerconstant.Java
     private boolean isInit = false;
     private boolean hasCollided = false;
-
-
-
 
 
     @Override
@@ -52,20 +47,17 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     }
 
-
-
     @Override
     public void Init(SurfaceView _view){
-        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.sans2);
+        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.bullet);
 
         isInit = true;
 
         //Setup all our variables
+
         xPos = _view.getWidth()* 0.5f; //setting the x position to spawn
         yStart = yPos = _view.getHeight() * 0.9f; //setting the y position to spawn
         yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
-
-
 
     }
 
@@ -81,34 +73,35 @@ public class PlayerEntity implements EntityBase, Collidable {
                 hasCollided = true;
             }
 
-            xPos = TouchManager.Instance.GetPosX();
+           // xPos = TouchManager.Instance.GetPosX();
             //yPos = TouchManager.Instance.GetPosY();
         }
+        if (shoot == true)
+        {
+            yPos += _dt *  250; //deals w the speed of moving the screen
+
+            //if (yPos < - screenHeight) { //if image position goes less than the widh of screen, set it to 0
+
+            //}
+        }
+
 
         //Gravity
-       // gravityVec += _dt * 10.0f;
+        // gravityVec += _dt * 10.0f;
         //yPos += gravityVec;
-
-        if (lives <= 0){
-            StateManager.Instance.ChangeState("GameOver");
-        }
-    }
-
-    private void Flap() {
-        gravityVec = -flapAmount;
     }
 
     @Override
     public void Render(Canvas _canvas) {
-
-
-        Matrix transform = new Matrix();
-        transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
+        //Matrix transform = new Matrix();
+       // transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
 
         //Scale and rotate here
-       transform.postTranslate(xPos,yPos);
-       _canvas.drawBitmap(bmp, transform, null);
-
+        //transform.postTranslate(xPos,yPos);
+        //_canvas.drawBitmap(bmp, transform, null);
+        if (shoot == true) {
+            _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
+        }
 
     }
 
@@ -129,18 +122,18 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     @Override
     public ENTITY_TYPE GetEntityType() {
-        return ENTITY_TYPE.ENT_PLAYER;
+        return ENTITY_TYPE.ENT_BULLET;
     }
 
     public static PlayerEntity Create() {
         PlayerEntity result = new PlayerEntity();
-        EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_PLAYER);
+        EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_BULLET);
         return result;
     }
 
     @Override
     public String GetType() {
-        return "PlayerEntity";
+        return "BulletEntity";
     }
 
     @Override
@@ -166,4 +159,5 @@ public class PlayerEntity implements EntityBase, Collidable {
             SetIsDone(true);
         }
     }
+
 }

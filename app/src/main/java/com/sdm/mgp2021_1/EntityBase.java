@@ -10,6 +10,7 @@ public interface EntityBase
  	 //used for entities such as background
     enum ENTITY_TYPE{
         ENT_PLAYER, //our titular main character
+         ENT_BULLET, // bullet that player can shoot
          ENT_EVIL, //things that kill the player
          ENT_PAUSE, //pause button
         ENT_DEFAULT,

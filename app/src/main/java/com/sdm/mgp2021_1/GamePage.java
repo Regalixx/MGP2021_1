@@ -5,9 +5,13 @@ package com.sdm.mgp2021_1;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class GamePage extends Activity {
 
@@ -36,6 +40,27 @@ public class GamePage extends Activity {
         TouchManager.Instance.Update(x, y, event.getAction());
 
         return true;
+    }
+
+    private  class SwipeListener implements View.OnTouchListener {
+        //Initialize variable
+        GestureDetector gestureDetector;
+
+        //Create constructor
+
+
+        SwipeListener(View view) {
+            int threshold = 100;
+            //int_velocity_threshold = 100;
+
+            //Initialize  simple gesture listener
+           // GestureDetector.SimpleOnGestureListener = new GestureDetector.SimpleOnGestureListener()
+        }
+        @Override
+        public boolean onTouch (View view, MotionEvent motionEvent){
+            return false;
+        }
+
     }
 
 }

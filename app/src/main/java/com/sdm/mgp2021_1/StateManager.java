@@ -5,6 +5,8 @@ package com.sdm.mgp2021_1;
 // StateManager to deal with which state is current or next.
 
 import android.graphics.Canvas;
+import android.graphics.RenderEffect;
+import android.view.Surface;
 import android.view.SurfaceView;
 
 import java.util.HashMap;
@@ -93,5 +95,11 @@ public class StateManager {
 
     public void Clean(){
         stateMap.clear();
+    }
+
+    public void OnEnter(SurfaceView _surfaceview){
+        //Create all background entities
+        //RenderBackground.Create();
+
     }
 }
