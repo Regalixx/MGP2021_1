@@ -19,6 +19,15 @@ public class EnemyBasic implements EntityBase, Collidable {
 
     private int RenderLayer = 0;
 
+
+    //Enemy Stats
+    private float health = 0.0f;
+
+    //Enemy Methods
+    public void SetHealth(float hp) { health = hp;}
+    public float GetHealth() { return health;}
+
+
     //EntityBase
     public boolean IsDone() {return isDone;};
     public void SetIsDone(boolean _isDone) { isDone = _isDone;};
@@ -26,10 +35,13 @@ public class EnemyBasic implements EntityBase, Collidable {
     public void Init(SurfaceView _view) {
         bmp = ResourceManager.Instance.GetBitmap(R.drawable.sans2);
         isInit = true;
-
+        pos.x = 2;
+        pos.y = 2;
 
     };
-    public void Update(float _dt) {};
+    public void Update(float _dt) {
+        //spawn bullets
+    };
     public void Render(Canvas _canvas) {
         Matrix transform = new Matrix();
         transform.postTranslate(-bmp.getWidth() * 0.5f, 0);
