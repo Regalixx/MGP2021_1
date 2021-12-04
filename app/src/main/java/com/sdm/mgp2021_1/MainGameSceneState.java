@@ -28,7 +28,7 @@ public class MainGameSceneState implements StateBase {
     {
         RenderBackground.Create(); //Background is an entity
         PlayerEntity.Create();
-        BulletEntity.Create();
+
         EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC);
         RenderTextEntity.Create(); // This  is the text
         // Example to include another Renderview for Pause Button
@@ -49,7 +49,6 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.Update(_dt);
             //Example of touch on screen in the main game to trigger back to Main menu
             //StateManager.Instance.ChangeState("Mainmenu");
-
     }
 
     @Override

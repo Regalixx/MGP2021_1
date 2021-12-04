@@ -15,6 +15,7 @@ public class BulletEntity implements EntityBase, Collidable {
     public Bitmap bmp = null;
     private Bitmap scaledbmp = null;
     public boolean shoot = false;
+    public boolean toggleshoot  = false;
 
     private boolean isDone = false;
 
@@ -64,7 +65,9 @@ public class BulletEntity implements EntityBase, Collidable {
     @Override
     public void Update(float _dt) {
 
-        if (TouchManager.Instance.HasTouch()){
+
+
+        if (TouchManager.Instance.HasTouch()){ //the moment player touch on the screen
             //Check Collision here!
             float imgRadius = bmp.getWidth() * 0.5f;
             if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(),
@@ -73,18 +76,10 @@ public class BulletEntity implements EntityBase, Collidable {
                 hasCollided = true;
             }
 
-           // xPos = TouchManager.Instance.GetPosX();
-            //yPos = TouchManager.Instance.GetPosY();
-        }
-        if (shoot == true)
-        {
-            yPos += _dt *  250; //deals w the speed of moving the screen
-
-            //if (yPos < - screenHeight) { //if image position goes less than the widh of screen, set it to 0
-
-            //}
         }
 
+
+        yPos -= _dt *  250;
 
         //Gravity
         // gravityVec += _dt * 10.0f;
@@ -99,9 +94,10 @@ public class BulletEntity implements EntityBase, Collidable {
         //Scale and rotate here
         //transform.postTranslate(xPos,yPos);
         //_canvas.drawBitmap(bmp, transform, null);
-        if (shoot == true) {
+      //  if (shoot == true) {
+            Log.d("Shoot","Has been RENDERED");
             _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
-        }
+       // }
 
     }
 
@@ -125,8 +121,8 @@ public class BulletEntity implements EntityBase, Collidable {
         return ENTITY_TYPE.ENT_BULLET;
     }
 
-    public static PlayerEntity Create() {
-        PlayerEntity result = new PlayerEntity();
+    public static BulletEntity Create() {
+        BulletEntity result = new BulletEntity();
         EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_BULLET);
         return result;
     }
@@ -158,6 +154,10 @@ public class BulletEntity implements EntityBase, Collidable {
 
             SetIsDone(true);
         }
+    }
+
+    public void SetShoot(){
+        shoot = true;
     }
 
 }

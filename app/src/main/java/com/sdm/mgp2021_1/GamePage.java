@@ -5,6 +5,7 @@ package com.sdm.mgp2021_1;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Debug;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,10 +13,13 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.view.GestureDetectorCompat;
 
-public class GamePage extends Activity {
+public class GamePage extends AppCompatActivity {
 
     public static GamePage Instance = null;
+    private GestureDetectorCompat gestureDetectorCompat = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +32,22 @@ public class GamePage extends Activity {
         Instance = this;
 
         setContentView(new GameView(this)); // Surfaceview = GameView
+
+        // Create a common gesture listener object.
+        DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
+        // Set activity to the gesture listener
+        gestureListener.setActivity(this);
+        // Create the gesture detector with the gesture listener.
+        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
+
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
+    public boolean onTouchEvent(MotionEvent event) {
         // WE are hijacking the touch event into our own system
+
+        gestureDetectorCompat.onTouchEvent(event);
+
         int x = (int) event.getX();
         int y = (int) event.getY();
 
@@ -42,26 +56,14 @@ public class GamePage extends Activity {
         return true;
     }
 
-    private  class SwipeListener implements View.OnTouchListener {
-        //Initialize variable
-        GestureDetector gestureDetector;
-
-        //Create constructor
-
-
-        SwipeListener(View view) {
-            int threshold = 100;
-            //int_velocity_threshold = 100;
-
-            //Initialize  simple gesture listener
-           // GestureDetector.SimpleOnGestureListener = new GestureDetector.SimpleOnGestureListener()
-        }
-        @Override
-        public boolean onTouch (View view, MotionEvent motionEvent){
-            return false;
-        }
+    public void DisplayBullet(){
+        BulletEntity.Create();
 
     }
 
-}
 
+
+
+
+
+}

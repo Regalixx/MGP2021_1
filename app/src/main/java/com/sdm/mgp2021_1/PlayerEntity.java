@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.graphics.Matrix;
 
@@ -83,6 +84,7 @@ public class PlayerEntity implements EntityBase, Collidable {
             }
 
             xPos = TouchManager.Instance.GetPosX();
+
             //yPos = TouchManager.Instance.GetPosY();
         }
 
