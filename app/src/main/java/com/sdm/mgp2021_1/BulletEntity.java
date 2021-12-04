@@ -17,6 +17,7 @@ public class BulletEntity implements EntityBase, Collidable {
     public boolean shoot = false;
     private boolean renderBullet = false;
     public boolean toggleshoot  = false;
+    public int EnemiesKilled = 0;
 
     private boolean isDone = false;
 
@@ -57,8 +58,8 @@ public class BulletEntity implements EntityBase, Collidable {
 
         //Setup all our variables
 
-        xPos = _view.getWidth()* 0.5f; //setting the x position to spawn
-        yStart = yPos = _view.getHeight() * 0.9f; //setting the y position to spawn
+        xPos = PlayerEntity.Instance.xPos; //setting the x position to spawn
+        yStart = yPos = PlayerEntity.Instance.yPos; //setting the y position to spawn
         yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
 
     }
@@ -75,12 +76,16 @@ public class BulletEntity implements EntityBase, Collidable {
                     0.0f,xPos,yPos,imgRadius ) || hasCollided){
 
                 hasCollided = true;
+
+
             }
 
         }
 
+        shoot = true;
 
-        yPos -= _dt *  250;
+
+        yPos -= _dt *  550;
 
         //Gravity
         // gravityVec += _dt * 10.0f;
@@ -95,10 +100,11 @@ public class BulletEntity implements EntityBase, Collidable {
         //Scale and rotate here
         //transform.postTranslate(xPos,yPos);
         //_canvas.drawBitmap(bmp, transform, null);
-      //  if (shoot == true) {
+        if (shoot == true) {
             Log.d("Shoot","Has been RENDERED");
             _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
-       // }
+
+       }
 
     }
 
@@ -152,13 +158,13 @@ public class BulletEntity implements EntityBase, Collidable {
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
-
             SetIsDone(true);
+            Log.d("Collided", "Collided");
+
+
         }
     }
 
-    public void SetShoot(){
-        shoot = true;
-    }
+
 
 }

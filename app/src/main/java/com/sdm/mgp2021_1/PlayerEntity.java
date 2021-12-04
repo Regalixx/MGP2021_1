@@ -13,6 +13,9 @@ import androidx.constraintlayout.helper.widget.Layer;
 import org.w3c.dom.Entity;
 
 public class PlayerEntity implements EntityBase, Collidable {
+
+    public static PlayerEntity Instance = null;
+
     public Bitmap bmp = null;
     private Bitmap scaledbmp = null;
 
@@ -37,9 +40,6 @@ public class PlayerEntity implements EntityBase, Collidable {
     private int RenderLayer = 0; //Layer1 to be rendered.  Check layerconstant.Java
     private boolean isInit = false;
     private boolean hasCollided = false;
-
-
-
 
 
     @Override
@@ -67,7 +67,7 @@ public class PlayerEntity implements EntityBase, Collidable {
         yStart = yPos = _view.getHeight() * 0.9f; //setting the y position to spawn
         yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
 
-
+        Instance = this;
 
     }
 

@@ -3,6 +3,7 @@ package com.sdm.mgp2021_1;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.util.Log;
 import android.view.SurfaceView;
 
 public class EnemyBasic implements EntityBase, Collidable {
@@ -35,7 +36,7 @@ public class EnemyBasic implements EntityBase, Collidable {
     public void Init(SurfaceView _view) {
         bmp = ResourceManager.Instance.GetBitmap(R.drawable.sans2);
         isInit = true;
-        pos.x = 2;
+        pos.x = 650;
         pos.y = 2;
 
     };
@@ -47,7 +48,9 @@ public class EnemyBasic implements EntityBase, Collidable {
         transform.postTranslate(-bmp.getWidth() * 0.5f, 0);
 
         transform.postTranslate(pos.x,pos.y);
-        _canvas.drawBitmap(bmp, transform, null);
+
+
+            _canvas.drawBitmap(bmp, transform, null);
     };
 
     @Override
@@ -70,8 +73,9 @@ public class EnemyBasic implements EntityBase, Collidable {
     };
 
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "ENT_BULLET") {
+        if (_other.GetType() == "BulletEntity") {
             SetIsDone(true);
+
         }
 
     };

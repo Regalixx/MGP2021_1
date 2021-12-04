@@ -7,6 +7,8 @@ import android.view.SurfaceView;
 
 public class RenderTextEntity implements EntityBase{
 
+
+
     private boolean isDone = false;
 
     //Paint
@@ -18,9 +20,11 @@ public class RenderTextEntity implements EntityBase{
     //Use for loading FPS so need more parameters!
     //we want to load FPS on my screen
     int frameCount;
+   public int EnemiesKill;
     long lastTime = 0;
     long lastFPSTime = 0;
     float FPS;
+
 
 
     public boolean IsDone() {
@@ -45,6 +49,8 @@ public class RenderTextEntity implements EntityBase{
 
         long currentTime = System.currentTimeMillis();
 
+
+
         lastTime = currentTime;
 
         if (currentTime - lastFPSTime > 1000){
@@ -64,6 +70,7 @@ public class RenderTextEntity implements EntityBase{
         paint.setTypeface(myFont);
         paint.setTextSize(70);
         _canvas.drawText ("FPS: " + (int)FPS, 30, 80, paint); //For now, default member but u can use _view.getWidth / ?
+        _canvas.drawText("Killed:" + EnemiesKill,50,400,paint);
     }
 
 
