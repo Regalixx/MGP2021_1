@@ -15,6 +15,7 @@ public class GameSystem {
     // Singleton Pattern : Blocks others from creating
     private GameSystem()
     {
+
     }
 
     public void Update(float _deltaTime)

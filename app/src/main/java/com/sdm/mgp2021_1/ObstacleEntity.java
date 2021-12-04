@@ -1,18 +1,15 @@
 package com.sdm.mgp2021_1;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.util.DisplayMetrics;
-import android.view.SurfaceView;
 import android.graphics.Matrix;
+import android.view.SurfaceView;
 
-import androidx.constraintlayout.helper.widget.Layer;
+import java.util.Random;
 
-import org.w3c.dom.Entity;
-
-public class PlayerEntity implements EntityBase, Collidable {
+public class ObstacleEntity implements EntityBase,Collidable {
     public Bitmap bmp = null;
+
     private Bitmap scaledbmp = null;
 
     private boolean isDone = false;
@@ -21,24 +18,17 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     public float yStart;
 
-    private int lives = 3;
-    private int wavesurvived = 0;
-    public float xPos = 0;
-    public float yPos = 0;
+    private int health = 3;
+    private float speed = 5;
+    public float xPos = 0,yPos = 0, xStart = 0;
+
 
     private float yLimit = 0;
     private float xLimit = 0;
 
-    private float flapAmount = 0;
-    private float gravityVec = 0;
-    private boolean tapGuard = false;
-
     private int RenderLayer = 0; //Layer1 to be rendered.  Check layerconstant.Java
     private boolean isInit = false;
     private boolean hasCollided = false;
-
-
-
 
 
     @Override
@@ -53,13 +43,27 @@ public class PlayerEntity implements EntityBase, Collidable {
     }
 
 
-
     @Override
     public void Init(SurfaceView _view){
         //bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.sans2);
-        bmp = ResourceManager.Instance.GetBitmap(R.drawable.sans2);
+        bmp = ResourceManager.Instance.GetBitmap(R.drawable.ship2_1);
 
         isInit = true;
+
+        //Option 1
+        // Make this entity destroyable/ respwawned all the time (using lives variable)
+
+        //Option 2
+        //Make this object IMMORTAL. loop it all again and again.
+
+        //Randomize a location to spawn on screen
+        Random ranGen = new Random();
+        xStart = xPos =  _view.getWidth();
+        screenHeight = _view.getHeight();
+        yPos =  ranGen.nextInt() % screenHeight;
+
+        // Set a speed to cross the screen
+        speed = _view.getWidth() * 0.5f;
 
         //Setup all our variables
         xPos = _view.getWidth()* 0.5f; //setting the x position to spawn
@@ -72,6 +76,26 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     @Override
     public void Update(float _dt) {
+
+        //Check if  current state is where?
+        //If (StateManager.Instance.GetCurrentState()  != "MainGame");
+        //return;
+
+        xPos -= speed * _dt;
+        //Check if we are out of the screen
+        if (xPos <= -bmp.getHeight() * 0.5f){
+            //Move it to another location
+            xPos = xStart;
+            Random ranGen = new Random();
+            yPos = ranGen.nextInt() % screenHeight;
+        }
+
+
+        //Check collision player or another object
+
+       // if (Collision.SphereToSphere(xPos, yPos, bmp.getWidth() * 0.5f,GameSystem.Instance.Ship.xPos, GameSystem.Instance.Ship.yPos,GameSystem.Instance.Ship.bmp.getWidth() * 0.5f)) {
+
+        //}
 
         if (TouchManager.Instance.HasTouch()){
             //Check Collision here!
@@ -87,18 +111,11 @@ public class PlayerEntity implements EntityBase, Collidable {
         }
 
         //Gravity
-       // gravityVec += _dt * 10.0f;
+        // gravityVec += _dt * 10.0f;
         //yPos += gravityVec;
 
-        if (lives <= 0){
-            StateManager.Instance.ChangeState("GameOver");
-        }
-    }
 
-    private void Flap() {
-        gravityVec = -flapAmount;
     }
-
     @Override
     public void Render(Canvas _canvas) {
 
@@ -107,8 +124,8 @@ public class PlayerEntity implements EntityBase, Collidable {
         transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
 
         //Scale and rotate here
-       transform.postTranslate(xPos,yPos);
-       _canvas.drawBitmap(bmp, transform, null);
+        transform.postTranslate(xPos,yPos);
+        _canvas.drawBitmap(bmp, transform, null);
 
 
     }
@@ -156,7 +173,7 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     @Override
     public float GetRadius() {
-        return bmp.getHeight() * 0.5f;
+        return 0;
     }
 
     @Override
@@ -167,4 +184,5 @@ public class PlayerEntity implements EntityBase, Collidable {
             SetIsDone(true);
         }
     }
+
 }
