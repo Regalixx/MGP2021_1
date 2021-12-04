@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Debug;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -58,7 +59,6 @@ public class GamePage extends AppCompatActivity {
 
     public void DisplayBullet(){
         BulletEntity.Create();
-
     }
 
 

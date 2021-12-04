@@ -10,11 +10,12 @@ import android.view.SurfaceView;
 
 public class BulletEntity implements EntityBase, Collidable {
 
-    //public static final BulletEntity Instance = new BulletEntity();
+
 
     public Bitmap bmp = null;
     private Bitmap scaledbmp = null;
     public boolean shoot = false;
+    private boolean renderBullet = false;
     public boolean toggleshoot  = false;
 
     private boolean isDone = false;
