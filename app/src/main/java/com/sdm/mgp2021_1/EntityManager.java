@@ -19,6 +19,7 @@ public class EntityManager {
 
     private EntityManager()
     {
+
     }
 
     public void Init(SurfaceView _view)
