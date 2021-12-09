@@ -141,7 +141,7 @@ public class BulletEntity implements EntityBase, Collidable {
 
     @Override
     public String GetType() {
-        return "BulletEntity";
+        return "ENT_BULLET";
     }
 
     @Override

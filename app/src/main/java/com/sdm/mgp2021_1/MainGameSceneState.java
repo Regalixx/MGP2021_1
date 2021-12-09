@@ -35,7 +35,7 @@ public class MainGameSceneState implements StateBase {
         TrashbinEntity.Create();
         PausebuttonEntity.Create();
        // EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC);
-        EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BOSS);
+        EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BOSS, new Vector3(metrics.widthPixels*0.5f,2,0));
         RenderTextEntity.Create(); // This  is the text
         // Example to include another Renderview for Pause Button
     }

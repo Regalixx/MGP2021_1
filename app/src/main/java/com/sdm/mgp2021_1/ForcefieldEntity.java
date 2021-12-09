@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceView;
 
 public class ForcefieldEntity implements EntityBase,Collidable {
@@ -154,7 +155,6 @@ public class ForcefieldEntity implements EntityBase,Collidable {
         if (_other.GetType() == "ENT_BULLET") //Change this to enemy entity
         {
            HP -= 1;
-
         }
     }
 

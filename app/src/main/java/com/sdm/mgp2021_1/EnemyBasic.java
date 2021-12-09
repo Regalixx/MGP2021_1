@@ -12,25 +12,24 @@ import java.util.Set;
 
 public class EnemyBasic implements EntityBase, Collidable {
 
-    private Bitmap bmp = null;
+    protected Bitmap bmp = null;
 
-    private Vector3 pos = new Vector3(0,0,0);
+    protected Vector3 pos = new Vector3(0,0,0);
 
     private ENTITY_TYPE type = ENTITY_TYPE.ENT_EVIL;
 
-    private boolean isInit = false;
-    private boolean isDone = false;
+    protected boolean isInit = false;
+    protected boolean isDone = false;
 
     private int RenderLayer = 0;
 
     //Enemy Stats
-    private float health = 0.0f;
+    protected float health = 0.0f;
 
-    private DisplayMetrics metrics;
-    private Vector3 sinespeed = new Vector3(0,0,0);
-    private Vector3 bigspeed = new Vector3(50.f,150.f,0);
-    private Vector3 smallspeed = new Vector3(300.f,-300.f,0);
-    private Vector3 original_pos;
+    protected DisplayMetrics metrics;
+    protected Vector3 bigspeed = new Vector3(50.f,150.f,0);
+    protected Vector3 smallspeed = new Vector3(300.f,-300.f,0);
+    protected Vector3 original_pos;
 
     enum BEHAVIOURS {
         AI_FALL,
@@ -50,9 +49,13 @@ public class EnemyBasic implements EntityBase, Collidable {
     public void SetPos(Vector3 _pos) {
         pos = _pos;
     }
+    //Choose the image you want
+    public void SetBMP(int _id) {
+        bmp = ResourceManager.Instance.GetBitmap(_id);
+    }
 
 
-    private void doBehaviour(float _dt) {
+    protected void doBehaviour(float _dt) {
 
 
 
@@ -122,7 +125,7 @@ public class EnemyBasic implements EntityBase, Collidable {
         }
     }
 
-    private void ConstrainToScreen() {
+    protected void ConstrainToScreen() {
         if (pos.x < bmp.getWidth()*0.5f) {
             pos.x = bmp.getWidth() * 0.5f;
         }
@@ -140,8 +143,16 @@ public class EnemyBasic implements EntityBase, Collidable {
         behaviours.add(ai);
     }
 
+    public void RemoveBehavior(BEHAVIOURS ai) {
+        behaviours.remove(ai);
+    }
+
     public void Init(SurfaceView _view) {
-        bmp = ResourceManager.Instance.GetBitmap(R.drawable.sans2);
+
+        if (bmp == null) {
+            Log.println(Log.ERROR, "Bitmap Error!", "Missing Bitmap for a Basic Enemy! Check EnemyFactory or reflect upon your actions for creating an Enemy without the factory.");
+        }
+
         isInit = true;
         metrics = _view.getResources().getDisplayMetrics();
         original_pos = new Vector3(pos);
@@ -184,7 +195,7 @@ public class EnemyBasic implements EntityBase, Collidable {
     };
 
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "BulletEntity") {
+        if (_other.GetType() == "ENT_BULLET") {
             SetIsDone(true);
 
         }

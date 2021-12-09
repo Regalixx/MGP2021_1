@@ -29,6 +29,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
     private int RenderLayer = 0;
     private boolean reverse = false;
     private boolean renderForcefield = false;
+    private float enemyCooldown = 0.f;
 
     private float cooldown = 5;
     private float popupcooldown = 0;
@@ -45,7 +46,9 @@ public class EnemyBoss1 implements EntityBase,Collidable {
     public boolean IsDone() {return isDone;};
     public void SetIsDone(boolean _isDone) { isDone = _isDone;};
 
+    @Override
     public void Init(SurfaceView _view) {
+
         bmp = ResourceManager.Instance.GetBitmap(R.drawable.scammer);
         isInit = true;
         pos.x = 650;
@@ -57,10 +60,15 @@ public class EnemyBoss1 implements EntityBase,Collidable {
         screenHeight = metrics.heightPixels;
 
         Instance = this;
-
     };
     public void Update(float _dt) {
         //spawn bullets
+
+        if (GetHealth() <= 0) {
+            SetIsDone(true);
+            return;
+        }
+
         if (reverse == false) {
             if (Phase1 == true) {
                 pos.x += _dt * 200;
@@ -76,6 +84,14 @@ public class EnemyBoss1 implements EntityBase,Collidable {
             else if (Phase2 == true){
                 pos.x -= _dt * 400;
             }
+        }
+
+        if (enemyCooldown >= 10) {
+            EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_MINION, pos.Plus(new Vector3(0,bmp.getHeight(), 0)));
+            enemyCooldown = 0;
+        }
+        else {
+            enemyCooldown += 1 * _dt;
         }
 
         if (pos.x >= screenWidth){
@@ -175,6 +191,8 @@ public class EnemyBoss1 implements EntityBase,Collidable {
 
 
     }
+
+
 
 
 }

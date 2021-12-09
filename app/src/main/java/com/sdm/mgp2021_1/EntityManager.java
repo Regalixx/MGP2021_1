@@ -2,6 +2,7 @@ package com.sdm.mgp2021_1;
 
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.SurfaceView;
 
 
