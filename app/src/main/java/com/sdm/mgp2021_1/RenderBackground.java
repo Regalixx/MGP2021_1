@@ -32,6 +32,7 @@ public class RenderBackground implements EntityBase { //renderbackground is an e
 
     @Override
     public void Init(SurfaceView _view) {
+
         bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.cyberbackground); //LOAD GAME SCENE BACKGROUND
         //Find the screen height and width
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();

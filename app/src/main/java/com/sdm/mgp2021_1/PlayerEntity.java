@@ -25,6 +25,7 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     public float yStart;
 
+    private float lifetime;
     private int lives = 3;
     private int wavesurvived = 0;
     public float xPos = 0;
@@ -37,9 +38,13 @@ public class PlayerEntity implements EntityBase, Collidable {
     private float gravityVec = 0;
     private boolean tapGuard = false;
 
+    private Sprite spritePlayer = null;
+
     private int RenderLayer = 0; //Layer1 to be rendered.  Check layerconstant.Java
     private boolean isInit = false;
     private boolean hasCollided = false;
+
+    //private boolean hasTouched = false;
 
 
     @Override
@@ -60,6 +65,8 @@ public class PlayerEntity implements EntityBase, Collidable {
         //bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.sans2);
         bmp = ResourceManager.Instance.GetBitmap(R.drawable.sans2);
 
+        spritePlayer = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4,16);
+
         isInit = true;
 
         //Setup all our variables
@@ -74,23 +81,32 @@ public class PlayerEntity implements EntityBase, Collidable {
     @Override
     public void Update(float _dt) {
 
-        if (TouchManager.Instance.HasTouch()){
+
+
+        spritePlayer.Update(_dt);
+
+      //  if (lifetime < 0.0f ) {
+        //    SetIsDone(true);   // <--- This part here or this code, meant when time is up, kill the items.
+        //}
+
+        if (TouchManager.Instance.HasTouch()) {
             //Check Collision here!
             float imgRadius = bmp.getWidth() * 0.5f;
             if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(),
-                    0.0f,xPos,yPos,imgRadius ) || hasCollided){
+                    0.0f, xPos, yPos, imgRadius)) {
 
                 hasCollided = true;
+                //SetIsDone(true);
             }
 
             xPos = TouchManager.Instance.GetPosX();
-
-            //yPos = TouchManager.Instance.GetPosY();
         }
-
-        //Gravity
-       // gravityVec += _dt * 10.0f;
-        //yPos += gravityVec;
+       // if (TouchManager.Instance.IsDown()) { //Previous and it is for justa touch - useful for collision with image
+         //   float imgRadius = bmp.getWidth() * 0.5f;
+         //   if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(),
+                  //  0.0f,xPos,yPos,imgRadius ) || hasCollided)
+            //SetIsDone(true);
+       // }
 
         if (lives <= 0){
             StateManager.Instance.ChangeState("GameOver");
@@ -104,7 +120,7 @@ public class PlayerEntity implements EntityBase, Collidable {
     @Override
     public void Render(Canvas _canvas) {
 
-
+      //  spritePlayer.Render(_canvas,100,100);
         Matrix transform = new Matrix();
         transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
 
@@ -122,7 +138,7 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     @Override
     public int GetRenderLayer() {
-        return RenderLayer;
+        return LayerConstants.PLAYER_LAYER;
     }
 
     @Override

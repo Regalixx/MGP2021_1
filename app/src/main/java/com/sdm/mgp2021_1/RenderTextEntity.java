@@ -3,16 +3,22 @@ package com.sdm.mgp2021_1;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.SurfaceView;
 
 public class RenderTextEntity implements EntityBase{
 
+    public final static RenderTextEntity Instance = new RenderTextEntity();
 
-
+    private BulletEntity bulletentity = new BulletEntity();
     private boolean isDone = false;
+    boolean EnemyKilled = false;
+    int realEnemiesKilled;
 
     //Paint
+
     Paint paint = new Paint();
+    Paint paint2 = new Paint();
     private int red = 0, green = 0, blue = 0; // 0 - 255
 
     Typeface myFont;
@@ -20,15 +26,12 @@ public class RenderTextEntity implements EntityBase{
     //Use for loading FPS so need more parameters!
     //we want to load FPS on my screen
     int frameCount;
-   public int EnemiesKill;
+    int Enemieskill = 0;
     long lastTime = 0;
     long lastFPSTime = 0;
     float FPS;
 
-
-
     public boolean IsDone() {
-
         return isDone;
     }
 
@@ -45,11 +48,24 @@ public class RenderTextEntity implements EntityBase{
     @Override
     public void Update(float _dt) {
         //get actual fps
+
+
+        if (GameSystem.Instance.GetIsPaused())
+        {
+            return;
+        }
+
         frameCount++;
 
+     if (EnemyDead()){
+         Enemieskill++;
+         bulletentity.SetEnemiesKilled(Enemieskill);
+     }
+
+         realEnemiesKilled = bulletentity.GetEnemiesKilled();
+
+
         long currentTime = System.currentTimeMillis();
-
-
 
         lastTime = currentTime;
 
@@ -69,8 +85,12 @@ public class RenderTextEntity implements EntityBase{
         paint.setStrokeWidth(200);
         paint.setTypeface(myFont);
         paint.setTextSize(70);
+        paint2.setARGB(255,0,235,63);
+        paint2.setStrokeWidth(200);
+        paint2.setTypeface(myFont);
+        paint2.setTextSize(70);
         _canvas.drawText ("FPS: " + (int)FPS, 30, 80, paint); //For now, default member but u can use _view.getWidth / ?
-        _canvas.drawText("Killed:" + EnemiesKill,50,400,paint);
+        _canvas.drawText("Killed:" + realEnemiesKilled,50,400,paint2);
     }
 
 
@@ -98,5 +118,9 @@ public class RenderTextEntity implements EntityBase{
         RenderTextEntity result = new RenderTextEntity();
         EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_TEXT);
         return result;
+    }
+
+    public boolean EnemyDead () {
+        return EnemyKilled;
     }
 }

@@ -16,12 +16,19 @@ public class EnemyFactory {
         if (type.name() == "SPAM_BASIC") {
             SpawnEnemy(30);
         }
+       if (type.name() == "SPAM_BOSS") {
+           SpawnEnemy(100);
+       }
    }
 
    private static void SpawnEnemy(float hp) {
-        EnemyBasic newguy = new EnemyBasic();
-        newguy.SetHealth(hp);
-        EntityManager.Instance.AddEntity(newguy,EntityBase.ENTITY_TYPE.ENT_EVIL);
+       // EnemyBasic newguy = new EnemyBasic();
+       // newguy.SetHealth(hp);
+       // EntityManager.Instance.AddEntity(newguy,EntityBase.ENTITY_TYPE.ENT_EVIL);
+
+       EnemyBoss1 Boss = new EnemyBoss1();
+       Boss.SetHealth(100);
+       EntityManager.Instance.AddEntity(Boss,EntityBase.ENTITY_TYPE.ENT_BOSS1);
 
    }
 
