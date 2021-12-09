@@ -10,19 +10,24 @@ public class EnemyFactory {
        BULLY_BOSS,
        GHOST_BASIC,
        GHOST_BOSS
-   };
-
-   public static void Create(ENEMY_TYPE type) {
-        if (type.name() == "SPAM_BASIC") {
-            SpawnEnemy(30);
-        }
    }
 
-   private static void SpawnEnemy(float hp) {
+   public static void Create(ENEMY_TYPE type, Vector3 position) {
         EnemyBasic newguy = new EnemyBasic();
-        newguy.SetHealth(hp);
-        EntityManager.Instance.AddEntity(newguy,EntityBase.ENTITY_TYPE.ENT_EVIL);
+        newguy.SetPos(position);
+        switch (type.name()) {
+            case "SPAM_BASIC":
+                newguy.SetHealth(30);
+                newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SMALLLEFTRIGHT);
+                newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SWEEPWIDTH);
+                newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_UPDOWN);
+                newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
+                break;
 
+        }
+
+        EntityManager.Instance.AddEntity(newguy, EntityBase.ENTITY_TYPE.ENT_EVIL);
    }
+
 
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
@@ -26,10 +27,11 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void OnEnter(SurfaceView _view)
     {
+        DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
         RenderBackground.Create(); //Background is an entity
         PlayerEntity.Create();
        // BulletEntity.Create();
-        EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC);
+        EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC, new Vector3(metrics.widthPixels*0.5f,2,0));
         RenderTextEntity.Create(); // This  is the text
         // Example to include another Renderview for Pause Button
     }
