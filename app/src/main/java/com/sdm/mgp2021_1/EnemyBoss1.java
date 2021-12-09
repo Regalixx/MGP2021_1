@@ -3,6 +3,7 @@ package com.sdm.mgp2021_1;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 
@@ -12,6 +13,8 @@ public class EnemyBoss1 implements EntityBase,Collidable {
 
     private Bitmap bmp = null;
     private GamePage activity = null;
+
+    int screenWidth,screenHeight;
 
     private Vector3 pos = new Vector3(0,0,0);
 
@@ -45,6 +48,11 @@ public class EnemyBoss1 implements EntityBase,Collidable {
         isInit = true;
         pos.x = 650;
         pos.y = 2;
+        Phase1 = true;
+
+        DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
+        screenWidth = metrics.widthPixels;
+        screenHeight = metrics.heightPixels;
 
         Instance = this;
 
@@ -52,28 +60,33 @@ public class EnemyBoss1 implements EntityBase,Collidable {
     public void Update(float _dt) {
         //spawn bullets
         if (reverse == false) {
-            pos.x += 0.9;
+            pos.x += 1.5;
         }
 
-        if (pos.x >= 900){
+        if (pos.x >= screenWidth){
             reverse = true;
         }
 
+
         if (reverse == true){
-            pos.x -= 0.9;
+            pos.x -= 1.5;
         }
 
-       if (cooldown <= 2) {
-           cooldown += _dt;
-       }
-        if (cooldown >= 2) {
-            GamePage.Instance.DisplayEmails();
-            cooldown = 0;
+        if (Phase1 == true){
+         BossPhase1();
         }
+
+        if (cooldown <= 2) {
+            cooldown += _dt;
+        }
+
+
 
    if (GetHealth() <= 50)
    {
-       cooldown = 1;
+       Phase1 = false;
+       Phase2 = true;
+       BossPhase2();
    }
 
     };
@@ -110,4 +123,22 @@ public class EnemyBoss1 implements EntityBase,Collidable {
        // if (_other.GetType() == "BulletEntity") {
          //   SetIsDone(true);
     };
+
+    public void BossPhase1() {
+
+        if (cooldown >= 2) {
+            GamePage.Instance.DisplayEmails();
+            cooldown = 0;
+        }
+    }
+
+    public void BossPhase2(){
+
+        if (cooldown >= 1) {
+            GamePage.Instance.DisplayEmails();
+            cooldown = 0;
+        }
+    }
+
+
 }

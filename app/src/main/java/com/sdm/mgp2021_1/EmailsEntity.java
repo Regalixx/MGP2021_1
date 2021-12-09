@@ -3,6 +3,7 @@ package com.sdm.mgp2021_1;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 
@@ -61,6 +62,9 @@ public class EmailsEntity implements  EntityBase,Collidable{
         yStart = yPos = EnemyBoss1.Instance.GetPosY(); //setting the y position to spawn
         yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
 
+        DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
+        screenWidth = metrics.widthPixels;
+        screenHeight = metrics.heightPixels;
 
     }
 
@@ -78,6 +82,12 @@ public class EmailsEntity implements  EntityBase,Collidable{
 
 
             }
+
+        }
+
+        if (yPos >  screenHeight){
+            isDone = true;
+            PlayerEntity.Instance.SetHP(PlayerEntity.Instance.GetHP()-5);
 
         }
 

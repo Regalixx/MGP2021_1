@@ -48,8 +48,6 @@ public class TrashbinEntity implements EntityBase,Collidable {
 
     }
 
-
-
     @Override
     public void Init(SurfaceView _view){
         //bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.sans2);

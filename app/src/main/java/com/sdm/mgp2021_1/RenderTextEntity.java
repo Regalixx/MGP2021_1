@@ -14,11 +14,13 @@ public class RenderTextEntity implements EntityBase{
     private boolean isDone = false;
     boolean EnemyKilled = false;
     int realEnemiesKilled;
-
-    //Paint
+    int PlayerHP;
+    int waves;
 
     Paint paint = new Paint();
     Paint paint2 = new Paint();
+    Paint paint3 = new Paint();
+    Paint paint4 = new Paint();
     private int red = 0, green = 0, blue = 0; // 0 - 255
 
     Typeface myFont;
@@ -27,6 +29,7 @@ public class RenderTextEntity implements EntityBase{
     //we want to load FPS on my screen
     int frameCount;
     int Enemieskill = 0;
+    int BOSS1HP;
     long lastTime = 0;
     long lastFPSTime = 0;
     float FPS;
@@ -62,7 +65,13 @@ public class RenderTextEntity implements EntityBase{
          bulletentity.SetEnemiesKilled(Enemieskill);
      }
 
-         realEnemiesKilled = bulletentity.GetEnemiesKilled();
+     PlayerHP = PlayerEntity.Instance.GetHP();
+
+     BOSS1HP = (int)EnemyBoss1.Instance.GetHealth();
+
+     waves = GameSystem.Instance.GetWave();
+
+     realEnemiesKilled = bulletentity.GetEnemiesKilled();
 
 
         long currentTime = System.currentTimeMillis();
@@ -81,16 +90,31 @@ public class RenderTextEntity implements EntityBase{
     @Override
     public void Render(Canvas _canvas){
 
-        paint.setARGB(255,0,235,63);
+        paint.setARGB(255,0,0,255);
         paint.setStrokeWidth(200);
         paint.setTypeface(myFont);
-        paint.setTextSize(70);
+        paint.setTextSize(50);
+
         paint2.setARGB(255,0,235,63);
         paint2.setStrokeWidth(200);
         paint2.setTypeface(myFont);
-        paint2.setTextSize(70);
-        _canvas.drawText ("FPS: " + (int)FPS, 30, 80, paint); //For now, default member but u can use _view.getWidth / ?
-        _canvas.drawText("Killed:" + realEnemiesKilled,50,400,paint2);
+        paint2.setTextSize(50);
+
+        paint3.setARGB(255,255,0,0);
+        paint3.setStrokeWidth(200);
+        paint3.setTypeface(myFont);
+        paint3.setTextSize(50);
+
+        paint4.setARGB(255,255,255,0);
+        paint4.setStrokeWidth(200);
+        paint4.setTypeface(myFont);
+        paint4.setTextSize(50);
+
+        _canvas.drawText ("FPS: " + (int)FPS, 30, 80, paint); //For now, default member but u can use _view.getWidth /
+        //_canvas.drawText("Killed:" + realEnemiesKilled,50,400,paint);
+        _canvas.drawText ("HP: " + (int)PlayerHP, 250, 80, paint2); //For now, default m
+        _canvas.drawText ("Boss HP: " + (int)BOSS1HP, 500, 80, paint3);
+        _canvas.drawText ("Wave: " + (int)waves, 850, 80, paint4);
     }
 
 

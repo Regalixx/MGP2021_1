@@ -8,6 +8,7 @@ import android.view.SurfaceView;
 
 public class GameSystem {
     public final static GameSystem Instance = new GameSystem();
+    int waves = 1;
 
     // Game stuff
     private boolean isPaused = false;
@@ -38,6 +39,10 @@ public class GameSystem {
     public boolean GetIsPaused()
     {
         return isPaused;
+    }
+
+    public int GetWave(){
+        return waves;
     }
 
 }

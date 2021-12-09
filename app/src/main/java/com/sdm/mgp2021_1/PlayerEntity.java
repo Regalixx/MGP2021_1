@@ -26,7 +26,7 @@ public class PlayerEntity implements EntityBase, Collidable {
     public float yStart;
 
     private float lifetime;
-    private int lives = 3;
+    private int HP = 100;
     private int wavesurvived = 0;
     public float xPos = 0;
     public float yPos = 0;
@@ -108,7 +108,7 @@ public class PlayerEntity implements EntityBase, Collidable {
             //SetIsDone(true);
        // }
 
-        if (lives <= 0){
+        if (HP <= 0){
             StateManager.Instance.ChangeState("GameOver");
         }
     }
@@ -181,8 +181,15 @@ public class PlayerEntity implements EntityBase, Collidable {
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
-            lives -= 1;
+            HP -= 5;
             //SetIsDone(true);
         }
+    }
+
+    public int GetHP(){
+        return HP;
+    }
+    public void SetHP(int _hp){
+        HP = _hp;
     }
 }
