@@ -3,14 +3,13 @@ package com.sdm.mgp2021_1;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.util.Log;
-import android.view.MotionEvent;
+import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
-public class BulletEntity implements EntityBase, Collidable {
+import java.util.Set;
 
-    public final static BulletEntity Instance = new BulletEntity();
+public class PopupEntity implements EntityBase,Collidable {
+    public final static PopupEntity Instance = new PopupEntity();
 
     public Bitmap bmp = null;
     private Bitmap scaledbmp = null;
@@ -53,16 +52,19 @@ public class BulletEntity implements EntityBase, Collidable {
 
     @Override
     public void Init(SurfaceView _view){
-        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.bullet);
+        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.popup);
 
         isInit = true;
 
         //Setup all our variables
 
-        xPos = PlayerEntity.Instance.xPos; //setting the x position to spawn
-        yStart = yPos = PlayerEntity.Instance.yPos; //setting the y position to spawn
+        xPos = EnemyBoss1.Instance.GetPosX(); //setting the x position to spawn
+        yStart = yPos = EnemyBoss1.Instance.GetPosY(); //setting the y position to spawn
         yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
 
+        DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
+        screenWidth = metrics.widthPixels;
+        screenHeight = metrics.heightPixels;
 
     }
 
@@ -77,38 +79,38 @@ public class BulletEntity implements EntityBase, Collidable {
                     0.0f,xPos,yPos,imgRadius ) || hasCollided){
 
                 hasCollided = true;
+                SetIsDone(true);
 
 
             }
 
         }
 
-       // if ()
-       // SetIsDone(false);
+        if (yPos >  screenHeight){
+            isDone = true;
+            PlayerEntity.Instance.SetHP(PlayerEntity.Instance.GetHP()-5);
 
-        shoot = true;
+        }
+
+        yPos += _dt *  550;
 
 
-        yPos -= _dt *  550;
 
-        //Gravity
-        // gravityVec += _dt * 10.0f;
-        //yPos += gravityVec;
     }
 
     @Override
     public void Render(Canvas _canvas) {
         //Matrix transform = new Matrix();
-       // transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
+        // transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
 
         //Scale and rotate here
         //transform.postTranslate(xPos,yPos);
         //_canvas.drawBitmap(bmp, transform, null);
-        if (shoot == true) {
-            //Log.d("Shoot","Has been RENDERED");
-            _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
 
-       }
+        //Log.d("Shoot","Has been RENDERED");
+        _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
+
+
 
     }
 
@@ -120,7 +122,7 @@ public class BulletEntity implements EntityBase, Collidable {
     @Override
     public int GetRenderLayer() {
 
-        return LayerConstants.BULLET_LAYER;
+        return LayerConstants.POPUP_LAYER;
     }
 
     @Override
@@ -129,19 +131,19 @@ public class BulletEntity implements EntityBase, Collidable {
     }
 
     @Override
-    public ENTITY_TYPE GetEntityType() {
-        return ENTITY_TYPE.ENT_BULLET;
+    public EntityBase.ENTITY_TYPE GetEntityType() {
+        return EntityBase.ENTITY_TYPE.ENT_EMAILS;
     }
 
-    public static BulletEntity Create() {
-        BulletEntity result = new BulletEntity();
-        EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_BULLET);
+    public static PopupEntity Create() {
+        PopupEntity result = new PopupEntity();
+        EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_POPUP);
         return result;
     }
 
     @Override
     public String GetType() {
-        return "BulletEntity";
+        return "PopupEntity";
     }
 
     @Override
@@ -161,25 +163,12 @@ public class BulletEntity implements EntityBase, Collidable {
 
     @Override
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
+        if (_other.GetType() == "TrashbinEntity") //Change this to enemy entity
         {
             SetIsDone(true);
-            RenderTextEntity.Instance.EnemyKilled = true;
-            EnemiesKilled += 1;
-            Log.d("Collided", Integer.toString((EnemiesKilled)));
+            EnemyBoss1.Instance.SetHealth(EnemyBoss1.Instance.GetHealth()-5);
+            //  Log.d("Collided", Float.toString(EnemyBoss1.Instance.GetHealth()));
         }
     }
-
-    public int GetEnemiesKilled()
-    {
-        return EnemiesKilled;
-    }
-
-    public void SetEnemiesKilled(int killed)
-    {
-        this.EnemiesKilled = killed;
-    }
-
-
 
 }

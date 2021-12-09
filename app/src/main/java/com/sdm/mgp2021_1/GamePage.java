@@ -61,6 +61,10 @@ public class GamePage extends AppCompatActivity {
         BulletEntity.Create();
     }
 
+    public void DisplayEmails(){
+        EmailsEntity.Create();
+    }
+
 
 
 

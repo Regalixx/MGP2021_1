@@ -23,6 +23,11 @@ public class EnemyFactory {
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_UPDOWN);
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
                 break;
+            
+            case "SPAM_BOSS":
+                EnemyBoss1 newguy = new EnemyBoss1();
+                newhuy.SetHealth(100);
+                break;
 
         }
 

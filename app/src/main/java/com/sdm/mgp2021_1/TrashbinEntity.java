@@ -1,24 +1,21 @@
 package com.sdm.mgp2021_1;
 
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.graphics.Matrix;
 
-public class BulletEntity implements EntityBase, Collidable {
 
-    public final static BulletEntity Instance = new BulletEntity();
+public class TrashbinEntity implements EntityBase,Collidable {
+
+    public static TrashbinEntity Instance = null;
 
     public Bitmap bmp = null;
     private Bitmap scaledbmp = null;
-
-    public boolean shoot = false;
-    private boolean renderBullet = false;
-    public boolean toggleshoot  = false;
-    public static int EnemiesKilled;
 
     private boolean isDone = false;
 
@@ -26,14 +23,14 @@ public class BulletEntity implements EntityBase, Collidable {
 
     public float yStart;
 
+    private float lifetime;
+    private int lives = 3;
+    private int wavesurvived = 0;
     public float xPos = 0;
     public float yPos = 0;
 
-
     private float yLimit = 0;
     private float xLimit = 0;
-
-    int damage = 0;
 
     private int RenderLayer = 0; //Layer1 to be rendered.  Check layerconstant.Java
     private boolean isInit = false;
@@ -53,22 +50,27 @@ public class BulletEntity implements EntityBase, Collidable {
 
     @Override
     public void Init(SurfaceView _view){
-        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.bullet);
+        //bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.sans2);
+        bmp = ResourceManager.Instance.GetBitmap(R.drawable.trashbin);
+
+        //spritePlayer = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4,16);
 
         isInit = true;
 
-        //Setup all our variables
-
         xPos = PlayerEntity.Instance.xPos; //setting the x position to spawn
-        yStart = yPos = PlayerEntity.Instance.yPos; //setting the y position to spawn
+        yStart = yPos = _view.getHeight() * 0.75f; //setting the y position to spawn
         yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
 
-
+        Instance = this;
     }
 
     @Override
     public void Update(float _dt) {
 
+
+        //  if (lifetime < 0.0f ) {
+        //    SetIsDone(true);   // <--- This part here or this code, meant when time is up, kill the items.
+        //}
 
         if (TouchManager.Instance.HasTouch()){ //the moment player touch on the screen
             //Check Collision here!
@@ -77,38 +79,25 @@ public class BulletEntity implements EntityBase, Collidable {
                     0.0f,xPos,yPos,imgRadius ) || hasCollided){
 
                 hasCollided = true;
-
-
             }
 
         }
-
-       // if ()
-       // SetIsDone(false);
-
-        shoot = true;
+        xPos = TouchManager.Instance.GetPosX();
 
 
-        yPos -= _dt *  550;
 
-        //Gravity
-        // gravityVec += _dt * 10.0f;
-        //yPos += gravityVec;
-    }
+        }
 
     @Override
     public void Render(Canvas _canvas) {
-        //Matrix transform = new Matrix();
-       // transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
+
+        Matrix transform = new Matrix();
+        transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
 
         //Scale and rotate here
-        //transform.postTranslate(xPos,yPos);
-        //_canvas.drawBitmap(bmp, transform, null);
-        if (shoot == true) {
-            //Log.d("Shoot","Has been RENDERED");
-            _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
+        transform.postTranslate(xPos,yPos);
+        _canvas.drawBitmap(bmp, transform, null);
 
-       }
 
     }
 
@@ -119,8 +108,7 @@ public class BulletEntity implements EntityBase, Collidable {
 
     @Override
     public int GetRenderLayer() {
-
-        return LayerConstants.BULLET_LAYER;
+        return LayerConstants.TRASHBIN_LAYER;
     }
 
     @Override
@@ -129,19 +117,19 @@ public class BulletEntity implements EntityBase, Collidable {
     }
 
     @Override
-    public ENTITY_TYPE GetEntityType() {
-        return ENTITY_TYPE.ENT_BULLET;
+    public EntityBase.ENTITY_TYPE GetEntityType() {
+        return ENTITY_TYPE.ENT_BIN;
     }
 
-    public static BulletEntity Create() {
-        BulletEntity result = new BulletEntity();
-        EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_BULLET);
+    public static TrashbinEntity Create() {
+        TrashbinEntity result = new TrashbinEntity();
+        EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_BIN);
         return result;
     }
 
     @Override
     public String GetType() {
-        return "BulletEntity";
+        return "TrashbinEntity";
     }
 
     @Override
@@ -156,30 +144,17 @@ public class BulletEntity implements EntityBase, Collidable {
 
     @Override
     public float GetRadius() {
-        return 0;
+        return bmp.getHeight() * 0.5f;
     }
 
     @Override
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
+        if (_other.GetType() == "EmailsEntity") //Change this to enemy entity
         {
-            SetIsDone(true);
-            RenderTextEntity.Instance.EnemyKilled = true;
-            EnemiesKilled += 1;
-            Log.d("Collided", Integer.toString((EnemiesKilled)));
+          //  lives -= 1;
+            //Log.d("Collision", "Hello");
+
+            //SetIsDone(true);
         }
     }
-
-    public int GetEnemiesKilled()
-    {
-        return EnemiesKilled;
-    }
-
-    public void SetEnemiesKilled(int killed)
-    {
-        this.EnemiesKilled = killed;
-    }
-
-
-
 }
