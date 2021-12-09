@@ -28,8 +28,10 @@ public class EnemyBoss1 implements EntityBase,Collidable {
     private boolean Phase2 = false;
     private int RenderLayer = 0;
     private boolean reverse = false;
+    private boolean renderForcefield = false;
 
     private float cooldown = 5;
+    private float popupcooldown = 0;
 
     //Enemy Stats
     private float health = 0.0f;
@@ -44,7 +46,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
     public void SetIsDone(boolean _isDone) { isDone = _isDone;};
 
     public void Init(SurfaceView _view) {
-        bmp = ResourceManager.Instance.GetBitmap(R.drawable.sans2);
+        bmp = ResourceManager.Instance.GetBitmap(R.drawable.scammer);
         isInit = true;
         pos.x = 650;
         pos.y = 2;
@@ -60,36 +62,62 @@ public class EnemyBoss1 implements EntityBase,Collidable {
     public void Update(float _dt) {
         //spawn bullets
         if (reverse == false) {
-            pos.x += 1.5;
+            if (Phase1 == true) {
+                pos.x += _dt * 200;
+            }
+            else if (Phase2 == true){
+                pos.x += _dt * 400;
+            }
+        }
+        if (reverse == true){
+            if (Phase1 == true) {
+                pos.x -= _dt * 200;
+            }
+            else if (Phase2 == true){
+                pos.x -= _dt * 400;
+            }
         }
 
         if (pos.x >= screenWidth){
             reverse = true;
         }
 
-
-        if (reverse == true){
-            pos.x -= 1.5;
+        if (pos.x < 0){
+            reverse = false;
         }
 
         if (Phase1 == true){
          BossPhase1();
         }
 
-        if (cooldown <= 2) {
+
+        if (cooldown <= 2 && Phase1 == true) {
             cooldown += _dt;
         }
 
+        if (Phase2 == true) {
+            BossPhase2();
+            cooldown += _dt;
+            popupcooldown += _dt;
+        }
 
 
-   if (GetHealth() <= 50)
-   {
-       Phase1 = false;
-       Phase2 = true;
-       BossPhase2();
-   }
+        if (GetHealth() == 50){
+            renderForcefield = true;
+        }
 
+        if (GetHealth() <= 50)
+        {
+            Phase1 = false;
+            Phase2 = true;
+         }
+
+        if (renderForcefield == true){
+            ForcefieldEntity.Create();
+            renderForcefield = false;
+        }
     };
+
     public void Render(Canvas _canvas) {
         Matrix transform = new Matrix();
         transform.postTranslate(-bmp.getWidth() * 0.5f, 0);
@@ -138,6 +166,14 @@ public class EnemyBoss1 implements EntityBase,Collidable {
             GamePage.Instance.DisplayEmails();
             cooldown = 0;
         }
+
+        if (popupcooldown >= 3) {
+            PopupEntity.Create();
+            popupcooldown = 0;
+        }
+
+
+
     }
 
 

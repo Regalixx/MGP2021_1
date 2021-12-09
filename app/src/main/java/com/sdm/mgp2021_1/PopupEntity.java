@@ -4,12 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.SurfaceView;
 
-public class EmailsEntity implements  EntityBase,Collidable{
+import java.util.Set;
 
-    public final static EmailsEntity Instance = new EmailsEntity();
+public class PopupEntity implements EntityBase,Collidable {
+    public final static PopupEntity Instance = new PopupEntity();
 
     public Bitmap bmp = null;
     private Bitmap scaledbmp = null;
@@ -52,7 +52,7 @@ public class EmailsEntity implements  EntityBase,Collidable{
 
     @Override
     public void Init(SurfaceView _view){
-        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.email);
+        bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.popup);
 
         isInit = true;
 
@@ -79,6 +79,7 @@ public class EmailsEntity implements  EntityBase,Collidable{
                     0.0f,xPos,yPos,imgRadius ) || hasCollided){
 
                 hasCollided = true;
+                SetIsDone(true);
 
 
             }
@@ -93,13 +94,8 @@ public class EmailsEntity implements  EntityBase,Collidable{
 
         yPos += _dt *  550;
 
-        if (EnemyBoss1.Instance.GetHealth() <= 50){
-            yPos += _dt * 700;
-        }
 
-        //Gravity
-        // gravityVec += _dt * 10.0f;
-        //yPos += gravityVec;
+
     }
 
     @Override
@@ -111,8 +107,8 @@ public class EmailsEntity implements  EntityBase,Collidable{
         //transform.postTranslate(xPos,yPos);
         //_canvas.drawBitmap(bmp, transform, null);
 
-            //Log.d("Shoot","Has been RENDERED");
-            _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
+        //Log.d("Shoot","Has been RENDERED");
+        _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
 
 
 
@@ -126,7 +122,7 @@ public class EmailsEntity implements  EntityBase,Collidable{
     @Override
     public int GetRenderLayer() {
 
-        return LayerConstants.EMAIL_LAYER;
+        return LayerConstants.POPUP_LAYER;
     }
 
     @Override
@@ -135,19 +131,19 @@ public class EmailsEntity implements  EntityBase,Collidable{
     }
 
     @Override
-    public ENTITY_TYPE GetEntityType() {
-        return ENTITY_TYPE.ENT_EMAILS;
+    public EntityBase.ENTITY_TYPE GetEntityType() {
+        return EntityBase.ENTITY_TYPE.ENT_EMAILS;
     }
 
-    public static EmailsEntity Create() {
-        EmailsEntity result = new EmailsEntity();
-        EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_EMAILS);
+    public static PopupEntity Create() {
+        PopupEntity result = new PopupEntity();
+        EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_POPUP);
         return result;
     }
 
     @Override
     public String GetType() {
-        return "EmailsEntity";
+        return "PopupEntity";
     }
 
     @Override
@@ -171,11 +167,8 @@ public class EmailsEntity implements  EntityBase,Collidable{
         {
             SetIsDone(true);
             EnemyBoss1.Instance.SetHealth(EnemyBoss1.Instance.GetHealth()-5);
-          //  Log.d("Collided", Float.toString(EnemyBoss1.Instance.GetHealth()));
+            //  Log.d("Collided", Float.toString(EnemyBoss1.Instance.GetHealth()));
         }
     }
-
-
-
 
 }

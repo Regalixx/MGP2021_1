@@ -13,6 +13,8 @@ public interface EntityBase
          ENT_BULLET, // bullet that player can shoot
          ENT_EVIL, //things that kill the player
          ENT_BIN,
+         ENT_FORCEFIELD,
+         ENT_POPUP,
          ENT_BOSS1,
          ENT_EMAILS,
          ENT_PAUSE, //pause button
