@@ -26,7 +26,7 @@ public class EnemyBullet implements EntityBase, Collidable{
     private boolean isDone = false;
     private boolean isInit = false;
 
-    private float speed = 300.f;
+    private float speed = 1000.f;
 
     // <--- entitybase ---> //
 
