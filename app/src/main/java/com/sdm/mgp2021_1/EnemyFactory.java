@@ -30,7 +30,7 @@ public class EnemyFactory {
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SMALLLEFTRIGHT);
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SWEEPWIDTH);
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
-                newguy.SetPattern(EnemyBulletFactory.PATTERN.STRAIGHT);
+                newguy.SetPattern(EnemyBulletFactory.PATTERN.SHOTGUN);
                 enemy = newguy;
                 break;
             case "SPAM_MINION":

@@ -44,6 +44,12 @@ public class EnemyBulletFactory {
             switch (patterns.get(index)) {
                 case STRAIGHT:
                     Spawn(new Vector3(0, 1, 0));
+                    break;
+                case SHOTGUN:
+                    Spawn(new Vector3(0,1,0));
+                    Spawn(new Vector3( 1,1,0));
+                    Spawn(new Vector3(-1,1,0));
+                    break;
 
             }
 
