@@ -41,6 +41,8 @@ public class EnemyBasic implements EntityBase, Collidable {
 
     private Set<BEHAVIOURS> behaviours = new HashSet<BEHAVIOURS>();
 
+    private EnemyBulletFactory bulletspawner = new EnemyBulletFactory();
+
     //     ---- < Enemy Methods > ----     //
     //  Methods that belong to enemyBasic  //
 
@@ -134,11 +136,6 @@ public class EnemyBasic implements EntityBase, Collidable {
         }
     }
 
-    //    ---- < EntityBase > ----    //
-    //     Methods from EntityBase    //
-    public boolean IsDone() {return isDone;}
-    public void SetIsDone(boolean _isDone) { isDone = _isDone;}
-
     public void SetBehaviour(BEHAVIOURS ai) {
         behaviours.add(ai);
     }
@@ -146,6 +143,23 @@ public class EnemyBasic implements EntityBase, Collidable {
     public void RemoveBehavior(BEHAVIOURS ai) {
         behaviours.remove(ai);
     }
+
+
+    //   ---- < EnemyBulletFactory > ---- //
+    //   Things related to spawning bullets //
+
+    public void SetPattern(EnemyBulletFactory.PATTERN type) {
+        bulletspawner.AddPattern(type);
+    }
+
+
+
+
+   //    ---- < EntityBase > ----    //
+   //     Methods from EntityBase    //
+    public boolean IsDone() {return isDone;}
+    public void SetIsDone(boolean _isDone) { isDone = _isDone;}
+
 
     public void Init(SurfaceView _view) {
 
@@ -157,12 +171,15 @@ public class EnemyBasic implements EntityBase, Collidable {
         metrics = _view.getResources().getDisplayMetrics();
         original_pos = new Vector3(pos);
 
+
     };
     public void Update(float _dt) {
         //spawn bullets
-
         //Update movement
         doBehaviour(_dt);
+
+        bulletspawner.SetPos(pos);
+        bulletspawner.Update(_dt);
     };
     public void Render(Canvas _canvas) {
         Matrix transform = new Matrix();

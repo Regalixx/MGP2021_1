@@ -25,12 +25,12 @@ public class EnemyFactory {
             case "SPAM_BASIC":
                 EnemyBasic newguy = new EnemyBasic();
                 newguy.SetHealth(30);
-                newguy.SetBMP(R.drawable.sans);
+                newguy.SetBMP(R.drawable.sans2);
                 newguy.SetPos(position);
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SMALLLEFTRIGHT);
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SWEEPWIDTH);
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
-
+                newguy.SetPattern(EnemyBulletFactory.PATTERN.STRAIGHT);
                 enemy = newguy;
                 break;
             case "SPAM_MINION":
@@ -39,6 +39,7 @@ public class EnemyFactory {
                 otherguy.SetPos(position);
                 otherguy.SetHealth(10);
                 otherguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
+                otherguy.SetPattern(EnemyBulletFactory.PATTERN.STRAIGHT);
                 enemy = otherguy;
                 break;
 
@@ -54,7 +55,7 @@ public class EnemyFactory {
 
         }
         if (enemy != null) {
-            Log.println(Log.DEBUG, "Test", "Boss Spawned? Ran Till here.");
+
             EntityManager.Instance.AddEntity(enemy, EntityBase.ENTITY_TYPE.ENT_EVIL);
         }
    }

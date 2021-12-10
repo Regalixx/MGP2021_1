@@ -59,6 +59,11 @@ public class Vector3 {
         return this;
     }
 
+    // returns value of multiplication
+    public Vector3 Times(float rhs) {
+        return new Vector3(x * rhs, y * rhs, z * rhs);
+    }
+
     public float Dot(Vector3 vector) {
         return x*vector.x + y * vector.y + z * vector.z;
     }
