@@ -52,6 +52,16 @@ public class EnemyFactory {
                 enemy = boss;
 
                 break;
+            case "GHOST_BOSS":
+                EnemyBoss3 boss3 = new EnemyBoss3();
+                boss3.SetBMP(R.drawable.boss3);
+                boss3.SetPos(position);
+                boss3.SetHealth(150);
+                //EnemyBoss1.Instance = boss;
+
+                enemy = boss3;
+
+                break;
 
         }
         if (enemy != null) {

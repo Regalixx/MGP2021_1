@@ -4,12 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.SurfaceView;
 
-public class EnemyBoss1 implements EntityBase,Collidable {
-
-    public static EnemyBoss1 Instance = null;
+public class EnemyBoss3 implements  EntityBase,Collidable{
+    public static EnemyBoss3 Instance = null;
 
     private Bitmap bmp = null;
     private GamePage activity = null;
@@ -18,7 +16,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
 
     private Vector3 pos = new Vector3(0,0,0);
 
-    private EntityBase.ENTITY_TYPE type = EntityBase.ENTITY_TYPE.ENT_BOSS1;
+    private EntityBase.ENTITY_TYPE type = EntityBase.ENTITY_TYPE.ENT_BOSS3;
 
     private boolean isInit = false;
     private boolean isDone = false;
@@ -49,7 +47,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
     @Override
     public void Init(SurfaceView _view) {
 
-        bmp = ResourceManager.Instance.GetBitmap(R.drawable.scammer);
+        bmp = ResourceManager.Instance.GetBitmap(R.drawable.boss3);
         isInit = true;
         pos.x = 650;
         pos.y = 2;
@@ -65,10 +63,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
         //spawn bullets
 
         if (GetHealth() <= 0) {
-            Log.d("Dead", "KILLED");
             SetIsDone(true);
-            ForcefieldEntity.Instance.SetIsDone(true);
-            TrashbinEntity.Instance.SetIsDone((true));
             return;
         }
 
@@ -76,25 +71,11 @@ public class EnemyBoss1 implements EntityBase,Collidable {
             if (Phase1 == true) {
                 pos.x += _dt * 200;
             }
-            else if (Phase2 == true){
-                pos.x += _dt * 400;
-            }
         }
         if (reverse == true){
             if (Phase1 == true) {
                 pos.x -= _dt * 200;
             }
-            else if (Phase2 == true){
-                pos.x -= _dt * 400;
-            }
-        }
-
-        if (enemyCooldown >= 7) {
-            EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_MINION, pos.Plus(new Vector3(0,bmp.getHeight(), 0)));
-            enemyCooldown = 0;
-        }
-        else {
-            enemyCooldown += 1 * _dt;
         }
 
         if (pos.x >= screenWidth){
@@ -105,36 +86,8 @@ public class EnemyBoss1 implements EntityBase,Collidable {
             reverse = false;
         }
 
-        if (Phase1 == true){
-            BossPhase1();
-        }
 
 
-        if (cooldown <= 2 && Phase1 == true) {
-            cooldown += _dt;
-        }
-
-        if (Phase2 == true) {
-            BossPhase2();
-            cooldown += _dt;
-            popupcooldown += _dt;
-        }
-
-
-        if (GetHealth() == 50){
-            renderForcefield = true;
-        }
-
-        if (GetHealth() <= 50)
-        {
-            Phase1 = false;
-            Phase2 = true;
-        }
-
-        if (renderForcefield == true){
-            ForcefieldEntity.Create();
-            renderForcefield = false;
-        }
     };
 
     public void Render(Canvas _canvas) {
@@ -160,7 +113,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
         return isInit;
     };
 
-    public int GetRenderLayer() {return LayerConstants.ENEMYBOSS1_LAYER;};
+    public int GetRenderLayer() {return LayerConstants.ENEMYBOSS3_LAYER;};
     public void SetRenderLayer(int _newLayer) {RenderLayer = _newLayer;};
 
     public EntityBase.ENTITY_TYPE GetEntityType() {return type;};
@@ -181,29 +134,11 @@ public class EnemyBoss1 implements EntityBase,Collidable {
 
     public void BossPhase1() {
 
-        if (cooldown >= 2) {
-            GamePage.Instance.DisplayEmails();
-            cooldown = 0;
-        }
+
     }
 
     public void BossPhase2(){
 
-        if (cooldown >= 1) {
-            GamePage.Instance.DisplayEmails();
-            cooldown = 0;
-        }
-
-        if (popupcooldown >= 3) {
-            PopupEntity.Create();
-            popupcooldown = 0;
-        }
-
-
 
     }
-
-
-
-
 }

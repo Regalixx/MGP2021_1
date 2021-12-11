@@ -85,6 +85,11 @@ public class RenderTextEntity implements EntityBase{
             frameCount = 0;
         }
 
+        if (EnemyBoss1.Instance.IsDone() == true)
+        {
+            waves++;
+        }
+
     }
 
     @Override
