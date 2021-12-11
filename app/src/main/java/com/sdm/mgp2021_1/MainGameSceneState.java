@@ -17,6 +17,8 @@ import android.view.View;
 public class MainGameSceneState implements StateBase {
     private float timer = 0.0f;
     public boolean shoot = false;
+    private boolean spawnBoss3 = false;
+    DisplayMetrics metrics2;
 
     float firstX_point, firstY_point;
     @Override
@@ -37,6 +39,7 @@ public class MainGameSceneState implements StateBase {
        // EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC);
         EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BOSS, new Vector3(metrics.widthPixels*0.5f,2,0));
         RenderTextEntity.Create(); // This  is the text
+        metrics2 = metrics;
         // Example to include another Renderview for Pause Button
     }
 
@@ -53,6 +56,13 @@ public class MainGameSceneState implements StateBase {
     public void Update(float _dt) {
 
         EntityManager.Instance.Update(_dt);
+
+        if (EnemyBoss1.Instance.IsDone() == true && spawnBoss3 == false){
+
+            Log.d("Created","Boss3");
+            EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.GHOST_BOSS, new Vector3(metrics2.widthPixels*0.5f,2,0));
+            spawnBoss3 = true;
+        }
             //Example of touch on screen in the main game to trigger back to Main menu
             //StateManager.Instance.ChangeState("Mainmenu");
     }

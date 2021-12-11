@@ -164,12 +164,12 @@ public class BulletEntity implements EntityBase, Collidable {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
             SetIsDone(true);
-            RenderTextEntity.Instance.EnemyKilled = true;
-            EnemiesKilled += 1;
-            Log.d("Collided", Integer.toString((EnemiesKilled)));
+            //RenderTextEntity.Instance.EnemyKilled = true;
+            //EnemiesKilled += 1;
+            //Log.d("Collided", Integer.toString((EnemiesKilled)));
         }
-    }
 
+    }
     public int GetEnemiesKilled()
     {
         return EnemiesKilled;

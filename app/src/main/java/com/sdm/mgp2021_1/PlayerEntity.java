@@ -184,6 +184,10 @@ public class PlayerEntity implements EntityBase, Collidable {
             HP -= 5;
             //SetIsDone(true);
         }
+        if (_other.GetType() == "ENT_VIDEOGAMES")
+        {
+            HP-=10;
+        }
     }
 
     public int GetHP(){

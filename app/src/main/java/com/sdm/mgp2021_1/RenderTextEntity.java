@@ -29,7 +29,8 @@ public class RenderTextEntity implements EntityBase{
     //we want to load FPS on my screen
     int frameCount;
     int Enemieskill = 0;
-    int BOSS1HP;
+    int BOSSHP;
+    int BOSS3HP;
     long lastTime = 0;
     long lastFPSTime = 0;
     float FPS;
@@ -52,13 +53,12 @@ public class RenderTextEntity implements EntityBase{
     public void Update(float _dt) {
         //get actual fps
 
-
         if (GameSystem.Instance.GetIsPaused())
         {
             return;
         }
-
         frameCount++;
+
 
      if (EnemyDead()){
          Enemieskill++;
@@ -67,7 +67,10 @@ public class RenderTextEntity implements EntityBase{
 
      PlayerHP = PlayerEntity.Instance.GetHP();
 
-     BOSS1HP = (int)EnemyBoss1.Instance.GetHealth();
+     BOSSHP = (int)EnemyBoss1.Instance.GetHealth();
+     if (waves == 2) {
+         BOSS3HP = (int) EnemyBoss3.Instance.GetHealth();
+     }
 
      waves = GameSystem.Instance.GetWave();
 
@@ -85,6 +88,10 @@ public class RenderTextEntity implements EntityBase{
             frameCount = 0;
         }
 
+        if (EnemyBoss1.Instance.IsDone() == true)
+        {
+            waves++;
+        }
     }
 
     @Override
@@ -112,8 +119,13 @@ public class RenderTextEntity implements EntityBase{
 
         _canvas.drawText ("FPS: " + (int)FPS, 30, 80, paint); //For now, default member but u can use _view.getWidth /
         //_canvas.drawText("Killed:" + realEnemiesKilled,50,400,paint);
-        _canvas.drawText ("HP: " + (int)PlayerHP, 250, 80, paint2); //For now, default m
-        _canvas.drawText ("Boss HP: " + (int)BOSS1HP, 500, 80, paint3);
+        _canvas.drawText ("HP: " + (int)PlayerHP, 250, 80, paint2); //For now, default
+        if (waves == 1) {
+            _canvas.drawText("Boss HP: " + (int) BOSSHP, 500, 80, paint3);
+        }
+        if(waves == 2) {
+            _canvas.drawText("Boss HP: " + (int) BOSS3HP, 500, 80, paint3);
+        }
         _canvas.drawText ("Wave: " + (int)waves, 850, 80, paint4);
     }
 
