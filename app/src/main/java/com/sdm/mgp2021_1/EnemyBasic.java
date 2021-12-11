@@ -39,9 +39,9 @@ public class EnemyBasic implements EntityBase, Collidable {
         AI_SIDEDIE
     }
 
-    private Set<BEHAVIOURS> behaviours = new HashSet<BEHAVIOURS>();
+    protected Set<BEHAVIOURS> behaviours = new HashSet<BEHAVIOURS>();
 
-    private EnemyBulletFactory bulletspawner = new EnemyBulletFactory();
+    protected EnemyBulletFactory bulletspawner = new EnemyBulletFactory();
 
     //     ---- < Enemy Methods > ----     //
     //  Methods that belong to enemyBasic  //
