@@ -58,6 +58,7 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.Update(_dt);
 
         if (EnemyBoss1.Instance.IsDone() == true && spawnBoss3 == false){
+
             Log.d("Created","Boss3");
             EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.GHOST_BOSS, new Vector3(metrics2.widthPixels*0.5f,2,0));
             spawnBoss3 = true;

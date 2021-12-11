@@ -65,10 +65,9 @@ public class EnemyBoss1 implements EntityBase,Collidable {
         //spawn bullets
 
         if (GetHealth() <= 0) {
-            Log.d("Dead", "KILLED");
             SetIsDone(true);
             ForcefieldEntity.Instance.SetIsDone(true);
-            TrashbinEntity.Instance.SetIsDone((true));
+            TrashbinEntity.Instance.SetIsDone(true);
             return;
         }
 
@@ -77,7 +76,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
                 pos.x += _dt * 200;
             }
             else if (Phase2 == true){
-                pos.x += _dt * 400;
+                pos.x += _dt * 300;
             }
         }
         if (reverse == true){
@@ -85,11 +84,11 @@ public class EnemyBoss1 implements EntityBase,Collidable {
                 pos.x -= _dt * 200;
             }
             else if (Phase2 == true){
-                pos.x -= _dt * 400;
+                pos.x -= _dt * 300;
             }
         }
 
-        if (enemyCooldown >= 7) {
+        if (enemyCooldown >= 5) {
             EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_MINION, pos.Plus(new Vector3(0,bmp.getHeight(), 0)));
             enemyCooldown = 0;
         }
@@ -198,12 +197,5 @@ public class EnemyBoss1 implements EntityBase,Collidable {
             PopupEntity.Create();
             popupcooldown = 0;
         }
-
-
-
     }
-
-
-
-
 }

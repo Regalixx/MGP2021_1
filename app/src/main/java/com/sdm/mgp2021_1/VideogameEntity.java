@@ -3,19 +3,21 @@ package com.sdm.mgp2021_1;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceView;
 
+import java.util.Set;
+
 public class VideogameEntity implements EntityBase,Collidable{
+
+
     public final static VideogameEntity Instance = new VideogameEntity();
 
     public Bitmap bmp = null;
     private Bitmap scaledbmp = null;
 
-    public boolean shoot = false;
-    private boolean renderBullet = false;
-    public boolean toggleshoot  = false;
-    public static int EnemiesKilled;
 
     private boolean isDone = false;
 
@@ -30,8 +32,6 @@ public class VideogameEntity implements EntityBase,Collidable{
     private float yLimit = 0;
     private float xLimit = 0;
 
-    int damage = 0;
-
     private int RenderLayer = 0; //Layer1 to be rendered.  Check layerconstant.Java
     private boolean isInit = false;
     private boolean hasCollided = false;
@@ -39,7 +39,6 @@ public class VideogameEntity implements EntityBase,Collidable{
 
     @Override
     public boolean IsDone() {
-
         return isDone;
     }
     @Override
@@ -58,7 +57,7 @@ public class VideogameEntity implements EntityBase,Collidable{
 
         xPos = EnemyBoss3.Instance.GetPosX(); //setting the x position to spawn
         yStart = yPos = EnemyBoss3.Instance.GetPosY(); //setting the y position to spawn
-        yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
+       // yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
 
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
         screenWidth = metrics.widthPixels;
@@ -70,49 +69,24 @@ public class VideogameEntity implements EntityBase,Collidable{
     public void Update(float _dt) {
 
 
-        if (TouchManager.Instance.HasTouch()){ //the moment player touch on the screen
-            //Check Collision here!
-            float imgRadius = bmp.getWidth() * 0.5f;
-            if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(),
-                    0.0f,xPos,yPos,imgRadius ) || hasCollided){
-
-                hasCollided = true;
-
-
-            }
-
-        }
-
         if (yPos >  screenHeight){
             isDone = true;
             PlayerEntity.Instance.SetHP(PlayerEntity.Instance.GetHP()-5);
+            EnemyBoss3.Instance.SetHealth(EnemyBoss3.Instance.GetHealth()+5);
 
         }
 
-        yPos += _dt *  550;
-
-        if (EnemyBoss1.Instance.GetHealth() <= 50){
-            yPos += _dt * 700;
-        }
-
-        //Gravity
-        // gravityVec += _dt * 10.0f;
-        //yPos += gravityVec;
+        yPos += _dt *  350;
     }
 
     @Override
     public void Render(Canvas _canvas) {
-        //Matrix transform = new Matrix();
-        // transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
+        Matrix transform = new Matrix();
+        transform.postTranslate(-bmp.getWidth() * 0.5f, 0);
 
-        //Scale and rotate here
-        //transform.postTranslate(xPos,yPos);
-        //_canvas.drawBitmap(bmp, transform, null);
+        transform.postTranslate(xPos,yPos);
 
-        //Log.d("Shoot","Has been RENDERED");
-        _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
-
-
+        _canvas.drawBitmap(bmp, transform, null);
 
     }
 
@@ -134,18 +108,18 @@ public class VideogameEntity implements EntityBase,Collidable{
 
     @Override
     public ENTITY_TYPE GetEntityType() {
-        return ENTITY_TYPE.ENT_VIDEOGAMES;
+        return ENTITY_TYPE.ENT_EVIL;
     }
 
     public static VideogameEntity Create() {
         VideogameEntity result = new VideogameEntity();
-        EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_VIDEOGAMES);
+        EntityManager.Instance.AddEntity(result,ENTITY_TYPE.ENT_VIDEOGAME);
         return result;
     }
 
     @Override
     public String GetType() {
-        return "EmailsEntity";
+        return "ENT_EVIL";
     }
 
     @Override
@@ -160,16 +134,16 @@ public class VideogameEntity implements EntityBase,Collidable{
 
     @Override
     public float GetRadius() {
-        return 0;
+        return bmp.getWidth() * 0.5f;
     }
 
     @Override
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "TrashbinEntity") //Change this to enemy entity
+        if (_other.GetType() == "ENT_BULLET") //Change this to enemy entity
         {
             SetIsDone(true);
-            EnemyBoss1.Instance.SetHealth(EnemyBoss1.Instance.GetHealth()-5);
-            //  Log.d("Collided", Float.toString(EnemyBoss1.Instance.GetHealth()));
+            EnemyBoss3.Instance.SetHealth(EnemyBoss3.Instance.GetHealth()-5);
+            //EnemyBoss3.Instance.SetHealth(EnemyBoss1.Instance.GetHealth()-5);
         }
     }
 }

@@ -10,8 +10,7 @@ import android.view.SurfaceView;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EnemyBasic implements EntityBase, Collidable {
-
+public class GhostBasic implements EntityBase, Collidable{
     protected Bitmap bmp = null;
 
     protected Vector3 pos = new Vector3(0,0,0);
@@ -39,7 +38,7 @@ public class EnemyBasic implements EntityBase, Collidable {
         AI_SIDEDIE
     }
 
-    private Set<BEHAVIOURS> behaviours = new HashSet<BEHAVIOURS>();
+    private Set<EnemyBasic.BEHAVIOURS> behaviours = new HashSet<EnemyBasic.BEHAVIOURS>();
 
     private EnemyBulletFactory bulletspawner = new EnemyBulletFactory();
 
@@ -61,7 +60,7 @@ public class EnemyBasic implements EntityBase, Collidable {
 
 
 
-        if (behaviours.contains(BEHAVIOURS.AI_SMALLLEFTRIGHT))
+        if (behaviours.contains(EnemyBasic.BEHAVIOURS.AI_SMALLLEFTRIGHT))
         {
             float offset = 50.f;
             pos.x += smallspeed.x * _dt;
@@ -75,13 +74,13 @@ public class EnemyBasic implements EntityBase, Collidable {
 
         }
 
-        if (behaviours.contains(BEHAVIOURS.AI_SWEEPWIDTH)) {
+        if (behaviours.contains(EnemyBasic.BEHAVIOURS.AI_SWEEPWIDTH)) {
             pos.x += bigspeed.x * _dt;
             //updates anchor point
             original_pos.x += bigspeed.x * _dt;
         }
 
-        if (behaviours.contains(BEHAVIOURS.AI_UPDOWN))
+        if (behaviours.contains(EnemyBasic.BEHAVIOURS.AI_UPDOWN))
         {
             float offset = 50.f;
             pos.y += smallspeed.y * _dt;
@@ -94,7 +93,7 @@ public class EnemyBasic implements EntityBase, Collidable {
 
             }
         }
-        if (behaviours.contains(BEHAVIOURS.AI_FALL)) {
+        if (behaviours.contains(EnemyBasic.BEHAVIOURS.AI_FALL)) {
             pos.y += bigspeed.y * _dt;
             //updates anchor point
             original_pos.y += bigspeed.y * _dt;
@@ -102,7 +101,7 @@ public class EnemyBasic implements EntityBase, Collidable {
 
 
         //Perish when touching the sides (if behaviour is set)
-        if (behaviours.contains(BEHAVIOURS.AI_SIDEDIE) ){
+        if (behaviours.contains(EnemyBasic.BEHAVIOURS.AI_SIDEDIE) ){
             if  (pos.x > metrics.widthPixels + bmp.getWidth()*0.5f || pos.x < -bmp.getWidth()*0.5f) {
                 SetIsDone(true);
             }
@@ -120,7 +119,6 @@ public class EnemyBasic implements EntityBase, Collidable {
         }
 
 
-
         //When reach bottom of the screen, destroy
         if (pos.y > metrics.heightPixels - bmp.getHeight() * 0.5f) {
             SetIsDone(true);
@@ -136,13 +134,14 @@ public class EnemyBasic implements EntityBase, Collidable {
         }
     }
 
-    public void SetBehaviour(BEHAVIOURS ai) {
+    public void SetBehaviour(EnemyBasic.BEHAVIOURS ai) {
         behaviours.add(ai);
     }
 
-    public void RemoveBehavior(BEHAVIOURS ai) {
+    public void RemoveBehavior(EnemyBasic.BEHAVIOURS ai) {
         behaviours.remove(ai);
     }
+
 
     //   ---- < EnemyBulletFactory > ---- //
     //   Things related to spawning bullets //
@@ -152,8 +151,10 @@ public class EnemyBasic implements EntityBase, Collidable {
     }
 
 
-   //    ---- < EntityBase > ----    //
-   //     Methods from EntityBase    //
+
+
+    //    ---- < EntityBase > ----    //
+    //     Methods from EntityBase    //
     public boolean IsDone() {return isDone;}
     public void SetIsDone(boolean _isDone) { isDone = _isDone;}
 
@@ -185,7 +186,7 @@ public class EnemyBasic implements EntityBase, Collidable {
         transform.postTranslate(pos.x,pos.y);
 
 
-            _canvas.drawBitmap(bmp, transform, null);
+        _canvas.drawBitmap(bmp, transform, null);
     };
 
     @Override

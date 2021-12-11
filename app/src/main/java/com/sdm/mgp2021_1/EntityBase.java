@@ -17,7 +17,7 @@ public interface EntityBase
          ENT_POPUP,
          ENT_BOSS1,
          ENT_BOSS3,
-         ENT_VIDEOGAMES,
+         ENT_VIDEOGAME,
          ENT_EMAILS,
          ENT_PAUSE, //pause button
          ENT_TEXT,

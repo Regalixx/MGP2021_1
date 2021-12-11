@@ -17,7 +17,7 @@ public class LayerConstants {
     public final static int FORCEFIELD_LAYER = 8;
     public final static int POPUP_LAYER = 9;
     public final static int ENEMYBOSS3_LAYER = 10;
-    public final static int VIDEOGAMES_LAYER = 10;
+    public final static int VIDEOGAMES_LAYER = 11;
     public final static int GAMEOBJECTS_LAYER = 100;  // Example
     public final static int UI_LAYER = 1000;
 

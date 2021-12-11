@@ -14,6 +14,7 @@ public class EnemyFactory {
        BULLY_BASIC,
        BULLY_BOSS,
        GHOST_BASIC,
+       GHOST_MINION,
        GHOST_BOSS
    }
 
@@ -25,7 +26,7 @@ public class EnemyFactory {
             case "SPAM_BASIC":
                 EnemyBasic newguy = new EnemyBasic();
                 newguy.SetHealth(30);
-                newguy.SetBMP(R.drawable.sans2);
+                newguy.SetBMP(R.drawable.threat);
                 newguy.SetPos(position);
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SMALLLEFTRIGHT);
                 newguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SWEEPWIDTH);
@@ -35,7 +36,7 @@ public class EnemyFactory {
                 break;
             case "SPAM_MINION":
                 EnemyBasic otherguy = new EnemyBasic();
-                otherguy.SetBMP(R.drawable.sans2);
+                otherguy.SetBMP(R.drawable.threat);
                 otherguy.SetPos(position);
                 otherguy.SetHealth(10);
                 otherguy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
@@ -56,11 +57,30 @@ public class EnemyFactory {
                 EnemyBoss3 boss3 = new EnemyBoss3();
                 boss3.SetBMP(R.drawable.boss3);
                 boss3.SetPos(position);
-                boss3.SetHealth(150);
+                boss3.SetHealth(100);
                 //EnemyBoss1.Instance = boss;
 
                 enemy = boss3;
 
+                break;
+            case "GHOST_BASIC":
+                GhostBasic basic = new GhostBasic();
+                basic.SetBMP(R.drawable.minion);
+                basic.SetPos(position);
+                basic.SetHealth(10);
+                basic.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
+                basic.SetPattern(EnemyBulletFactory.PATTERN.STRAIGHT);
+                enemy = basic;
+
+                break;
+            case "GHOST_MINION":
+                GhostBasic minion = new GhostBasic();
+                minion.SetBMP(R.drawable.minion);
+                minion.SetPos(position);
+                minion.SetHealth(10);
+                minion.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_UPDOWN);
+                minion.SetPattern(EnemyBulletFactory.PATTERN.SHOTGUN);
+                enemy = minion;
                 break;
 
         }
