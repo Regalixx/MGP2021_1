@@ -1,6 +1,7 @@
 package com.sdm.mgp2021_1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -58,13 +59,18 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.Update(_dt);
 
         if (EnemyBoss1.Instance.IsDone() == true && spawnBoss3 == false){
-
+            PlayerEntity.Instance.SetHP(500);
             Log.d("Created","Boss3");
             EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.BULLY_BOSS, new Vector3(metrics2.widthPixels*0.5f,2,0));
             spawnBoss3 = true;
         }
-            //Example of touch on screen in the main game to trigger back to Main menu
-            //StateManager.Instance.ChangeState("Mainmenu");
+
+        if (PlayerEntity.Instance.GetHP() <= 0)
+        {
+            StateManager.Instance.ChangeState("Mainmenu");
+            Log.d("State", "Switching to main menu");
+        }
+
     }
 
     @Override

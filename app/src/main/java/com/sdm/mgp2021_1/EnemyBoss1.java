@@ -64,6 +64,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
     public void Update(float _dt) {
         //spawn bullets
 
+
         if (GetHealth() <= 0) {
             SetIsDone(true);
             ForcefieldEntity.Instance.SetIsDone(true);

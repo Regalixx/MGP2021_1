@@ -42,7 +42,7 @@ public class PausebuttonEntity implements EntityBase {
         ScaledbmpP = Bitmap.createScaledBitmap(bmpP, (int) (ScreenWidth)/12, (int)(ScreenWidth)/7, true);
         ScaledbmpUP = Bitmap.createScaledBitmap(bmpUP, (int) (ScreenWidth)/12, (int)(ScreenWidth)/7, true);
 
-        xPos = ScreenWidth - 1000;
+        xPos = ScreenWidth - 150;
         yPos = 180;
 
         isInit = true;
@@ -55,7 +55,7 @@ public class PausebuttonEntity implements EntityBase {
         if (TouchManager.Instance.HasTouch()) {
             if (TouchManager.Instance.IsDown() && !Paused) {
                 // Check Collision of button here!!
-                float imgRadius = ScaledbmpP.getHeight() * 0.5f;
+                float imgRadius = ScaledbmpP.getWidth() * 0.5f;
 
                 if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
                     Log.d("Paused", "Works");
@@ -74,10 +74,10 @@ public class PausebuttonEntity implements EntityBase {
 
         if (Paused == false)
             _canvas.drawBitmap(ScaledbmpP,xPos - ScaledbmpP.getWidth() * 0.5f, yPos - ScaledbmpP.getHeight() * 0.5f, null);
-        else if (Paused == true) {
+        else
             _canvas.drawBitmap(ScaledbmpUP, xPos - ScaledbmpUP.getWidth() * 0.5f, yPos - ScaledbmpUP.getHeight() * 0.5f, null);
             Log.d("Paused","Yo");
-        }
+
 
     }
 

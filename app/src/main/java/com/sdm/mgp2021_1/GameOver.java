@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class GameOver extends Activity implements View.OnClickListener, StateBase {
-    public static CreditsPage Instance = null;
+    public static GameOver Instance = null;
     private Button btn_retry;
     private Button btn_menu;
     private Button btn_quit;
@@ -36,6 +36,8 @@ public class GameOver extends Activity implements View.OnClickListener, StateBas
 
         btn_quit = (Button)findViewById(R.id.btn_quit);
         btn_quit.setOnClickListener(this); //Set Listener to this button --> Start Button
+
+        StateManager.Instance.AddState(new GameOver());
 
     }
 
