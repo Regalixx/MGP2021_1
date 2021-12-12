@@ -89,7 +89,7 @@ public class BulletEntity implements EntityBase, Collidable {
         shoot = true;
 
 
-        yPos -= _dt *  550;
+        yPos -= _dt *  5000;
 
         //Gravity
         // gravityVec += _dt * 10.0f;

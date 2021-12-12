@@ -54,6 +54,12 @@ public class EnemyFactory {
                 enemy = boss;
 
                 break;
+            case "BULLY_BOSS":
+                BullyBoss boss2 = new BullyBoss();
+                boss2.SetHealth(180);
+                boss2.SetBMP(R.drawable.sans);
+                enemy = boss2;
+                break;
             case "GHOST_BOSS":
                 EnemyBoss3 boss3 = new EnemyBoss3();
                 boss3.SetBMP(R.drawable.boss3);

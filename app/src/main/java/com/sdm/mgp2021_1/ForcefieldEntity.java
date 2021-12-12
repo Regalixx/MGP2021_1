@@ -21,7 +21,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
     public float yStart;
 
     private float lifetime;
-    private int HP;
+    private int HP = 0;
     public float xPos = 0;
     public float yPos = 0;
 
@@ -50,7 +50,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
 
         //spritePlayer = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4,16);
 
-        HP = 5;
+        HP = 1;
 
         isInit = true;
 
@@ -69,16 +69,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
         //    SetIsDone(true);   // <--- This part here or this code, meant when time is up, kill the items.
         //}
 
-        if (TouchManager.Instance.HasTouch()){ //the moment player touch on the screen
-            //Check Collision here!
-            float imgRadius = bmp.getWidth() * 0.5f;
-            if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(),
-                    0.0f,xPos,yPos,imgRadius ) || hasCollided){
 
-                hasCollided = true;
-            }
-
-        }
 
         xPos = EnemyBoss1.Instance.GetPosX();
         yPos = EnemyBoss1.Instance.GetPosY();
@@ -132,7 +123,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
 
     @Override
     public String GetType() {
-        return "ForcefieldEntity";
+        return "ENT_EVIL";
     }
 
     @Override
@@ -154,6 +145,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_BULLET") //Change this to enemy entity
         {
+            Log.println(Log.DEBUG, "Bullet", "Hit forcefield");
            HP -= 1;
         }
     }

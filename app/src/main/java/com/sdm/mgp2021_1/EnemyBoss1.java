@@ -120,8 +120,9 @@ public class EnemyBoss1 implements EntityBase,Collidable {
         }
 
 
-        if (GetHealth() == 50){
+        if (GetHealth() == 50 && renderForcefield == false){
             renderForcefield = true;
+            ForcefieldEntity.Create();
         }
 
         if (GetHealth() <= 50)
@@ -130,10 +131,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
             Phase2 = true;
         }
 
-        if (renderForcefield == true){
-            ForcefieldEntity.Create();
-            renderForcefield = false;
-        }
+
     };
 
     public void Render(Canvas _canvas) {

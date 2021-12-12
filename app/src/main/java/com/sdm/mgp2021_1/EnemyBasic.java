@@ -141,7 +141,8 @@ public class EnemyBasic implements EntityBase, Collidable {
     }
 
     public void RemoveBehavior(BEHAVIOURS ai) {
-        behaviours.remove(ai);
+        if (behaviours.contains(ai))
+            behaviours.remove(ai);
     }
 
     //   ---- < EnemyBulletFactory > ---- //

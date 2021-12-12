@@ -60,7 +60,7 @@ public class MainGameSceneState implements StateBase {
         if (EnemyBoss1.Instance.IsDone() == true && spawnBoss3 == false){
 
             Log.d("Created","Boss3");
-            EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.GHOST_BOSS, new Vector3(metrics2.widthPixels*0.5f,2,0));
+            EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.BULLY_BOSS, new Vector3(metrics2.widthPixels*0.5f,2,0));
             spawnBoss3 = true;
         }
             //Example of touch on screen in the main game to trigger back to Main menu
