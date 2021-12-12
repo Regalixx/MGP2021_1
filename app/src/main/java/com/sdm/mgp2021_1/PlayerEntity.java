@@ -26,7 +26,7 @@ public class PlayerEntity implements EntityBase, Collidable {
     public float yStart;
 
     private float lifetime;
-    private int HP = 100;
+    private int HP = 200;
     private int wavesurvived = 0;
     public float xPos = 0;
     public float yPos = 0;
