@@ -37,7 +37,7 @@ public class MainGameSceneState implements StateBase {
         WaveManager.Instance.Init(_view);
         RenderBackground.Create(); //Background is an entity
         PlayerEntity.Create();
-        EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC, new Vector3(1,700,0));
+        //EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC, new Vector3(1,700,0));
         TrashbinEntity.Create();
         PausebuttonEntity.Create();
 
