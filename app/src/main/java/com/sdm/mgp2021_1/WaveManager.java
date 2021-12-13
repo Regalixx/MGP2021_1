@@ -35,6 +35,10 @@ public class WaveManager {
         bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BOSS, startingpos);
     }
 
+    public int GetBossHealth() {
+        return (int)Math.ceil(bossToSpawn.GetHealth());
+    }
+
     public void Update(float _dt) {
 
         if (bossToSpawn.IsDone()) {
