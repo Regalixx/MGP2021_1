@@ -67,7 +67,7 @@ public class RenderTextEntity implements EntityBase{
 
      PlayerHP = PlayerEntity.Instance.GetHP();
 
-     BOSSHP = (int)EnemyBoss1.Instance.GetHealth();
+     //BOSSHP = (int)EnemyBoss1.Instance.GetHealth();
 
 
 

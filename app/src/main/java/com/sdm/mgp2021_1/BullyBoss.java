@@ -14,6 +14,8 @@ public class BullyBoss extends EnemyBasic{
     private int HealthPhase1 = 60;
     private int HealthPhase2 = 30;
 
+    private float cd = 0;
+
     @Override
     public void Update(float _dt) {
         //do movement
@@ -28,6 +30,18 @@ public class BullyBoss extends EnemyBasic{
 
         HandlePhases();
 
+        //Update for spawning enemies
+        if (cd > 2) {
+            if (phase < 2) {
+                EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.BULLY_BASIC, pos );
+            } else {
+                EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.BULLY_MINION, pos);
+            }
+
+            cd = 0;
+        }
+        cd += 1 * _dt;
+
         if (health <= 0) {
             SetIsDone(true);
         }
@@ -39,7 +53,8 @@ public class BullyBoss extends EnemyBasic{
         //Heal from bullets
         //Bullies shouldn't be encouraged.
         if (_other.GetType() == "ENT_BULLET") {
-            health += 10;
+            health += 4;
+
         }
     }
 
@@ -68,7 +83,7 @@ public class BullyBoss extends EnemyBasic{
 
 
     private void Phase1() {
-        bigspeed.x = 150.f;
+        bigspeed.x = 300.f;
         SetBehaviour(BEHAVIOURS.AI_UPDOWN);
         SetPattern(EnemyBulletFactory.PATTERN.PISS);
         SetBMP(R.drawable.bully2);
@@ -76,6 +91,7 @@ public class BullyBoss extends EnemyBasic{
 
     private void Phase2() {
         smallspeed.y = 300.f;
+        SetPattern(EnemyBulletFactory.PATTERN.CIRCLE);
         SetBMP(R.drawable.bully3);
     }
 

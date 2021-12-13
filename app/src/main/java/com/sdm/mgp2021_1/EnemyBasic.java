@@ -49,7 +49,7 @@ public class EnemyBasic implements EntityBase, Collidable {
     public void SetHealth(float hp) { health = hp;}
     public float GetHealth() { return health;}
     public void SetPos(Vector3 _pos) {
-        pos = _pos;
+        pos = new Vector3(_pos);
     }
     //Choose the image you want
     public void SetBMP(int _id) {
@@ -152,6 +152,7 @@ public class EnemyBasic implements EntityBase, Collidable {
         bulletspawner.AddPattern(type);
     }
 
+    public void SetCooldown(float cd) { bulletspawner.SetCooldown(cd);}
 
    //    ---- < EntityBase > ----    //
    //     Methods from EntityBase    //

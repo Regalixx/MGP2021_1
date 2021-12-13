@@ -37,6 +37,8 @@ public class EnemyBulletFactory {
         patterns.add(it);
     }
 
+    public void SetCooldown(float _cd) { cooldown = _cd;}
+
     public void Update(double _dt) {
 
 

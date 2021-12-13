@@ -172,7 +172,7 @@ public class EmailsEntity implements  EntityBase,Collidable{
             SetIsDone(true);
 
             if (ForcefieldEntity.Instance == null || ForcefieldEntity.Instance.IsDone() == true) {
-                EnemyBoss1.Instance.SetHealth(EnemyBoss1.Instance.GetHealth() - 5);
+                EnemyBoss1.Instance.SetHealth(EnemyBoss1.Instance.GetHealth() - 50);
             }
           //  Log.d("Collided", Float.toString(EnemyBoss1.Instance.GetHealth()));
         }
