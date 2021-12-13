@@ -85,7 +85,7 @@ public class VictoryPage extends Activity implements View.OnClickListener, State
 
     @Override
     public String GetName() {
-        return "GameOver";
+        return "Victory";
     }
 
     @Override

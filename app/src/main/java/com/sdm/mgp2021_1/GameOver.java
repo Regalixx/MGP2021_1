@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class GameOver extends Activity implements View.OnClickListener, StateBase {
     public static GameOver Instance = null;
@@ -27,6 +28,10 @@ public class GameOver extends Activity implements View.OnClickListener, StateBas
 
 
         setContentView(R.layout.gameover);
+
+        //Set text to show how many waves cleared
+        TextView wavetext = (TextView)findViewById(R.id.waves);
+        wavetext.setText("Waves Cleared: " + WaveManager.Instance.GetWave());
 
         btn_retry = (Button)findViewById(R.id.btn_retry);
         btn_retry.setOnClickListener(this); //Set Listener to this button --> Start Button

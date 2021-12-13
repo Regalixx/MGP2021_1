@@ -72,10 +72,15 @@ public class MainGameSceneState implements StateBase {
 
         WaveManager.Instance.Update(_dt);
 
-        if (PlayerEntity.Instance.GetHP() <= 0 || WaveManager.Instance.TimeToExit())
+        if (PlayerEntity.Instance.GetHP() <= 0)
         {
             StateManager.Instance.ChangeState("GameOver");
-            Log.d("State", "Switching to main menu");
+
+        }
+        if (WaveManager.Instance.TimeToExit())
+        {
+            StateManager.Instance.ChangeState("Victory");
+
         }
 
     }
