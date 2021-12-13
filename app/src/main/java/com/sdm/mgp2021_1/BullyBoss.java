@@ -11,6 +11,8 @@ public class BullyBoss extends EnemyBasic{
     private int phase = 0;
     private boolean toSwitch = false;
 
+    private int HealthPhase1 = 60;
+    private int HealthPhase2 = 30;
 
     @Override
     public void Update(float _dt) {
@@ -22,47 +24,59 @@ public class BullyBoss extends EnemyBasic{
         bulletspawner.Update(_dt);
 
         //loses health every second
-        health -= _dt;
+        health -= 2*_dt;
 
-        //if health healed back to normal, return to stronger phase 0.
-        if (health >= 60 && phase > 0) {
-            PhaseSwitch(0);
-        }
+        HandlePhases();
 
-        //after 1 minute, become angry
-        if (health < 60 && phase == 0) {
-            PhaseSwitch(1);
-        }
-
-        //after 2 minutes, final enraged form
-        if (health < 120 && phase < 2) {
-            PhaseSwitch(2);
-        }
-
-
-        //return to phase 1 after healing
-        if (health > 120 && phase == 2) {
-            PhaseSwitch(1);
+        if (health <= 0) {
+            SetIsDone(true);
         }
 
     }
 
     @Override
     public void OnHit(Collidable _other) {
+        //Heal from bullets
+        //Bullies shouldn't be encouraged.
         if (_other.GetType() == "ENT_BULLET") {
             health += 10;
         }
     }
 
+    private void HandlePhases() {
+        //if health healed back to normal, return to stronger phase 0.
+        if (health >=  HealthPhase1 && phase > 0) {
+            PhaseSwitch(0);
+        }
+
+        //after 1 minute, become angry
+        if (health < HealthPhase1 && phase == 0) {
+            PhaseSwitch(1);
+        }
+
+        //after 2 minutes, final enraged form
+        if (health < HealthPhase2 && phase < 2) {
+            PhaseSwitch(2);
+        }
+
+
+        //return to phase 1 after healing
+        if (health > HealthPhase2 && phase == 2) {
+            PhaseSwitch(1);
+        }
+    }
+
+
     private void Phase1() {
         bigspeed.x = 150.f;
         SetBehaviour(BEHAVIOURS.AI_UPDOWN);
         SetPattern(EnemyBulletFactory.PATTERN.PISS);
-        SetBMP(R.drawable.sans2);
+        SetBMP(R.drawable.bully2);
     }
 
     private void Phase2() {
         smallspeed.y = 300.f;
+        SetBMP(R.drawable.bully3);
     }
 
     private void PhaseSwitch(int phaseDiff) {
@@ -73,7 +87,7 @@ public class BullyBoss extends EnemyBasic{
             case 0:
                 bigspeed.x = 50.f;
                 RemoveBehavior(BEHAVIOURS.AI_UPDOWN);
-                SetBMP(R.drawable.sans);
+                SetBMP(R.drawable.bully1);
                 break;
             case 1:
                 Phase1();
