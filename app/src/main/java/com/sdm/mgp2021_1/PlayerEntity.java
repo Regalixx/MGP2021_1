@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.graphics.Matrix;
+import android.view.ViewDebug;
 
 import androidx.constraintlayout.helper.widget.Layer;
 
@@ -108,9 +109,6 @@ public class PlayerEntity implements EntityBase, Collidable {
             //SetIsDone(true);
        // }
 
-        if (HP <= 0){
-            StateManager.Instance.ChangeState("GameOver");
-        }
     }
 
     private void Flap() {
@@ -182,7 +180,7 @@ public class PlayerEntity implements EntityBase, Collidable {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
             HP -= 5;
-            //SetIsDone(true);
+            //Log.d("HP", );
         }
         if (_other.GetType() == "ENT_VIDEOGAMES")
         {

@@ -119,8 +119,6 @@ public class EnemyBasic implements EntityBase, Collidable {
 
         }
 
-
-
         //When reach bottom of the screen, destroy
         if (pos.y > metrics.heightPixels - bmp.getHeight() * 0.5f) {
             SetIsDone(true);
@@ -211,7 +209,6 @@ public class EnemyBasic implements EntityBase, Collidable {
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_BULLET") {
             SetIsDone(true);
-
         }
 
     };

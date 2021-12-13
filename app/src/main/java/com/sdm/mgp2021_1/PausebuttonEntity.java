@@ -2,6 +2,7 @@ package com.sdm.mgp2021_1;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -43,7 +44,7 @@ public class PausebuttonEntity implements EntityBase {
         ScaledbmpUP = Bitmap.createScaledBitmap(bmpUP, (int) (ScreenWidth)/12, (int)(ScreenWidth)/7, true);
 
         xPos = ScreenWidth - 150;
-        yPos = 180;
+        yPos = 150;
 
         isInit = true;
     }
@@ -58,8 +59,8 @@ public class PausebuttonEntity implements EntityBase {
                 float imgRadius = ScaledbmpP.getWidth() * 0.5f;
 
                 if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
-                    Log.d("Paused", "Works");
                     Paused = true;
+
                 }
                 buttonDelay = 0;
                 GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
@@ -75,8 +76,7 @@ public class PausebuttonEntity implements EntityBase {
         if (Paused == false)
             _canvas.drawBitmap(ScaledbmpP,xPos - ScaledbmpP.getWidth() * 0.5f, yPos - ScaledbmpP.getHeight() * 0.5f, null);
         else
-            _canvas.drawBitmap(ScaledbmpUP, xPos - ScaledbmpUP.getWidth() * 0.5f, yPos - ScaledbmpUP.getHeight() * 0.5f, null);
-            Log.d("Paused","Yo");
+            _canvas.drawBitmap(ScaledbmpUP,xPos - ScaledbmpUP.getWidth() * 0.5f, yPos - ScaledbmpUP.getHeight() * 0.5f, null);
 
 
     }
