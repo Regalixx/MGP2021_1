@@ -88,7 +88,7 @@ public class PopupEntity implements EntityBase,Collidable {
 
         if (yPos >  screenHeight){
             isDone = true;
-            PlayerEntity.Instance.SetHP(PlayerEntity.Instance.GetHP()-5);
+            //PlayerEntity.Instance.SetHP(PlayerEntity.Instance.GetHP()-5);
 
         }
 

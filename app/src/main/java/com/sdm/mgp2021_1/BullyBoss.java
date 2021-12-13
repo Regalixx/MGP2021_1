@@ -6,7 +6,6 @@ public class BullyBoss extends EnemyBasic{
 
     private  int RenderLayer = 0;
 
-
     //Boss phases variables
     private int phase = 0;
     private boolean toSwitch = false;
@@ -58,8 +57,6 @@ public class BullyBoss extends EnemyBasic{
         if (health < HealthPhase2 && phase < 2) {
             PhaseSwitch(2);
         }
-
-
         //return to phase 1 after healing
         if (health > HealthPhase2 && phase == 2) {
             PhaseSwitch(1);
