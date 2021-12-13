@@ -167,10 +167,13 @@ public class EmailsEntity implements  EntityBase,Collidable{
 
     @Override
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "TrashbinEntity") //Change this to enemy entity
+        if (_other.GetType() == "TrashbinEntity")
         {
             SetIsDone(true);
-            EnemyBoss1.Instance.SetHealth(EnemyBoss1.Instance.GetHealth()-5);
+
+            if (ForcefieldEntity.Instance == null || ForcefieldEntity.Instance.IsDone() == true) {
+                EnemyBoss1.Instance.SetHealth(EnemyBoss1.Instance.GetHealth() - 5);
+            }
           //  Log.d("Collided", Float.toString(EnemyBoss1.Instance.GetHealth()));
         }
     }

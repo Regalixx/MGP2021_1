@@ -7,7 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 
-public class EnemyBoss3 implements  EntityBase,Collidable{
+public class EnemyBoss3 extends EnemyBasic implements  EntityBase,Collidable{
     public static EnemyBoss3 Instance = null;
 
     private Bitmap bmp = null;

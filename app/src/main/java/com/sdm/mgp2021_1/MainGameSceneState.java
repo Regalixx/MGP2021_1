@@ -22,6 +22,9 @@ public class MainGameSceneState implements StateBase {
     DisplayMetrics metrics2;
 
     float firstX_point, firstY_point;
+
+
+
     @Override
     public String GetName() {
         return "MainGame";
@@ -31,6 +34,7 @@ public class MainGameSceneState implements StateBase {
     public void OnEnter(SurfaceView _view)
     {
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
+        WaveManager.Instance.Init(_view);
         RenderBackground.Create(); //Background is an entity
         PlayerEntity.Create();
        // BulletEntity.Create();
@@ -38,8 +42,10 @@ public class MainGameSceneState implements StateBase {
         TrashbinEntity.Create();
         PausebuttonEntity.Create();
        // EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC);
-        EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BOSS, new Vector3(metrics.widthPixels*0.5f,2,0));
+        // EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BOSS, new Vector3(metrics.widthPixels*0.5f,2,0));
         RenderTextEntity.Create(); // This  is the text
+
+
         metrics2 = metrics;
         // Example to include another Renderview for Pause Button
     }
@@ -58,14 +64,16 @@ public class MainGameSceneState implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
-        if (EnemyBoss1.Instance.IsDone() == true && spawnBoss3 == false){
-            PlayerEntity.Instance.SetHP(500);
-            Log.d("Created","Boss3");
-            EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.GHOST_BOSS, new Vector3(metrics2.widthPixels*0.5f,2,0));
-            spawnBoss3 = true;
-        }
+        //if (EnemyBoss1.Instance.IsDone() == true && spawnBoss3 == false){
+        //    PlayerEntity.Instance.SetHP(500);
+        //    Log.d("Created","Boss3");
+        //    EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.GHOST_BOSS, new Vector3(metrics2.widthPixels*0.5f,2,0));
+        //    spawnBoss3 = true;
+        //}
 
-        if (PlayerEntity.Instance.GetHP() <= 0)
+        WaveManager.Instance.Update(_dt);
+
+        if (PlayerEntity.Instance.GetHP() <= 0 || WaveManager.Instance.TimeToExit())
         {
             StateManager.Instance.ChangeState("Mainmenu");
             Log.d("State", "Switching to main menu");

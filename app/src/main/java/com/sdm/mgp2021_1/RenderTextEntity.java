@@ -15,7 +15,7 @@ public class RenderTextEntity implements EntityBase{
     boolean EnemyKilled = false;
     int realEnemiesKilled;
     int PlayerHP;
-    int waves;
+    int waves = 0;
 
     Paint paint = new Paint();
     Paint paint2 = new Paint();
@@ -68,11 +68,9 @@ public class RenderTextEntity implements EntityBase{
      PlayerHP = PlayerEntity.Instance.GetHP();
 
      BOSSHP = (int)EnemyBoss1.Instance.GetHealth();
-     if (waves == 2) {
-         BOSS3HP = (int) EnemyBoss3.Instance.GetHealth();
-     }
 
-     waves = GameSystem.Instance.GetWave();
+
+
 
      realEnemiesKilled = bulletentity.GetEnemiesKilled();
 
@@ -88,10 +86,7 @@ public class RenderTextEntity implements EntityBase{
             frameCount = 0;
         }
 
-        if (EnemyBoss1.Instance.IsDone() == true)
-        {
-            waves++;
-        }
+
     }
 
     @Override
@@ -123,9 +118,7 @@ public class RenderTextEntity implements EntityBase{
         if (waves == 1) {
             _canvas.drawText("Boss HP: " + (int) BOSSHP, 500, 80, paint3);
         }
-        if(waves == 2) {
-            _canvas.drawText("Boss HP: " + (int) BOSS3HP, 500, 80, paint3);
-        }
+
         _canvas.drawText ("Wave: " + (int)waves, 850, 80, paint4);
     }
 

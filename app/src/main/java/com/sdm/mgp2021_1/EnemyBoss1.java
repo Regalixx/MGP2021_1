@@ -7,7 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceView;
 
-public class EnemyBoss1 implements EntityBase,Collidable {
+public class EnemyBoss1 extends EnemyBasic implements EntityBase,Collidable {
 
     public static EnemyBoss1 Instance = null;
 
@@ -61,6 +61,7 @@ public class EnemyBoss1 implements EntityBase,Collidable {
 
         Instance = this;
     };
+    @Override
     public void Update(float _dt) {
         //spawn bullets
 
@@ -120,8 +121,9 @@ public class EnemyBoss1 implements EntityBase,Collidable {
         }
 
 
-        if (GetHealth() == 50){
+        if (GetHealth() == 50 && renderForcefield == false){
             renderForcefield = true;
+            ForcefieldEntity.Create();
         }
 
         if (GetHealth() <= 50)
@@ -130,12 +132,10 @@ public class EnemyBoss1 implements EntityBase,Collidable {
             Phase2 = true;
         }
 
-        if (renderForcefield == true){
-            ForcefieldEntity.Create();
-            renderForcefield = false;
-        }
+
     };
 
+    @Override
     public void Render(Canvas _canvas) {
         Matrix transform = new Matrix();
         transform.postTranslate(-bmp.getWidth() * 0.5f, 0);
