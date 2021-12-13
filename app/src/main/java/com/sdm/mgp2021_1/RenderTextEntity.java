@@ -118,7 +118,7 @@ public class RenderTextEntity implements EntityBase{
 
         _canvas.drawText ( "Boss HP: " + WaveManager.Instance.GetBossHealth(), 500, 80, paint3);
 
-        _canvas.drawText ("Wave: " + (int)waves, 850, 80, paint4);
+        _canvas.drawText ("Wave: " + (int)(WaveManager.Instance.GetWave() + 1), 850, 80, paint4);
     }
 
 
