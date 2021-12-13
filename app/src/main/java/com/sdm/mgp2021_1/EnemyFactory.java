@@ -12,6 +12,7 @@ public class EnemyFactory {
        SPAM_BOSS,
        SPAM_MINION,
        BULLY_BASIC,
+       BULLY_MINION,
        BULLY_BOSS,
        GHOST_BASIC,
        GHOST_MINION,
@@ -22,8 +23,8 @@ public class EnemyFactory {
 
        EnemyBasic enemy = null;
 
-        switch (type.name()) {
-            case "SPAM_BASIC":
+        switch (type) {
+            case SPAM_BASIC:
                 enemy = new EnemyBasic();
                 enemy.SetHealth(30);
                 enemy.SetBMP(R.drawable.threat);
@@ -34,7 +35,7 @@ public class EnemyFactory {
                 enemy.SetPattern(EnemyBulletFactory.PATTERN.CIRCLE);
                 enemy.SetPattern(EnemyBulletFactory.PATTERN.PISS);
                 break;
-            case "SPAM_MINION":
+            case SPAM_MINION:
                 enemy = new EnemyBasic();
                 enemy.SetBMP(R.drawable.threat);
                 enemy.SetPos(position);
@@ -44,7 +45,7 @@ public class EnemyFactory {
 
                 break;
 
-            case "SPAM_BOSS":
+            case SPAM_BOSS:
                 enemy = new EnemyBoss1();
 
                 enemy.SetHealth(100);
@@ -52,14 +53,36 @@ public class EnemyFactory {
 
 
                 break;
-            case "BULLY_BOSS":
+            case BULLY_BOSS:
                 enemy = new BullyBoss();
                 enemy.SetHealth(90);
+                enemy.SetPos(position);
+                enemy.SetCooldown(1.f);
                 enemy.SetBMP(R.drawable.bully1);
                 enemy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_SWEEPWIDTH);
-
+                enemy.SetPattern(EnemyBulletFactory.PATTERN.SHOTGUN);
+                enemy.bigspeed.x = 100.f;
                 break;
-            case "GHOST_BOSS":
+
+            case BULLY_BASIC:
+                enemy = new EnemyBasic();
+                enemy.SetHealth(10);
+                enemy.SetPos(position);
+                enemy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
+                enemy.SetPattern(EnemyBulletFactory.PATTERN.CIRCLE);
+                enemy.SetBMP(R.drawable.sans2);
+                break;
+
+            case BULLY_MINION:
+                enemy = new EnemyBasic();
+                enemy.SetHealth(10);
+                enemy.SetPos(position);
+                enemy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
+                enemy.SetPattern(EnemyBulletFactory.PATTERN.SPIRAL);
+                enemy.SetBMP(R.drawable.sans2);
+                break;
+
+            case GHOST_BOSS:
                 enemy = new EnemyBoss3();
                 enemy.SetBMP(R.drawable.boss3);
                 enemy.SetPos(position);
@@ -69,7 +92,7 @@ public class EnemyFactory {
 
 
                 break;
-            case "GHOST_BASIC":
+            case GHOST_BASIC:
                 enemy = new EnemyBasic();
                 enemy.SetBMP(R.drawable.minion);
                 enemy.SetPos(position);
@@ -79,7 +102,7 @@ public class EnemyFactory {
 
 
                 break;
-            case "GHOST_MINION":
+            case GHOST_MINION:
                 enemy = new EnemyBasic();
                 enemy.SetBMP(R.drawable.minion);
                 enemy.SetPos(position);

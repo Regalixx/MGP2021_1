@@ -172,7 +172,7 @@ public class PlayerEntity implements EntityBase, Collidable {
 
     @Override
     public float GetRadius() {
-        return bmp.getHeight() * 0.5f;
+        return bmp.getWidth() * 0.25f;
     }
 
     @Override

@@ -31,8 +31,17 @@ public class WaveManager {
         wave = 0;
         metrics = _view.getResources().getDisplayMetrics();
 
-        startingpos = new Vector3(metrics.widthPixels*0.5f,2,0);
+        toExit = false;
+        startingpos = new Vector3(metrics.widthPixels*0.5f,8,0);
         bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BOSS, startingpos);
+    }
+
+    public int GetBossHealth() {
+        return (int)Math.ceil(bossToSpawn.GetHealth());
+    }
+
+    public int GetWave() {
+        return wave;
     }
 
     public void Update(float _dt) {

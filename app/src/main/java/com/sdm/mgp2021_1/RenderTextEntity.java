@@ -67,7 +67,7 @@ public class RenderTextEntity implements EntityBase{
 
      PlayerHP = PlayerEntity.Instance.GetHP();
 
-     BOSSHP = (int)EnemyBoss1.Instance.GetHealth();
+     //BOSSHP = (int)EnemyBoss1.Instance.GetHealth();
 
 
 
@@ -115,11 +115,10 @@ public class RenderTextEntity implements EntityBase{
         _canvas.drawText ("FPS: " + (int)FPS, 30, 80, paint); //For now, default member but u can use _view.getWidth /
         //_canvas.drawText("Killed:" + realEnemiesKilled,50,400,paint);
         _canvas.drawText ("HP: " + (int)PlayerHP, 250, 80, paint2); //For now, default
-        if (waves == 1) {
-            _canvas.drawText("Boss HP: " + (int) BOSSHP, 500, 80, paint3);
-        }
 
-        _canvas.drawText ("Wave: " + (int)waves, 850, 80, paint4);
+        _canvas.drawText ( "Boss HP: " + WaveManager.Instance.GetBossHealth(), 500, 80, paint3);
+
+        _canvas.drawText ("Wave: " + (int)(WaveManager.Instance.GetWave() + 1), 850, 80, paint4);
     }
 
 
