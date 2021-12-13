@@ -80,6 +80,7 @@ public class MainGameSceneState implements StateBase {
             StateManager.Instance.ChangeState("GameOver");
             GamePage.Instance.ChangeState(GameOver.class);
 
+
         }
         if (WaveManager.Instance.TimeToExit())
         {
@@ -93,7 +94,8 @@ public class MainGameSceneState implements StateBase {
     public void OnExit() {
         EntityManager.Instance.Clean();
         GamePage.Instance.finish();
-
+        Log.d("MainScene","We Leave");
+        ForcefieldEntity.Instance = null;
     }
 
     public boolean onTouchEvent(MotionEvent event) {
