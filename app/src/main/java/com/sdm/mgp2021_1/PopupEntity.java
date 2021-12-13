@@ -71,7 +71,10 @@ public class PopupEntity implements EntityBase,Collidable {
     @Override
     public void Update(float _dt) {
 
-
+        if (GameSystem.Instance.GetIsPaused() == true)
+        {
+            return;
+        }
         if (TouchManager.Instance.HasTouch()){ //the moment player touch on the screen
             //Check Collision here!
             float imgRadius = bmp.getWidth() * 0.5f;
@@ -80,10 +83,7 @@ public class PopupEntity implements EntityBase,Collidable {
 
                 hasCollided = true;
                 SetIsDone(true);
-
-
             }
-
         }
 
         if (yPos >  screenHeight){

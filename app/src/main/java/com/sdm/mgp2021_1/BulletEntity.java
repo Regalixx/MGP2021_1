@@ -69,6 +69,10 @@ public class BulletEntity implements EntityBase, Collidable {
     @Override
     public void Update(float _dt) {
 
+        if (GameSystem.Instance.GetIsPaused() == true)
+        {
+            return;
+        }
 
         if (TouchManager.Instance.HasTouch()){ //the moment player touch on the screen
             //Check Collision here!

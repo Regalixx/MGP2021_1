@@ -50,7 +50,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
 
         //spritePlayer = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4,16);
 
-        HP = 30;
+        HP = 15;
 
         isInit = true;
 
@@ -147,6 +147,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
         {
             Log.println(Log.DEBUG, "Bullet", "Hit forcefield");
            HP -= 1;
+            Log.v("Hey", String.valueOf(HP));
         }
     }
 

@@ -73,9 +73,7 @@ public class VideogameEntity implements EntityBase,Collidable{
             isDone = true;
             PlayerEntity.Instance.SetHP(PlayerEntity.Instance.GetHP()-5);
             EnemyBoss3.Instance.SetHealth(EnemyBoss3.Instance.GetHealth()+5);
-
         }
-
         yPos += _dt *  350;
     }
 

@@ -6,7 +6,10 @@ import android.view.MotionEvent;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
 
+
     public static final DetectSwipeGestureListener Instance = new DetectSwipeGestureListener();
+
+
     // Minimal x and y axis swipe distance.
     private static int MIN_SWIPE_DISTANCE_X = 100;
     private static int MIN_SWIPE_DISTANCE_Y = 100;
@@ -50,7 +53,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
         {
             if(deltaY > 0)
             {
-                this.activity.DisplayBullet();// if its swiped up, make a bullet
+                BulletEntity.Create();// if its swiped up, make a bullet
 
             }else
             {

@@ -9,12 +9,15 @@ import android.view.SurfaceView;
 
 public class PausebuttonEntity implements EntityBase {
 
+
+    public final static PausebuttonEntity Instance = new PausebuttonEntity();
     private Bitmap bmpP,bmpUP,ScaledbmpP,ScaledbmpUP;
     private float xPos = 0, yPos = 0;
 
     private boolean isDone = false;
     private boolean isInit = false;
-    private boolean Paused = false;
+    public boolean Paused = false;
+
 
     int ScreenWidth, ScreenHeight;
 
@@ -43,10 +46,11 @@ public class PausebuttonEntity implements EntityBase {
         ScaledbmpP = Bitmap.createScaledBitmap(bmpP, (int) (ScreenWidth)/12, (int)(ScreenWidth)/7, true);
         ScaledbmpUP = Bitmap.createScaledBitmap(bmpUP, (int) (ScreenWidth)/12, (int)(ScreenWidth)/7, true);
 
-        xPos = ScreenWidth - 150;
-        yPos = 150;
+        xPos = ScreenWidth - 950;
+        yPos = 170;
 
         isInit = true;
+
     }
 
     @Override
@@ -54,20 +58,28 @@ public class PausebuttonEntity implements EntityBase {
         buttonDelay += _dt;
 
         if (TouchManager.Instance.HasTouch()) {
-            if (TouchManager.Instance.IsDown() && !Paused) {
-                // Check Collision of button here!!
-                float imgRadius = ScaledbmpP.getWidth() * 0.5f;
+            float imgRadius = ScaledbmpP.getHeight() * 0.5f;
+            if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(),
+                    0.0f,xPos,yPos,imgRadius )) {
+                Log.v("Touch", "Touched");
+                if (!Paused) {
+                    // Check Collision of button here!!
 
-                if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
-                    Paused = true;
 
+                    if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
+                        Paused = true;
+                        Log.v("Paused", "Successful");
+
+                    }
+                    buttonDelay = 0;
+                    GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+                    Log.v("Paused", "SuccessfuL2");
                 }
-                buttonDelay = 0;
-                GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+                else if (Paused) {
+                    Paused = false;
+                }
             }
-        } else
-            Paused = false;
-
+        }
     }
 
     @Override

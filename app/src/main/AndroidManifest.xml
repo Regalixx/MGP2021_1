@@ -42,7 +42,9 @@
         <activity
             android:name = ".GamePage"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -70,7 +70,7 @@ public class EnemyFactory {
                 enemy.SetPos(position);
                 enemy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
                 enemy.SetPattern(EnemyBulletFactory.PATTERN.CIRCLE);
-                enemy.SetBMP(R.drawable.sans2);
+                enemy.SetBMP(R.drawable.bullyminion);
                 break;
 
             case BULLY_MINION:
@@ -79,7 +79,7 @@ public class EnemyFactory {
                 enemy.SetPos(position);
                 enemy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
                 enemy.SetPattern(EnemyBulletFactory.PATTERN.SPIRAL);
-                enemy.SetBMP(R.drawable.sans2);
+                enemy.SetBMP(R.drawable.bullyminion);
                 break;
 
             case GHOST_BOSS:

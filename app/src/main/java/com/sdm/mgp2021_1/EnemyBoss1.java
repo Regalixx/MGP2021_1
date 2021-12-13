@@ -52,7 +52,7 @@ public class EnemyBoss1 extends EnemyBasic implements EntityBase,Collidable {
         bmp = ResourceManager.Instance.GetBitmap(R.drawable.scammer);
         isInit = true;
         pos.x = 650;
-        pos.y = 2;
+        pos.y = 150;
         Phase1 = true;
 
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
@@ -63,7 +63,11 @@ public class EnemyBoss1 extends EnemyBasic implements EntityBase,Collidable {
     };
     @Override
     public void Update(float _dt) {
-        //spawn bullets
+        //spawn
+       if (GameSystem.Instance.GetIsPaused() == true)
+       {
+           return;
+       }
 
         if (GetHealth() <= 0) {
             SetIsDone(true);
@@ -108,7 +112,6 @@ public class EnemyBoss1 extends EnemyBasic implements EntityBase,Collidable {
         if (Phase1 == true){
             BossPhase1();
         }
-
 
         if (cooldown <= 2 && Phase1 == true) {
             cooldown += _dt;

@@ -172,6 +172,10 @@ public class EnemyBasic implements EntityBase, Collidable {
     };
     public void Update(float _dt) {
         //spawn bullets
+        if (GameSystem.Instance.GetIsPaused() == true)
+        {
+            return;
+        }
         //Update movement
         doBehaviour(_dt);
 

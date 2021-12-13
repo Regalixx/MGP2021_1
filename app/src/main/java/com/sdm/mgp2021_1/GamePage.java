@@ -26,12 +26,9 @@ public class GamePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //To make fullscreen
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide titlebar
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);  // Hide topbar
-
-        Instance = this;
 
         setContentView(new GameView(this)); // Surfaceview = GameView
 
@@ -40,8 +37,8 @@ public class GamePage extends AppCompatActivity {
         // Set activity to the gesture listener
         gestureListener.setActivity(this);
         // Create the gesture detector with the gesture listener.
-        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
-
+       gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
+        Instance = this;
     }
 
     @Override
@@ -56,10 +53,6 @@ public class GamePage extends AppCompatActivity {
         TouchManager.Instance.Update(x, y, event.getAction());
 
         return true;
-    }
-
-    public void DisplayBullet(){
-        BulletEntity.Create();
     }
 
     public void DisplayEmails(){

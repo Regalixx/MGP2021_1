@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 public class VictoryPage extends Activity implements View.OnClickListener, StateBase{
-    public static CreditsPage Instance = null;
+    public static VictoryPage Instance = null;
     private Button btn_retry;
     private Button btn_menu;
     private Button btn_quit;
@@ -19,11 +19,9 @@ public class VictoryPage extends Activity implements View.OnClickListener, State
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //To make fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide titlebar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);  // Hide topbar
-
 
         setContentView(R.layout.victoryscreen);
 
@@ -58,6 +56,7 @@ public class VictoryPage extends Activity implements View.OnClickListener, State
         else if (v == btn_menu)
         {
             intent.setClass(this, Mainmenu.class);
+            StateManager.Instance.ChangeState("Mainmenu");
         }
 
         else if (v == btn_quit)
@@ -66,8 +65,6 @@ public class VictoryPage extends Activity implements View.OnClickListener, State
         }
 
         startActivity(intent);
-
-
     }
 
     @Override

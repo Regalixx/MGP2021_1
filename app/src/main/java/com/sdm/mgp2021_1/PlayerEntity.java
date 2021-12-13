@@ -82,9 +82,11 @@ public class PlayerEntity implements EntityBase, Collidable {
     @Override
     public void Update(float _dt) {
 
+        if (GameSystem.Instance.GetIsPaused() == true)
+        {
+            return;
+        }
 
-
-        spritePlayer.Update(_dt);
 
       //  if (lifetime < 0.0f ) {
         //    SetIsDone(true);   // <--- This part here or this code, meant when time is up, kill the items.
@@ -125,8 +127,6 @@ public class PlayerEntity implements EntityBase, Collidable {
         //Scale and rotate here
        transform.postTranslate(xPos,yPos);
        _canvas.drawBitmap(bmp, transform, null);
-
-
     }
 
     @Override
@@ -179,8 +179,7 @@ public class PlayerEntity implements EntityBase, Collidable {
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
-            HP -= 5;
-            //Log.d("HP", );
+            SetHP(GetHP()-5);
         }
         if (_other.GetType() == "ENT_VIDEOGAMES")
         {

@@ -32,7 +32,7 @@ public class WaveManager {
         metrics = _view.getResources().getDisplayMetrics();
 
         toExit = false;
-        startingpos = new Vector3(metrics.widthPixels*0.5f,8,0);
+        startingpos = new Vector3(metrics.widthPixels*0.5f,150,0);
         bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BOSS, startingpos);
     }
 
@@ -51,10 +51,12 @@ public class WaveManager {
             if (wave == 0) {
                 bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.BULLY_BOSS, startingpos);
                 wave += 1;
+                PlayerEntity.Instance.SetHP(200);
             }
             else if (wave == 1) {
                 bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.GHOST_BOSS, startingpos);
                 wave += 1;
+                PlayerEntity.Instance.SetHP(200);
             }
             else {
                 //Return to menu first

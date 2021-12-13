@@ -11,7 +11,7 @@ public class GameSystem {
     int waves = 1;
 
     // Game stuff
-    private boolean isPaused = false;
+    public boolean isPaused = false;
 
     // Singleton Pattern : Blocks others from creating
     private GameSystem()
@@ -26,10 +26,12 @@ public class GameSystem {
     public void Init(SurfaceView _view)
     {
 
+
         // We will add all of our states into the state manager here!
         StateManager.Instance.AddState(new Mainmenu());
         StateManager.Instance.AddState(new MainGameSceneState());
         StateManager.Instance.AddState(new VictoryPage());
+        StateManager.Instance.AddState(new GameOver());
     }
 
     public void SetIsPaused(boolean _newIsPaused)

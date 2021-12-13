@@ -18,6 +18,10 @@ public class BullyBoss extends EnemyBasic{
     @Override
     public void Update(float _dt) {
         //do movement
+        if (GameSystem.Instance.GetIsPaused() == true)
+        {
+            return;
+        }
         doBehaviour(_dt);
 
 
@@ -84,6 +88,7 @@ public class BullyBoss extends EnemyBasic{
         SetBehaviour(BEHAVIOURS.AI_UPDOWN);
         SetPattern(EnemyBulletFactory.PATTERN.PISS);
         SetBMP(R.drawable.bully2);
+
     }
 
     private void Phase2() {

@@ -66,7 +66,10 @@ public class TrashbinEntity implements EntityBase,Collidable {
 
     @Override
     public void Update(float _dt) {
-
+        if (GameSystem.Instance.GetIsPaused() == true)
+        {
+            return;
+        }
 
         //  if (lifetime < 0.0f ) {
         //    SetIsDone(true);   // <--- This part here or this code, meant when time is up, kill the items.

@@ -71,6 +71,10 @@ public class EmailsEntity implements  EntityBase,Collidable{
     @Override
     public void Update(float _dt) {
 
+        if (GameSystem.Instance.GetIsPaused() == true)
+        {
+            return;
+        }
 
         if (TouchManager.Instance.HasTouch()){ //the moment player touch on the screen
             //Check Collision here!
@@ -170,7 +174,6 @@ public class EmailsEntity implements  EntityBase,Collidable{
         if (_other.GetType() == "TrashbinEntity")
         {
             SetIsDone(true);
-
             if (ForcefieldEntity.Instance == null || ForcefieldEntity.Instance.IsDone() == true) {
                 EnemyBoss1.Instance.SetHealth(EnemyBoss1.Instance.GetHealth() - 5);
             }
