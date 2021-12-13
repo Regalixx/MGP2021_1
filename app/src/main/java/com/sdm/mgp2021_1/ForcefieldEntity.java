@@ -50,7 +50,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
 
         //spritePlayer = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4,16);
 
-        HP = 1;
+        HP = 30;
 
         isInit = true;
 
