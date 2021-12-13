@@ -28,6 +28,7 @@ public class RenderTextEntity implements EntityBase{
     //Use for loading FPS so need more parameters!
     //we want to load FPS on my screen
     int frameCount;
+
     int Enemieskill = 0;
     int BOSSHP;
     int BOSS3HP;

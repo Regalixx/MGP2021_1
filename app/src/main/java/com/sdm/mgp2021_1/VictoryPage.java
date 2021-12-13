@@ -9,9 +9,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class VictoryPage extends Activity implements View.OnClickListener, StateBase{
-    public static VictoryPage Instance = null;
+
     private Button btn_retry;
     private Button btn_menu;
     private Button btn_quit;
@@ -24,6 +25,12 @@ public class VictoryPage extends Activity implements View.OnClickListener, State
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);  // Hide topbar
 
         setContentView(R.layout.victoryscreen);
+
+        TextView wavetext = (TextView)findViewById(R.id.waves);
+        wavetext.setText("Waves Survived: " + WaveManager.Instance.GetWave() + 1);
+
+        TextView scoretext = (TextView)findViewById(R.id.TotalScore);
+        scoretext.setText("Total Score: 99999");
 
         btn_retry = (Button)findViewById(R.id.btn_retry);
         btn_retry.setOnClickListener(this); //Set Listener to this button --> Start Button

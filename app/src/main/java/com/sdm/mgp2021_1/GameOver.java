@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
@@ -13,7 +14,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class GameOver extends Activity implements View.OnClickListener, StateBase {
-    public static GameOver Instance = null;
     private Button btn_retry;
     private Button btn_menu;
     private Button btn_quit;
@@ -44,6 +44,7 @@ public class GameOver extends Activity implements View.OnClickListener, StateBas
 
         StateManager.Instance.AddState(new GameOver());
 
+        Log.d("GameOVer","GameOver got cooled");
     }
 
     @Override
@@ -84,10 +85,12 @@ public class GameOver extends Activity implements View.OnClickListener, StateBas
 
     @Override
     public void OnEnter(SurfaceView _view) {
+        Log.d("Game OVer","Entered Gameover yey");
     }
 
     @Override
     public void OnExit() {
+
     }
 
     @Override

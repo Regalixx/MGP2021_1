@@ -4,6 +4,7 @@ package com.sdm.mgp2021_1;
 // Create a GamePage is an activity class used to hold the GameView which will have a surfaceview
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.view.GestureDetector;
@@ -59,7 +60,14 @@ public class GamePage extends AppCompatActivity {
         EmailsEntity.Create();
     }
 
+    public void ChangeState(Class<?> cls) {
+        Intent intent = new Intent();
 
+        intent.setClass(this, cls);
+        StateManager.Instance.ChangeState("Mainmenu");
+        startActivity(intent);
+
+    }
 
 
 

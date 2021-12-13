@@ -23,7 +23,7 @@ public class MainGameSceneState implements StateBase {
 
     float firstX_point, firstY_point;
 
-
+    //Intent intent = new Intent();
 
     @Override
     public String GetName() {
@@ -37,7 +37,7 @@ public class MainGameSceneState implements StateBase {
         WaveManager.Instance.Init(_view);
         RenderBackground.Create(); //Background is an entity
         PlayerEntity.Create();
-
+        EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC, new Vector3(1,700,0));
         TrashbinEntity.Create();
         PausebuttonEntity.Create();
 
@@ -72,15 +72,19 @@ public class MainGameSceneState implements StateBase {
 
         WaveManager.Instance.Update(_dt);
 
+
+
         if (PlayerEntity.Instance.GetHP() <= 0)
         {
+
             StateManager.Instance.ChangeState("GameOver");
+            GamePage.Instance.ChangeState(GameOver.class);
 
         }
         if (WaveManager.Instance.TimeToExit())
         {
             StateManager.Instance.ChangeState("Victory");
-
+            GamePage.Instance.ChangeState(VictoryPage.class);
         }
 
     }
@@ -89,6 +93,7 @@ public class MainGameSceneState implements StateBase {
     public void OnExit() {
         EntityManager.Instance.Clean();
         GamePage.Instance.finish();
+
     }
 
     public boolean onTouchEvent(MotionEvent event) {
