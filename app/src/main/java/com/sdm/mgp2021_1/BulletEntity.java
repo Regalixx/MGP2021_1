@@ -38,6 +38,7 @@ public class BulletEntity implements EntityBase, Collidable {
     private int RenderLayer = 0; //Layer1 to be rendered.  Check layerconstant.Java
     private boolean isInit = false;
     private boolean hasCollided = false;
+    int currScore;
 
 
     @Override
@@ -86,6 +87,12 @@ public class BulletEntity implements EntityBase, Collidable {
             }
 
         }
+
+        currScore = GameSystem.Instance.GetIntFromSave("Score");
+        ++currScore;
+        GameSystem.Instance.SaveEditBegin();
+        GameSystem.Instance.SetIntInSave("Score",currScore);
+        GameSystem.Instance.SaveEditEnd();
 
        // if ()
        // SetIsDone(false);
@@ -168,6 +175,7 @@ public class BulletEntity implements EntityBase, Collidable {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
             SetIsDone(true);
+            AudioManager.Instance.PlayAudio(R.raw.correct,0.9f);
             //RenderTextEntity.Instance.EnemyKilled = true;
             //EnemiesKilled += 1;
             //Log.d("Collided", Integer.toString((EnemiesKilled)));

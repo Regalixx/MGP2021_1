@@ -5,8 +5,10 @@ package com.sdm.mgp2021_1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Debug;
+import android.preference.PreferenceManager;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
@@ -20,7 +22,7 @@ import androidx.core.view.GestureDetectorCompat;
 
 public class GamePage extends AppCompatActivity {
 
-    public static GamePage Instance = null;
+    public final static GamePage Instance = new GamePage();
     private GestureDetectorCompat gestureDetectorCompat = null;
 
     @Override
@@ -39,7 +41,7 @@ public class GamePage extends AppCompatActivity {
         gestureListener.setActivity(this);
         // Create the gesture detector with the gesture listener.
        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
-        Instance = this;
+
     }
 
     @Override

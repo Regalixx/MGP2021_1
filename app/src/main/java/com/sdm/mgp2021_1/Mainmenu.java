@@ -82,7 +82,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
         }
 
         else if (v == btn_credits) {
-            intent.setClass(this, VictoryPage.class);
+            intent.setClass(this, CreditsPage.class);
         }
         startActivity(intent);
 

@@ -114,7 +114,6 @@ public class ObstacleEntity implements EntityBase,Collidable {
         // gravityVec += _dt * 10.0f;
         //yPos += gravityVec;
 
-
     }
     @Override
     public void Render(Canvas _canvas) {
