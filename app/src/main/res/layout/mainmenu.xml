@@ -33,18 +33,30 @@
         android:textSize="18dp" />
 
     <Button
+        android:id="@+id/btn_leaderboard"
+        android:layout_width="177dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="240dp"
+        android:layout_marginRight="107dp"
+        android:background="@drawable/button"
+        android:text="LEADERBOARD"
+        android:textColor="#32faf7"
+        android:textSize="18dp" />
+
+    <Button
         android:id="@+id/btn_controls"
         android:layout_width="143dp"
         android:layout_height="53dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="246dp"
-        android:layout_marginRight="130dp"
+        android:layout_marginTop="319dp"
+        android:layout_marginRight="126dp"
         android:background="@drawable/button"
         android:text="Controls"
         android:textColor="#32faf7"
         android:textSize="18dp" />
-    >
 
     <Button
         android:id="@+id/btn_about"
@@ -52,13 +64,12 @@
         android:layout_height="53dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="324dp"
-        android:layout_marginRight="130dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginRight="127dp"
         android:background="@drawable/button"
         android:text="About"
         android:textColor="#32faf7"
         android:textSize="18dp" />
-    >
 
     <Button
         android:id="@+id/btn_credits"
@@ -66,8 +77,8 @@
         android:layout_height="53dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="411dp"
-        android:layout_marginRight="130dp"
+        android:layout_marginTop="476dp"
+        android:layout_marginRight="128dp"
         android:background="@drawable/button"
         android:text="Credits"
         android:textColor="#32faf7"

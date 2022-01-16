@@ -19,6 +19,7 @@ public class BulletEntity implements EntityBase, Collidable {
     private boolean renderBullet = false;
     public boolean toggleshoot  = false;
     public static int EnemiesKilled;
+    int currscore;
 
     private boolean isDone = false;
 
@@ -88,11 +89,7 @@ public class BulletEntity implements EntityBase, Collidable {
 
         }
 
-        currScore = GameSystem.Instance.GetIntFromSave("Score");
-        ++currScore;
-        GameSystem.Instance.SaveEditBegin();
-        GameSystem.Instance.SetIntInSave("Score",currScore);
-        GameSystem.Instance.SaveEditEnd();
+
 
        // if ()
        // SetIsDone(false);
@@ -175,7 +172,12 @@ public class BulletEntity implements EntityBase, Collidable {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
             SetIsDone(true);
-            AudioManager.Instance.PlayAudio(R.raw.correct,0.9f);
+            AudioManager.Instance.PlayAudio(R.raw.enemydead,0.9f);
+            currscore = GameSystem.Instance.GetIntFromSave("Score");
+            ++currscore;
+            GameSystem.Instance.SaveEditBegin();
+            GameSystem.Instance.SetIntInSave("Score",currscore);
+            GameSystem.Instance.SaveEditEnd();
             //RenderTextEntity.Instance.EnemyKilled = true;
             //EnemiesKilled += 1;
             //Log.d("Collided", Integer.toString((EnemiesKilled)));

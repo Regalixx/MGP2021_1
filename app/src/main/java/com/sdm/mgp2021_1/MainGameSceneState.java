@@ -12,14 +12,18 @@ import android.view.SurfaceView;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.View;
+import android.widget.TextView;
 
 // Created by TanSiewLan2021
 
 public class MainGameSceneState implements StateBase {
-    private float timer = 0.0f;
+    //private float timer = 0.0f;
     public boolean shoot = false;
     private boolean spawnBoss3 = false;
+
+
     DisplayMetrics metrics2;
+    String scoreText;
 
     float firstX_point, firstY_point;
 
@@ -33,6 +37,7 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void OnEnter(SurfaceView _view)
     {
+
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
         WaveManager.Instance.Init(_view);
         RenderBackground.Create(); //Background is an entity
@@ -41,9 +46,30 @@ public class MainGameSceneState implements StateBase {
         TrashbinEntity.Create();
         PausebuttonEntity.Create();
 
+        // Restart score here
+       // GameSystem.Instance.ResetScore();
+
+        //timer = 0.0f;
+
+
+
         RenderTextEntity.Create(); // This  is the text
 
-        Log.println(Log.ASSERT,"MainGameScene","Entering Main Game Scene");
+        // Restart score here
+        GameSystem.Instance.ResetScore();
+
+        //timer = 0.0f;
+       
+
+        int currScore = 0;
+        GameSystem.Instance.SaveEditBegin();
+        GameSystem.Instance.SetIntInSave("Score", currScore);
+        GameSystem.Instance.SaveEditEnd();
+
+        AudioManager.Instance.PlayAudio(R.raw.gamebg,0.9f);
+
+
+        //Log.println(Log.ASSERT,"MainGameScene","Entering Main Game Scene");
 
         metrics2 = metrics;
         // Example to include another Renderview for Pause Button
@@ -55,13 +81,14 @@ public class MainGameSceneState implements StateBase {
     {
         EntityManager.Instance.Render(_canvas);
 
-        String scoreText = String.format("SCORE: %d",GameSystem.Instance.GetIntFromSave("Score"));
+
 
         Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.RED);
         paint.setTextSize(64);
 
-        _canvas.drawText(scoreText,10,220,paint);
+        _canvas.drawText(scoreText, 10, 220, paint);
+
 
 
     }
@@ -80,21 +107,27 @@ public class MainGameSceneState implements StateBase {
 
         WaveManager.Instance.Update(_dt);
 
-
+        scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
 
         if (PlayerEntity.Instance.GetHP() <= 0)
         {
 
-            StateManager.Instance.ChangeState("GameOver");
-            GamePage.Instance.ChangeState(GameOver.class);
-
+            //StateManager.Instance.ChangeState("GameOver");
+            //GamePage.Instance.ChangeState(GameOver.class);
 
         }
         if (WaveManager.Instance.TimeToExit())
         {
-            StateManager.Instance.ChangeState("Victory");
-            GamePage.Instance.ChangeState(VictoryPage.class);
+            if (SaveConfirmDialogFragment.IsShown)
+                return;
+
+            SaveConfirmDialogFragment newSaveConfirm = new SaveConfirmDialogFragment();
+            newSaveConfirm.show(GamePage.Instance.getSupportFragmentManager(), "SaveConfirm");
+
         }
+
+        // Restart score here
+        GameSystem.Instance.ResetScore();
 
     }
 
@@ -104,6 +137,8 @@ public class MainGameSceneState implements StateBase {
         GamePage.Instance.finish();
         Log.d("MainScene","We Leave");
         ForcefieldEntity.Instance = null;
+
+
     }
 
     public boolean onTouchEvent(MotionEvent event) {

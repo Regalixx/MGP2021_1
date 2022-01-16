@@ -215,6 +215,7 @@ public class EnemyBasic implements EntityBase, Collidable {
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_BULLET") {
             SetIsDone(true);
+            AudioManager.Instance.PlayAudio(R.raw.enemydead,0.9f);
         }
 
     };

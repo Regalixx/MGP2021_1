@@ -51,16 +51,19 @@ public class EnemyBulletFactory {
 
             switch (patterns.get(index)) {
                 case STRAIGHT:
+                    AudioManager.Instance.PlayAudio(R.raw.explosion,0.9f);
                     Spawn(new Vector3(0, 1, 0));
                     countup = 0;
                     break;
                 case SHOTGUN:
+                    AudioManager.Instance.PlayAudio(R.raw.explosion,0.9f);
                     Spawn(new Vector3(0,1,0));
                     Spawn(new Vector3( 1,1,0));
                     Spawn(new Vector3(-1,1,0));
                     countup = 0;
                     break;
                 case CIRCLE:
+                    AudioManager.Instance.PlayAudio(R.raw.explosion,0.9f);
                     Spawn(new Vector3(0, 1,0));
                     Spawn(new Vector3(1, 1,0));
                     Spawn(new Vector3(-1, 1,0));
@@ -72,7 +75,7 @@ public class EnemyBulletFactory {
                     countup = 0;
                     break;
                 case SPIRAL:
-
+                    AudioManager.Instance.PlayAudio(R.raw.explosion,0.9f);
                     if (spawntimer >= 1) {
                         spawntimer = 0;
                         countup = 0;
@@ -89,7 +92,7 @@ public class EnemyBulletFactory {
                     break;
 
                 case PISS:
-
+                    AudioManager.Instance.PlayAudio(R.raw.explosion,0.9f);
                     if (spawntimer >= 0.5) {
                         spawntimer = 0;
                         countup = 0;

@@ -67,7 +67,7 @@ public class PausebuttonEntity implements EntityBase {
 
 
                     if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
-                        Paused = true;
+                        //Paused = true;
                         Log.v("Paused", "Successful");
 
                         //Button got clicked show the popup dialog
@@ -79,10 +79,11 @@ public class PausebuttonEntity implements EntityBase {
 
 
 
+
                     }
                     buttonDelay = 0;
-                    GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
-                    Log.v("Paused", "SuccessfuL2");
+                    //GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+                    //Log.v("Paused", "SuccessfuL2");
                 }
                 else if (Paused) {
                     Paused = false;

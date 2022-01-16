@@ -22,7 +22,8 @@ import androidx.core.view.GestureDetectorCompat;
 
 public class GamePage extends AppCompatActivity {
 
-    public final static GamePage Instance = new GamePage();
+    //public static GamePage Instance = new GamePage();
+    public static GamePage Instance = null;
     private GestureDetectorCompat gestureDetectorCompat = null;
 
     @Override
@@ -32,8 +33,9 @@ public class GamePage extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        Instance = this;
         setContentView(new GameView(this)); // Surfaceview = GameView
+
 
         // Create a common gesture listener object.
         DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();

@@ -1,6 +1,7 @@
 package com.sdm.mgp2021_1;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -17,10 +18,12 @@ public class RenderTextEntity implements EntityBase{
     int PlayerHP;
     int waves = 0;
 
+    String scoreText;
     Paint paint = new Paint();
     Paint paint2 = new Paint();
     Paint paint3 = new Paint();
     Paint paint4 = new Paint();
+    Paint paint5 = new Paint();
     private int red = 0, green = 0, blue = 0; // 0 - 255
 
     Typeface myFont;
@@ -34,6 +37,7 @@ public class RenderTextEntity implements EntityBase{
     int BOSS3HP;
     long lastTime = 0;
     long lastFPSTime = 0;
+    int playerscore = 0;
     float FPS;
 
     public boolean IsDone() {
@@ -70,6 +74,7 @@ public class RenderTextEntity implements EntityBase{
 
 
      realEnemiesKilled = bulletentity.GetEnemiesKilled();
+     playerscore = PlayerEntity.Instance.score;
 
 
         long currentTime = System.currentTimeMillis();
@@ -109,6 +114,17 @@ public class RenderTextEntity implements EntityBase{
         paint4.setTypeface(myFont);
         paint4.setTextSize(50);
 
+
+
+
+
+        paint5.setStrokeWidth(200);
+        paint5.setColor(Color.BLACK);
+        paint5.setTypeface(myFont);
+        paint5.setTextSize(64);
+
+
+
         _canvas.drawText ("FPS: " + (int)FPS, 30, 80, paint); //For now, default member but u can use _view.getWidth /
         //_canvas.drawText("Killed:" + realEnemiesKilled,50,400,paint);
         _canvas.drawText ("HP: " + (int)PlayerHP, 250, 80, paint2); //For now, default
@@ -116,6 +132,8 @@ public class RenderTextEntity implements EntityBase{
         _canvas.drawText ( "Boss HP: " + WaveManager.Instance.GetBossHealth(), 500, 80, paint3);
 
         _canvas.drawText ("Wave: " + (int)(WaveManager.Instance.GetWave() + 1), 850, 80, paint4);
+
+
     }
 
 

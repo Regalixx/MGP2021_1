@@ -54,6 +54,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
             if(deltaY > 0)
             {
                 BulletEntity.Create();// if its swiped up, make a bullet
+                AudioManager.Instance.PlayAudio(R.raw.laserbeam,1.0f);
 
             }else
             {

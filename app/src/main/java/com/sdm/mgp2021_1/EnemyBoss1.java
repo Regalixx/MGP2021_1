@@ -94,6 +94,7 @@ public class EnemyBoss1 extends EnemyBasic implements EntityBase,Collidable {
         }
 
         if (enemyCooldown >= 5) {
+            AudioManager.Instance.PlayAudio(R.raw.enemyspawn,0.9f);
             EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_MINION, pos.Plus(new Vector3(0,bmp.getHeight(), 0)));
             enemyCooldown = 0;
         }

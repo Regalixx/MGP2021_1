@@ -38,6 +38,7 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
 
     private float lifetime;
     private int HP = 200;
+    int score = 0;
     private int wavesurvived = 0;
     public float xPos = 0;
     public float yPos = 0;
@@ -201,7 +202,7 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
         //Scale and rotate here
        transform.postTranslate(xPos,yPos);
     //   _canvas.drawBitmap(bmp, transform, null);
-        _canvas.drawBitmap(bmp, bX - bmp.getWidth()/2,bY-bmp.getHeight()/2,null);
+        _canvas.drawBitmap(bmp, xPos,yPos,null);
     }
 
     public void startVibrate(){

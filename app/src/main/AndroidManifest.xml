@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sdm.mgp2021_1">
-//android manifest file = the main information store.
+    //android manifest file = the main information store.
     //give permission for internet use,accelerometer use.
     // it also indicates the number of activities, classes, that we have
 
@@ -48,6 +48,18 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
 
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name = ".LeaderboardPage"
+            android:screenOrientation="portrait"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

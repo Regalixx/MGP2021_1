@@ -17,6 +17,7 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
 
     //Define buttons
     private Button btn_start;
+    private Button btn_leaderboard;
     private Button btn_back;
     private Button btn_controls;
     private Button btn_about;
@@ -37,6 +38,9 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
 
         btn_start = (Button)findViewById(R.id.btn_start);
         btn_start.setOnClickListener(this); //Set Listener to this button --> Start Button
+
+        btn_leaderboard = (Button)findViewById(R.id.btn_leaderboard);
+        btn_leaderboard.setOnClickListener(this); //Set Listener to this button --> Start Button
 
         btn_controls = (Button)findViewById(R.id.btn_controls);
         btn_controls.setOnClickListener(this); //Set Listener to this button --> Controls Button
@@ -66,8 +70,16 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
             // intent --> to set to another class which another page or screen that we are launching.
             intent.setClass(this, GamePage.class);
  				 StateManager.Instance.ChangeState("MainGame"); // Default is like a loading page
+               // AudioManager.Instance.PlayAudio(R.raw.gamebg,0.6f);
                 //Main menu ->  game page -> game view -> surface view
                 //Change state -> "Main Game" state =  MainGameSceneState = which is the main gameplay screen
+
+        }
+
+        if (v == btn_leaderboard)
+        {
+            // intent --> to set to another class which another page or screen that we are launching.
+            intent.setClass(this, LeaderboardPage.class);
 
         }
 
