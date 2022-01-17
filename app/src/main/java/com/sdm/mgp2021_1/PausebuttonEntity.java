@@ -66,9 +66,11 @@ public class PausebuttonEntity implements EntityBase {
                     // Check Collision of button here!!
 
 
+
                     if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
                         //Paused = true;
                         Log.v("Paused", "Successful");
+
 
                         //Button got clicked show the popup dialog
                         if (PauseConfirmDialogFragment.IsShown)
@@ -76,18 +78,16 @@ public class PausebuttonEntity implements EntityBase {
 
                         PauseConfirmDialogFragment newPauseConfirm = new PauseConfirmDialogFragment();
                         newPauseConfirm.show(GamePage.Instance.getSupportFragmentManager(),"PauseConfirm");
-
-
-
-
                     }
                     buttonDelay = 0;
                     //GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
                     //Log.v("Paused", "SuccessfuL2");
                 }
                 else if (Paused) {
-                    Paused = false;
+                    AudioManager.Instance.PlayAudio(R.raw.gamebg,0.9f);
+                    Log.v("unpaused","unpaused");
                 }
+
             }
         }
     }

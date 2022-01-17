@@ -81,13 +81,11 @@ public class MainGameSceneState implements StateBase {
     {
         EntityManager.Instance.Render(_canvas);
 
-
-
         Paint paint = new Paint();
-        paint.setColor(Color.RED);
+        paint.setARGB(255,255,0,255);
         paint.setTextSize(64);
 
-        _canvas.drawText(scoreText, 10, 220, paint);
+        _canvas.drawText(scoreText, 550, 220, paint);
 
 
 

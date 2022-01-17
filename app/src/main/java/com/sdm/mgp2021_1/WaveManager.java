@@ -49,12 +49,12 @@ public class WaveManager {
         if (bossToSpawn.IsDone()) {
             //Log.println(Log.DEBUG,"Wave Manager", "Boss is done. Spawn another");
             if (wave == 0) {
-                //bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.BULLY_BOSS, startingpos);
-                toExit = true;
+                bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.BULLY_BOSS, startingpos);
+                //toExit = true;
 
 
-                //wave += 1;
-                //PlayerEntity.Instance.SetHP(200);
+                wave += 1;
+                PlayerEntity.Instance.SetHP(200);
             }
             else if (wave == 1) {
                 bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.GHOST_BOSS, startingpos);
@@ -64,7 +64,7 @@ public class WaveManager {
             else {
                 //Return to menu first
                 //figure out winscreen another time
-                //toExit = true;
+                toExit = true;
             }
         }
 
