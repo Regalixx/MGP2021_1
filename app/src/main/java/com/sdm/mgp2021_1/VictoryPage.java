@@ -77,16 +77,17 @@ int highscore;
         if (v == btn_retry)
         {
 
-
+            intent.setClass(this, GamePage.class);
+            StateManager.Instance.ChangeState("GamePage");
+            startActivity(intent);
 
         }
 
         else if (v == btn_menu)
         {
-
-
             intent.setClass(this, Mainmenu.class);
             StateManager.Instance.ChangeState("Mainmenu");
+            startActivity(intent);
         }
 
         else if (v == btn_quit)
@@ -94,7 +95,7 @@ int highscore;
             this.finishAffinity();
         }
 
-       startActivity(intent);
+
     }
 
 
