@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
@@ -31,15 +32,21 @@ public class LeaderboardPage extends Activity implements View.OnClickListener, S
         Instance = this;
         setContentView(R.layout.highscorepage);
 
-        TextView t1,t2;
-        t2 = findViewById(R.id.username);
-        String userText = String.format(GameSystem.Instance.GetUserFromSave("User"));
-        t2.setText(userText);
+        if (GameSystem.Instance.GetSharedPref() == null) {
+            Log.d("Save","I don't got the shared Pref!");
+        }
+
+        else {
+            TextView t1, t2;
+            t2 = findViewById(R.id.username);
+            String userText = String.format(GameSystem.Instance.GetUserFromSave("User"));
+            t2.setText(userText);
 
 
-        t1 = (TextView)findViewById(R.id.score);
-        String scoreText = String.format("%d", GameSystem.Instance.GetIntFromSave("Score"));
-        t1.setText(scoreText);
+            t1 = (TextView) findViewById(R.id.score);
+            String scoreText = String.format("%d", GameSystem.Instance.GetIntFromSave("Score"));
+            t1.setText(scoreText);
+        }
 
     }
 

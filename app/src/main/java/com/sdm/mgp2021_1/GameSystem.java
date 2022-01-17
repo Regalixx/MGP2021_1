@@ -101,6 +101,10 @@ public class GameSystem {
 
     }
 
+    public SharedPreferences GetSharedPref() {
+        return sharedPref;
+    }
+
     public String GetUserFromSave(String _key)
     {
         return sharedPref.getString(_key,"" );
