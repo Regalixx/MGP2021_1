@@ -65,6 +65,8 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
     private long lastTime = System.currentTimeMillis();
     //private boolean hasTouched = false;
 
+    private float targetPos;
+
 
     @Override
     public boolean IsDone() {
@@ -91,6 +93,12 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
         //Setup hardware vibrate
         _vibrator = (Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE);
 
+        DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
+        screenWidth = metrics.widthPixels;
+        screenHeight = metrics.heightPixels;
+
+        targetPos = screenWidth * 0.5f;
+
         //Setup all our variables
         xPos = _view.getWidth()* 0.5f; //setting the x position to spawn
         yStart = yPos = _view.getHeight() * 0.9f; //setting the y position to spawn
@@ -111,7 +119,39 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
     public void onSensorChanged(SensorEvent SenseEvent) {
         //Many sensors return 3 values, one for each axis
         //Do something with sensor value.
-        values = SenseEvent.values;
+
+        if (SenseEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            values = SenseEvent.values;
+            //tilt
+            float
+                    rx = values[0],
+                    ry = values[1],
+                    rz = values[2];
+
+            float
+                    x =  (float)Math.toDegrees ( Math.atan(rx / Math.sqrt(ry * ry + rz * rz))),
+                    y =  (float)Math.toDegrees ( Math.atan(ry / Math.sqrt(rx * rx + rz * rz))),
+                    z =  (float)Math.toDegrees(Math.atan(rz / Math.sqrt(ry * ry + rx * rx)));
+
+            Log.d("Acceloremter test", "X: " + x + " Y: " + y + " Z: " + z);
+
+
+            int offset = 30;
+
+            //xpos is the percentage of the max x tilt - min x tilt
+            targetPos = screenWidth - (screenWidth * (  (x + offset) / (offset*2)  )) ;
+
+
+
+
+        }
+
+
+    }
+
+    private float lerp(float a, float b, float f)
+    {
+        return a + f * (b - a);
     }
 
     public void SensorMove() {
@@ -176,15 +216,13 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
                 //SetIsDone(true);
             }
 
-            xPos = TouchManager.Instance.GetPosX();
+
+
+            //xPos = TouchManager.Instance.GetPosX();
 
         }
-       // if (TouchManager.Instance.IsDown()) { //Previous and it is for justa touch - useful for collision with image
-         //   float imgRadius = bmp.getWidth() * 0.5f;
-         //   if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(),
-                  //  0.0f,xPos,yPos,imgRadius ) || hasCollided)
-            //SetIsDone(true);
-       // }
+        //every frame, linearly interpolate to place.
+        xPos = lerp(xPos, targetPos, 0.2f );
 
     }
 
