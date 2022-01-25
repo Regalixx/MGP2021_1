@@ -24,6 +24,15 @@ public class MenuConfirmDialogFragment extends DialogFragment {
                 // User triggered pause
                 StateManager.Instance.ChangeState("MainMenu");
                 GamePage.Instance.ChangeState(Mainmenu.class);
+                if (OptionsPage.Instance == null) {
+                    AudioManager.Instance.StopAudio(R.raw.gamebg);
+                }
+                if (OptionsPage.Instance != null) {
+                    if (OptionsPage.Instance.musicactive == true){
+                        AudioManager.Instance.StopAudio(R.raw.gamebg);
+                    }
+                }
+
                 IsShown = false;
             }
         })

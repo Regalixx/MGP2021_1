@@ -25,6 +25,8 @@ public class GamePage extends AppCompatActivity {
     //public static GamePage Instance = new GamePage();
     public static GamePage Instance = null;
     private GestureDetectorCompat gestureDetectorCompat = null;
+    public boolean active = false;
+    public boolean musicactive = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

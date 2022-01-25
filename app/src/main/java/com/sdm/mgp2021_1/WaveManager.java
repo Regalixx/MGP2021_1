@@ -54,9 +54,12 @@ public class WaveManager {
 
 
                 wave += 1;
+                toExit = true;
                 PlayerEntity.Instance.SetHP(200);
+
             }
             else if (wave == 1) {
+
                 bossToSpawn = EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.GHOST_BOSS, startingpos);
                 wave += 1;
                 PlayerEntity.Instance.SetHP(200);

@@ -43,6 +43,7 @@ public class GameSystem {
 
         // We will add all of our states into the state manager here!
         StateManager.Instance.AddState(new Mainmenu());
+        StateManager.Instance.AddState(new OptionsPage());
         StateManager.Instance.AddState(new MainGameSceneState());
         StateManager.Instance.AddState(new VictoryPage());
         StateManager.Instance.AddState(new LeaderboardPage());

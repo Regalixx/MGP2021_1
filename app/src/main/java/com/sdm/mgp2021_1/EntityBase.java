@@ -20,6 +20,7 @@ public interface EntityBase
          ENT_VIDEOGAME,
          ENT_EMAILS,
          ENT_PAUSE, //pause button
+         ENT_MAINMENU,
          ENT_TEXT,
         ENT_DEFAULT,
     }

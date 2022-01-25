@@ -45,13 +45,12 @@ public class MainGameSceneState implements StateBase {
         //EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC, new Vector3(1,700,0));
         TrashbinEntity.Create();
         PausebuttonEntity.Create();
+        MainMenuButtonEntity.Create();
 
         // Restart score here
        // GameSystem.Instance.ResetScore();
 
         //timer = 0.0f;
-
-
 
         RenderTextEntity.Create(); // This  is the text
 
@@ -59,15 +58,22 @@ public class MainGameSceneState implements StateBase {
         GameSystem.Instance.ResetScore();
 
         //timer = 0.0f;
-       
 
         int currScore = 0;
         GameSystem.Instance.SaveEditBegin();
         GameSystem.Instance.SetIntInSave("Score", currScore);
         GameSystem.Instance.SaveEditEnd();
 
-        AudioManager.Instance.PlayAudio(R.raw.gamebg,0.9f);
+        if (OptionsPage.Instance == null) { //means player did not open options state
+            AudioManager.Instance.PlayAudio(R.raw.gamebg, 0.9f);
+        }
 
+        if (OptionsPage.Instance != null) { //player did open options state
+            if (OptionsPage.Instance.musicactive == true)
+            {
+            AudioManager.Instance.PlayAudio(R.raw.gamebg, 0.9f);
+            }
+        }
 
         //Log.println(Log.ASSERT,"MainGameScene","Entering Main Game Scene");
 

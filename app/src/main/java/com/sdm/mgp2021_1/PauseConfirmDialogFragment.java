@@ -34,6 +34,7 @@ public class PauseConfirmDialogFragment extends DialogFragment {
                         IsShown = false;
                     }
                 });
+
         //Create the AlertDialog and return it
         return builder.create();
     }

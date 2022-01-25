@@ -12,6 +12,7 @@ public class LayerConstants {
     public final static int BULLET_LAYER = 3;
     public final static int TRASHBIN_LAYER = 5;
     public final static int  PAUSEBUTTON_LAYER = 4;
+    public final static int MAINMENUBUTTON_LAYER = 12;
     public final static int ENEMYBOSS1_LAYER = 6;
     public final static int EMAIL_LAYER = 7;
     public final static int FORCEFIELD_LAYER = 8;
