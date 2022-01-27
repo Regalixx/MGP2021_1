@@ -8,6 +8,7 @@ import org.w3c.dom.Entity;
 public class EnemyFactory {
 
    enum ENEMY_TYPE {
+       TUTORIAL_MINION,
        SPAM_BASIC,
        SPAM_BOSS,
        SPAM_MINION,
@@ -42,6 +43,14 @@ public class EnemyFactory {
                 enemy.SetHealth(10);
                 enemy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
                 enemy.SetPattern(EnemyBulletFactory.PATTERN.STRAIGHT);
+
+                break;
+            case TUTORIAL_MINION:
+                enemy = new EnemyBasic();
+                enemy.SetBMP(R.drawable.threat);
+                enemy.SetPos(position);
+                enemy.SetHealth(10);
+                enemy.SetBehaviour(EnemyBasic.BEHAVIOURS.AI_FALL);
 
                 break;
 

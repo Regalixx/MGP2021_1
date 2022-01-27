@@ -109,7 +109,8 @@ public class MainGameSceneState implements StateBase {
         //    spawnBoss3 = true;
         //}
 
-        WaveManager.Instance.Update(_dt);
+            WaveManager.Instance.Update(_dt);
+
 
         scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
 

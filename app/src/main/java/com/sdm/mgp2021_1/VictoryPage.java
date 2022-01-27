@@ -38,7 +38,6 @@ int highscore;
 
         setContentView(R.layout.victoryscreen);
 
-
        // highscore = GameSystem.Instance.GetIntFromSave("Score");
         TextView wavetext = (TextView)findViewById(R.id.waves);
         wavetext.setText("Waves Survived: " + WaveManager.Instance.GetWave() + 1);
@@ -59,9 +58,6 @@ int highscore;
 
         btn_quit = (Button)findViewById(R.id.btn_quit);
         btn_quit.setOnClickListener(this); //Set Listener to this button --> Start Button
-
-
-
     }
 
     @Override
@@ -95,8 +91,6 @@ int highscore;
         {
             this.finishAffinity();
         }
-
-
     }
 
 

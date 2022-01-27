@@ -129,9 +129,16 @@ public class RenderTextEntity implements EntityBase{
         //_canvas.drawText("Killed:" + realEnemiesKilled,50,400,paint);
         _canvas.drawText ("HP: " + (int)PlayerHP, 250, 80, paint2); //For now, default
 
-        _canvas.drawText ( "Boss HP: " + WaveManager.Instance.GetBossHealth(), 500, 80, paint3);
+        if (WaveManager.Instance.tutorial == true) {
 
-        _canvas.drawText ("Wave: " + (int)(WaveManager.Instance.GetWave() + 1), 850, 80, paint4);
+            _canvas.drawText("TUTORIAL STAGE", 400, 80, paint3); //For now, default
+        }
+
+        if (WaveManager.Instance.tutorial == false) {
+            _canvas.drawText("Boss HP: " + WaveManager.Instance.GetBossHealth(), 500, 80, paint3);
+
+            _canvas.drawText("Wave: " + (int) (WaveManager.Instance.GetWave() + 1), 850, 80, paint4);
+        }
 
 
     }
