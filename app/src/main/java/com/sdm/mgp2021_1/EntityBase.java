@@ -18,6 +18,9 @@ public interface EntityBase
          ENT_BOSS1,
          ENT_BOSS3,
          ENT_VIDEOGAME,
+         ENT_HEALTHPOWERUP,
+         ENT_SCOREMULTIPLIER,
+         ENT_SHIELDPOWERUP,
          ENT_EMAILS,
          ENT_PAUSE, //pause button
          ENT_MAINMENU,

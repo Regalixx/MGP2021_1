@@ -34,6 +34,7 @@ public class ReadyConfirmDialogFragment extends DialogFragment {
                         StateManager.Instance.ChangeState("MainMenu");
                         GamePage.Instance.ChangeState(Mainmenu.class);
                         IsShown = false;
+                        WaveManager.Instance.tutorial = false;
                         if (OptionsPage.Instance == null) {
                             AudioManager.Instance.StopAudio(R.raw.gamebg);
                         }

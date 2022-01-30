@@ -66,6 +66,10 @@ public class GamePage extends AppCompatActivity {
         EmailsEntity.Create();
     }
 
+    public void DisplayForcefield(){
+        ForcefieldEntityPlayer.Create();
+    }
+
     public void ChangeState(Class<?> cls) {
         Intent intent = new Intent();
 

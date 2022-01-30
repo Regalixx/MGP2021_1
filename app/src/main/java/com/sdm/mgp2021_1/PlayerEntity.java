@@ -320,9 +320,10 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
-            SetHP(GetHP()-5);
-            startVibrate();
-
+            if (ForcefieldEntityPlayer.Instance.IsDone() == true) {
+                SetHP(GetHP() - 5);
+                startVibrate();
+            }
         }
         if (_other.GetType() == "ENT_VIDEOGAMES")
         {

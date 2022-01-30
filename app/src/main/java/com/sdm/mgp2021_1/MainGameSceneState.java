@@ -20,6 +20,7 @@ public class MainGameSceneState implements StateBase {
     //private float timer = 0.0f;
     public boolean shoot = false;
     private boolean spawnBoss3 = false;
+    private float spawnPowerup = 0.0f;
 
 
     DisplayMetrics metrics2;
@@ -111,8 +112,31 @@ public class MainGameSceneState implements StateBase {
 
             WaveManager.Instance.Update(_dt);
 
-
         scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
+
+        spawnPowerup+=_dt;
+
+        if (spawnPowerup >= 10)
+        {
+            int max = 2;
+            int min = 0;
+            int range = max - min + 1;
+
+            // generate random numbers within 1 to 10
+            int rand = (int)(Math.random() * range) + min;
+
+            if (rand == 0) { //setting the x position to spawn
+                HealthPowerupEntity.Create();
+            }
+            if (rand == 1) { //setting the x position to spawn
+                ScoreMultiplierPowerupEntity.Create();
+            }
+            if (rand == 2) {
+                ShieldPowerupEntity.Create();
+            }
+            spawnPowerup = 0;
+
+        }
 
         if (PlayerEntity.Instance.GetHP() <= 0)
         {
