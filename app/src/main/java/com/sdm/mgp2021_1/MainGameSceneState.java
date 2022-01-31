@@ -20,6 +20,7 @@ public class MainGameSceneState implements StateBase {
     //private float timer = 0.0f;
     public boolean shoot = false;
     private boolean spawnBoss3 = false;
+    private float spawnPowerup = 0.0f;
 
 
     DisplayMetrics metrics2;
@@ -45,13 +46,12 @@ public class MainGameSceneState implements StateBase {
         //EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC, new Vector3(1,700,0));
         TrashbinEntity.Create();
         PausebuttonEntity.Create();
+        MainMenuButtonEntity.Create();
 
         // Restart score here
        // GameSystem.Instance.ResetScore();
 
         //timer = 0.0f;
-
-
 
         RenderTextEntity.Create(); // This  is the text
 
@@ -59,7 +59,6 @@ public class MainGameSceneState implements StateBase {
         GameSystem.Instance.ResetScore();
 
         //timer = 0.0f;
-       
 
         int currScore = 0;
         GameSystem.Instance.SaveEditBegin();
@@ -68,8 +67,17 @@ public class MainGameSceneState implements StateBase {
 
         GameSystem.Instance.setPlayerDied(false);
 
-        AudioManager.Instance.PlayAudio(R.raw.gamebg,0.9f);
+        //AudioManager.Instance.PlayAudio(R.raw.gamebg,0.9f);
+        if (OptionsPage.Instance == null) { //means player did not open options state
+            AudioManager.Instance.PlayAudio(R.raw.gamebg, 0.9f);
+        }
 
+        if (OptionsPage.Instance != null) { //player did open options state
+            if (OptionsPage.Instance.musicactive == true)
+            {
+            AudioManager.Instance.PlayAudio(R.raw.gamebg, 0.9f);
+            }
+        }
 
         //Log.println(Log.ASSERT,"MainGameScene","Entering Main Game Scene");
 
@@ -105,9 +113,33 @@ public class MainGameSceneState implements StateBase {
         //    spawnBoss3 = true;
         //}
 
-        WaveManager.Instance.Update(_dt);
+            WaveManager.Instance.Update(_dt);
 
         scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
+
+        spawnPowerup+=_dt;
+
+        if (spawnPowerup >= 10)
+        {
+            int max = 2;
+            int min = 0;
+            int range = max - min + 1;
+
+            // generate random numbers within 1 to 10
+            int rand = (int)(Math.random() * range) + min;
+
+            if (rand == 0) { //setting the x position to spawn
+                HealthPowerupEntity.Create();
+            }
+            if (rand == 1) { //setting the x position to spawn
+                ScoreMultiplierPowerupEntity.Create();
+            }
+            if (rand == 2) {
+                ShieldPowerupEntity.Create();
+            }
+            spawnPowerup = 0;
+
+        }
 
         if (PlayerEntity.Instance.GetHP() <= 0)
         {

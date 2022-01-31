@@ -38,16 +38,16 @@ int highscore;
 
         setContentView(R.layout.victoryscreen);
 
-
-        highscore = GameSystem.Instance.GetIntFromSave("Score");
+       // highscore = GameSystem.Instance.GetIntFromSave("Score");
         TextView wavetext = (TextView)findViewById(R.id.waves);
         wavetext.setText("Waves Survived: " + WaveManager.Instance.GetWave() + 1);
 
-        TextView highscoretext = (TextView)findViewById(R.id.scores);
-        highscoretext.setText(String.valueOf(highscore));
+        highscoretext = (TextView)findViewById(R.id.scores);
+        String scoreText = String.format("%d", GameSystem.Instance.GetIntFromSave("Score"));
+        highscoretext.setText(scoreText);
 
         scoretext = (TextView)findViewById(R.id.TotalScore);
-      //  highscoretext = (TextView)findViewById(R.id.scores);
+        // highscoretext = (TextView)findViewById(R.id.scores);
 
 
         btn_retry = (Button)findViewById(R.id.btn_retry);
@@ -58,9 +58,6 @@ int highscore;
 
         btn_quit = (Button)findViewById(R.id.btn_quit);
         btn_quit.setOnClickListener(this); //Set Listener to this button --> Start Button
-
-
-
     }
 
     @Override
@@ -94,8 +91,6 @@ int highscore;
         {
             this.finishAffinity();
         }
-
-
     }
 
 

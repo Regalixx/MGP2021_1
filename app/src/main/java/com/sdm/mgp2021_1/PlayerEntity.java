@@ -107,7 +107,6 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
         sensor = (SensorManager)_view.getContext().getSystemService(Context.SENSOR_SERVICE);
         sensor.registerListener((SensorEventListener) this,sensor.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0),SensorManager.SENSOR_DELAY_NORMAL);
         Instance = this;
-
     }
 
     @Override
@@ -192,6 +191,7 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
         }
     }
 
+
     @Override
     public void Update(float _dt) {
 
@@ -199,6 +199,9 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
         {
             return;
         }
+
+
+
 
 
       //  if (lifetime < 0.0f ) {
@@ -221,8 +224,18 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
             //xPos = TouchManager.Instance.GetPosX();
 
         }
-        //every frame, linearly interpolate to place.
-        xPos = lerp(xPos, targetPos, 0.2f );
+
+        if (OptionsPage.Instance != null)
+        {
+        if (OptionsPage.Instance.active == true) {
+            //every frame, linearly interpolate to place.
+            xPos = lerp(xPos, targetPos, 0.2f);
+        }
+        }
+        if (OptionsPage.Instance == null || OptionsPage.Instance.active == false){
+            xPos = TouchManager.Instance.GetPosX();
+        }
+
 
     }
 
@@ -307,9 +320,10 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
-            SetHP(GetHP()-5);
-            startVibrate();
-
+            if (ForcefieldEntityPlayer.Instance.IsDone() == true) {
+                SetHP(GetHP() - 5);
+                startVibrate();
+            }
         }
         if (_other.GetType() == "ENT_VIDEOGAMES")
         {

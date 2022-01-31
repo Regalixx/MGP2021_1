@@ -3,16 +3,14 @@ package com.sdm.mgp2021_1;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.util.DisplayMetrics;
+import android.media.metrics.PlaybackErrorEvent;
 import android.util.Log;
 import android.view.SurfaceView;
 
-public class ForcefieldEntity implements EntityBase,Collidable {
+public class ForcefieldEntityPlayer implements EntityBase,Collidable {
+    public static ForcefieldEntityPlayer Instance = new ForcefieldEntityPlayer();
 
-    public static ForcefieldEntity Instance = null;
-
-    public Bitmap bmp = null;
-    private Bitmap scaledbmp = null;
+    public Bitmap bmp = ResourceManager.Instance.GetBitmap(R.drawable.forcefield2);
 
     public boolean forceFieldplayer = false;
     private boolean isDone = false;
@@ -24,6 +22,7 @@ public class ForcefieldEntity implements EntityBase,Collidable {
     private boolean spawn = false;
     private float lifetime;
     private int HP = 0;
+    private float shieldTimer = 0;
     public float xPos = 0;
     public float yPos = 0;
 
@@ -47,38 +46,55 @@ public class ForcefieldEntity implements EntityBase,Collidable {
 
     @Override
     public void Init(SurfaceView _view){
-        //bmp = BitmapFactory.decodeResource(_view.getResources(), R.drawable.sans2);
-        bmp = ResourceManager.Instance.GetBitmap(R.drawable.forcefield);
 
-        //spritePlayer = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4,16);
 
-            HP = 15;
+        bmp = ResourceManager.Instance.GetBitmap(R.drawable.forcefield2);
+
+
+        HP = 8;
 
 
         isInit = true;
 
 
-            xPos = EnemyBoss1.Instance.GetPosX(); //setting the x position to spawn
-            yStart = yPos = EnemyBoss1.Instance.GetPosY(); //setting the y position to spawn
-
+        xPos = PlayerEntity.Instance.GetPosX(); //setting the x position to spawn
+        yStart = yPos = PlayerEntity.Instance.GetPosY(); //setting the y position to spawn
         yLimit = _view.getHeight()-bmp.getHeight() * 0.5f; //setting constraint
 
-        Instance = this;
+
     }
 
     @Override
     public void Update(float _dt) {
 
 
+        shieldTimer += _dt;
+
+        if (shieldTimer >= 10 )
+        {
+            SetIsDone(true);
+        }
+
         //  if (lifetime < 0.0f ) {
         //    SetIsDone(true);   // <--- This part here or this code, meant when time is up, kill the items.
         //}
+        if (TouchManager.Instance.HasTouch()){ //the moment player touch on the screen
+            //Check Collision here!
+            float imgRadius = bmp.getWidth() * 0.5f;
+            if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(),
+                    0.0f,xPos,yPos,imgRadius ) || hasCollided){
+
+                hasCollided = true;
 
 
+            }
+
+        }
+spawn = true;
 
 
-            xPos = EnemyBoss1.Instance.GetPosX();
-            yPos = EnemyBoss1.Instance.GetPosY();
+        xPos = PlayerEntity.Instance.GetPosX();
+        yPos = PlayerEntity.Instance.GetPosY();
 
 
         if (HP <= 0 ) {
@@ -91,15 +107,12 @@ public class ForcefieldEntity implements EntityBase,Collidable {
     @Override
     public void Render(Canvas _canvas) {
 
-        Matrix transform = new Matrix();
-        transform.postTranslate(-bmp.getWidth() * 0.5f, 0); // make it not look so scuffed.
-
-        //Scale and rotate here
-        transform.postTranslate(xPos,yPos);
-        _canvas.drawBitmap(bmp, transform, null);
-
+        if (spawn == true) {
+            _canvas.drawBitmap(bmp, xPos, yPos, null); // 1st image
+        }
 
     }
+
 
     @Override
     public boolean IsInit() {
@@ -118,18 +131,19 @@ public class ForcefieldEntity implements EntityBase,Collidable {
 
     @Override
     public EntityBase.ENTITY_TYPE GetEntityType() {
-        return ENTITY_TYPE.ENT_FORCEFIELD;
+        return EntityBase.ENTITY_TYPE.ENT_FORCEFIELD;
     }
 
-    public static ForcefieldEntity Create() {
-        ForcefieldEntity result = new ForcefieldEntity();
+    public static ForcefieldEntityPlayer Create() {
+        Log.v("Forcefield","Created");
+        ForcefieldEntityPlayer result = new ForcefieldEntityPlayer();
         EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_FORCEFIELD);
         return result;
     }
 
     @Override
     public String GetType() {
-        return "ENT_EVIL";
+        return "ENT_FFPLAYER";
     }
 
     @Override
@@ -144,16 +158,15 @@ public class ForcefieldEntity implements EntityBase,Collidable {
 
     @Override
     public float GetRadius() {
-        return bmp.getHeight() * 0.5f;
+
+      return bmp.getWidth() * 0.5f;
     }
 
     @Override
     public void OnHit(Collidable _other) {
-        if (_other.GetType() == "ENT_BULLET") //Change this to enemy entity
+        if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
-            Log.println(Log.DEBUG, "Bullet", "Hit forcefield");
-           HP -= 1;
-            Log.v("Hey", String.valueOf(HP));
+            HP -= 1;
         }
     }
 
@@ -163,5 +176,4 @@ public class ForcefieldEntity implements EntityBase,Collidable {
     public int GetHP() {
         return HP;
     }
-
 }

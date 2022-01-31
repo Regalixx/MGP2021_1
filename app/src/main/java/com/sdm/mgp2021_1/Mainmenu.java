@@ -17,7 +17,9 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
 
     //Define buttons
     private Button btn_start;
+    private Button btn_tutorial;
     private Button btn_leaderboard;
+    private Button btn_options;
     private Button btn_back;
     private Button btn_controls;
     private Button btn_about;
@@ -38,6 +40,12 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
 
         btn_start = (Button)findViewById(R.id.btn_start);
         btn_start.setOnClickListener(this); //Set Listener to this button --> Start Button
+
+        btn_tutorial = (Button)findViewById(R.id.btn_tutorial);
+        btn_tutorial.setOnClickListener(this); //Set Listener to this button --> Start Button
+
+        btn_options = (Button)findViewById(R.id.btn_options);
+        btn_options.setOnClickListener(this);
 
         btn_leaderboard = (Button)findViewById(R.id.btn_leaderboard);
         btn_leaderboard.setOnClickListener(this); //Set Listener to this button --> Start Button
@@ -70,10 +78,26 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase {  
             // intent --> to set to another class which another page or screen that we are launching.
             intent.setClass(this, GamePage.class);
  				 StateManager.Instance.ChangeState("MainGame"); // Default is like a loading page
+
                // AudioManager.Instance.PlayAudio(R.raw.gamebg,0.6f);
                 //Main menu ->  game page -> game view -> surface view
                 //Change state -> "Main Game" state =  MainGameSceneState = which is the main gameplay screen
 
+        }
+
+        if (v == btn_tutorial)
+        {
+            // intent --> to set to another class which another page or screen that we are launching.
+            intent.setClass(this, GamePage.class);
+
+            StateManager.Instance.ChangeState("MainGame"); // Default is like a loading page
+            WaveManager.Instance.tutorial = true;
+        }
+
+        if (v == btn_options)
+        {
+            // intent --> to set to another class which another page or screen that we are launching.
+            intent.setClass(this,OptionsPage.class);
         }
 
         if (v == btn_leaderboard)

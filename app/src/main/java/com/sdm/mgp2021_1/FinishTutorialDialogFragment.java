@@ -7,8 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
-public class MenuConfirmDialogFragment extends DialogFragment {
-
+public class FinishTutorialDialogFragment extends DialogFragment {
     public static boolean IsShown = false;
 
     @Override
@@ -18,10 +17,12 @@ public class MenuConfirmDialogFragment extends DialogFragment {
 
         //Use the builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Go back to main menu?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setMessage("You have completed the tutorial! We hope you learn the mechanics of the game. Proceed back to main menu and press Play to experience different waves of gameplay and enemies." +
+                "").setPositiveButton("Go back to main menu", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // User triggered pause
+
                 StateManager.Instance.ChangeState("MainMenu");
                 GamePage.Instance.ChangeState(Mainmenu.class);
                 if (OptionsPage.Instance == null) {
@@ -32,17 +33,12 @@ public class MenuConfirmDialogFragment extends DialogFragment {
                         AudioManager.Instance.StopAudio(R.raw.gamebg);
                     }
                 }
-
                 IsShown = false;
+
             }
-        })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //User Cancelled the pause
-                        IsShown = false;
-                    }
-                });
+        });
+
+
         //Create the AlertDialog and return it
         return builder.create();
     }

@@ -50,7 +50,10 @@ public class SaveConfirmDialogFragment extends DialogFragment {
                 }
 
 
-                AudioManager.Instance.StopAudio(R.raw.gamebg);
+                
+                if (OptionsPage.Instance == null) {
+                    AudioManager.Instance.StopAudio(R.raw.gamebg);
+                }
                 IsShown = false;
 
             }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/cyberborder">
+
+    <ImageView
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="458dp"
+        android:layout_marginRight="191dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/middle" />
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="328dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/backbutton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:layout_width="119dp"
+        android:layout_height="104dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="445dp"
+        android:layout_marginRight="247dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/drag" />
+
+    <TextView
+        android:id="@+id/AboutTitle"
+        android:layout_width="283dp"
+        android:layout_height="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="0dp"
+        android:text="OPTIONS"
+        android:textColor="#00F1FF"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/AboutDesc"
+        android:layout_width="400dp"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="175dp"
+        android:layout_marginRight="-37dp"
+        android:text="BG Music:"
+        android:textColor="#00d933"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/aboutDesc3"
+        android:layout_width="400dp"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="231dp"
+        android:layout_marginRight="-38dp"
+        android:text="Accelerometer:"
+        android:textColor="#00d933"
+        android:textSize="30sp" />
+
+    <ToggleButton
+        android:id="@+id/btn_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="229dp"
+        android:layout_marginRight="65dp"
+        android:text="ToggleButton" />
+
+    <ToggleButton
+        android:id="@+id/btn_musictoggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="173dp"
+        android:layout_marginRight="127dp"
+        android:checked = "true"
+        android:text="ToggleButton" />
+
+
+</RelativeLayout>
