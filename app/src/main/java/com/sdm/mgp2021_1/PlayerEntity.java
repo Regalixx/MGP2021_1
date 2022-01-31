@@ -201,10 +201,7 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
         }
 
 
-
-
-
-      //  if (lifetime < 0.0f ) {
+        //  if (lifetime < 0.0f ) {
         //    SetIsDone(true);   // <--- This part here or this code, meant when time is up, kill the items.
         //}
 
@@ -260,16 +257,19 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
         if (Build.VERSION.SDK_INT >= 26)
         {
             _vibrator.vibrate(VibrationEffect.createOneShot(150,10));
+            Log.v("Vibration1","works") ;
         }
         else {
             long pattern[] = {0,50,0};
             _vibrator.vibrate(pattern,-1);
+            Log.v("Vibration2","works") ;
         }
     }
 
     public void stopVibrate(){
         _vibrator.cancel();
     }
+
     @Override
     public boolean IsInit() {
         return isInit;
@@ -320,10 +320,13 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "ENT_EVIL") //Change this to enemy entity
         {
+
             if (ForcefieldEntityPlayer.Instance.IsDone() == true) {
                 SetHP(GetHP() - 5);
-                startVibrate();
+                Log.v("Hit","hiit");
             }
+
+            startVibrate();
         }
         if (_other.GetType() == "ENT_VIDEOGAMES")
         {

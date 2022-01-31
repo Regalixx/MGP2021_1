@@ -85,7 +85,7 @@ public class TrashbinEntity implements EntityBase,Collidable {
             }
 
         }
-        xPos = TouchManager.Instance.GetPosX();
+        xPos = PlayerEntity.Instance.GetPosX();
 
 
 

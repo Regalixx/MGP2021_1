@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -44,7 +45,9 @@ public class MainGameSceneState implements StateBase {
         RenderBackground.Create(); //Background is an entity
         PlayerEntity.Create();
         //EnemyFactory.Create(EnemyFactory.ENEMY_TYPE.SPAM_BASIC, new Vector3(1,700,0));
-        TrashbinEntity.Create();
+        if (WaveManager.Instance.tutorial == false) {
+            TrashbinEntity.Create();
+        }
         PausebuttonEntity.Create();
         MainMenuButtonEntity.Create();
 
@@ -106,6 +109,12 @@ public class MainGameSceneState implements StateBase {
 
         EntityManager.Instance.Update(_dt);
 
+       if(PausebuttonEntity.Instance.resumeAudio == true)
+       {
+           AudioManager.Instance.PlayAudio(R.raw.gamebg,0.9f);
+           PausebuttonEntity.Instance.resumeAudio = false;
+       }
+
         //if (EnemyBoss1.Instance.IsDone() == true && spawnBoss3 == false){
         //    PlayerEntity.Instance.SetHP(500);
         //    Log.d("Created","Boss3");
@@ -117,28 +126,29 @@ public class MainGameSceneState implements StateBase {
 
         scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
 
-        spawnPowerup+=_dt;
+        if (WaveManager.Instance.tutorial == false) {
+            spawnPowerup += _dt;
 
-        if (spawnPowerup >= 10)
-        {
-            int max = 2;
-            int min = 0;
-            int range = max - min + 1;
+            if (spawnPowerup >= 10) {
+                int max = 2;
+                int min = 0;
+                int range = max - min + 1;
 
-            // generate random numbers within 1 to 10
-            int rand = (int)(Math.random() * range) + min;
+                // generate random numbers within 1 to 10
+                int rand = (int) (Math.random() * range) + min;
 
-            if (rand == 0) { //setting the x position to spawn
-                HealthPowerupEntity.Create();
+                if (rand == 0) { //setting the x position to spawn
+                    HealthPowerupEntity.Create();
+                }
+                if (rand == 1) { //setting the x position to spawn
+                    ScoreMultiplierPowerupEntity.Create();
+                }
+                if (rand == 2) {
+                    ShieldPowerupEntity.Create();
+                }
+                spawnPowerup = 0;
+
             }
-            if (rand == 1) { //setting the x position to spawn
-                ScoreMultiplierPowerupEntity.Create();
-            }
-            if (rand == 2) {
-                ShieldPowerupEntity.Create();
-            }
-            spawnPowerup = 0;
-
         }
 
         if (PlayerEntity.Instance.GetHP() <= 0)

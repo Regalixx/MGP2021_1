@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -24,6 +25,16 @@ public class PauseConfirmDialogFragment extends DialogFragment {
                 // User triggered pause
                 GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
                 IsShown = false;
+                if (GameSystem.Instance.GetIsPaused() == true) {
+                    AudioManager.Instance.Release();
+
+                }
+                if (GameSystem.Instance.GetIsPaused() == false) {
+                    Log.v("It does work","lol");
+                    PausebuttonEntity.Instance.resumeAudio = true;
+
+                }
+
 
             }
         })

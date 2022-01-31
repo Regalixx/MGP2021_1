@@ -11,6 +11,7 @@ public class PausebuttonEntity implements EntityBase {
 
 
     public final static PausebuttonEntity Instance = new PausebuttonEntity();
+    public boolean resumeAudio = false;
     private Bitmap bmpP,bmpUP,ScaledbmpP,ScaledbmpUP;
     private float xPos = 0, yPos = 0;
 
@@ -65,7 +66,7 @@ public class PausebuttonEntity implements EntityBase {
                 if (!Paused) {
                     // Check Collision of button here!!
 
-
+                    PlayerEntity.Instance.startVibrate();
 
                     if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
                         //Paused = true;
@@ -79,6 +80,8 @@ public class PausebuttonEntity implements EntityBase {
                         PauseConfirmDialogFragment newPauseConfirm = new PauseConfirmDialogFragment();
                         newPauseConfirm.show(GamePage.Instance.getSupportFragmentManager(),"PauseConfirm");
                     }
+
+
                     buttonDelay = 0;
                     //GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
                     //Log.v("Paused", "SuccessfuL2");

@@ -95,6 +95,7 @@ public class EnemyBullet implements EntityBase, Collidable{
     public void OnHit(Collidable _other){
         if (_other.GetType() == "ENT_PLAYER") {
             SetIsDone(true);
+            Log.v("Hit2","hiit2");
         }
         if (_other.GetType() == "ENT_FFPLAYER") {
             SetIsDone(true);

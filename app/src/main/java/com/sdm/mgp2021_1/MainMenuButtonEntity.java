@@ -42,7 +42,7 @@ public class MainMenuButtonEntity implements EntityBase{
         ScaledbmpP = Bitmap.createScaledBitmap(bmpP, (int) (ScreenWidth)/12, (int)(ScreenWidth)/7, true);
 
         xPos = ScreenWidth - 950;
-        yPos = 260;
+        yPos = 300;
         isInit = true;
 
 
@@ -59,11 +59,12 @@ public class MainMenuButtonEntity implements EntityBase{
                 Log.v("Touch", "Touched");
                 if (!Paused) {
                     // Check Collision of button here!!
-
+                    PlayerEntity.Instance.startVibrate();
 
 
                     if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
                         //Paused = true;
+
                         Log.v("Paused", "Successful");
 
 

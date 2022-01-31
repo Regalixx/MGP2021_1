@@ -170,5 +170,4 @@ public class HealthPowerupEntity implements  EntityBase,Collidable{
             PlayerEntity.Instance.SetHP(PlayerEntity.Instance.GetHP()+ 30);
         }
     }
-
 }

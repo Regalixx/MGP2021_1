@@ -25,6 +25,7 @@ public class FinishTutorialDialogFragment extends DialogFragment {
 
                 StateManager.Instance.ChangeState("MainMenu");
                 GamePage.Instance.ChangeState(Mainmenu.class);
+                WaveManager.Instance.tutorial = false;
                 if (OptionsPage.Instance == null) {
                     AudioManager.Instance.StopAudio(R.raw.gamebg);
                 }
