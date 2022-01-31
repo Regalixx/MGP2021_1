@@ -53,7 +53,15 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
         {
             if(deltaY > 0)
             {
+                if (OptionsPage.Instance == null) {
+                    BulletEntity.Create();// if its swiped up, make a bullet
+                    AudioManager.Instance.PlayAudio(R.raw.laserbeam,1.0f);
+                }
+                else if (OptionsPage.Instance.active == false) {
 
+                    BulletEntity.Create();// if its swiped up, make a bullet
+                    AudioManager.Instance.PlayAudio(R.raw.laserbeam,1.0f);
+                }
 
             }else
             {
@@ -67,15 +75,30 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
       //  this.activity.displayMessage("Single tap occurred.");
-        BulletEntity.Create();// if its swiped up, make a bullet
-        AudioManager.Instance.PlayAudio(R.raw.laserbeam,1.0f);
+        if (OptionsPage.Instance == null) {
+            return true;
+        }
+        else if (OptionsPage.Instance.active == true) {
 
+            BulletEntity.Create();// if its swiped up, make a bullet
+            AudioManager.Instance.PlayAudio(R.raw.laserbeam,1.0f);
+        }
         return true;
     }
     // Invoked when double tap screen.
     @Override
     public boolean onDoubleTap(MotionEvent e) {
        // this.activity.displayMessage("Double tap occurred.");
+
+        if (OptionsPage.Instance == null) {
+            return true;
+        }
+        else if (OptionsPage.Instance.active == true) {
+
+            BulletEntity.Create();// if its swiped up, make a bullet
+            AudioManager.Instance.PlayAudio(R.raw.laserbeam,1.0f);
+        }
+
         return true;
     }
 }
