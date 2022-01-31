@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.Map;
 
 public class LeaderboardPage extends Activity implements View.OnClickListener, StateBase {
 
@@ -39,13 +42,33 @@ public class LeaderboardPage extends Activity implements View.OnClickListener, S
         else {
             TextView t1, t2;
             t2 = findViewById(R.id.username);
-            String userText = String.format(GameSystem.Instance.GetUserFromSave("User"));
+            t1 = (TextView) findViewById(R.id.score);
+
+            String userText = "";
+            String scoreText = "";
+
+            int height = 0;
+            for (Map.Entry<String, ?> pair : GameSystem.Instance.GetSharedPref().getAll().entrySet()) {
+
+                Log.d( "Found text", "Text found: " + pair.getKey() + " " + pair.getValue());
+                userText  += String.format(pair.getKey() + ": " + pair.getValue() + " \n");
+                height += 1;
+                scoreText += String.format(pair.getValue() + "\n");
+
+            }
+
             t2.setText(userText);
 
+            RelativeLayout.LayoutParams t2params = (RelativeLayout.LayoutParams) t2.getLayoutParams();
 
-            t1 = (TextView) findViewById(R.id.score);
-            String scoreText = String.format("%d", GameSystem.Instance.GetIntFromSave("Score"));
-            t1.setText(scoreText);
+            t2params.height *= height;
+
+            t2.setLayoutParams(t2params);
+
+            //t1.setText(scoreText);
+
+
+
         }
 
     }

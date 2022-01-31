@@ -37,10 +37,19 @@ public class SaveConfirmDialogFragment extends DialogFragment {
                 username = input.getText().toString();
                 Log.v(username,"user");
                 GameSystem.Instance.SaveEditBegin();
-                GameSystem.Instance.SetUserInSave("User",username);
+                GameSystem.Instance.SetIntInSave(username, GameSystem.Instance.GetIntFromSave("Score"));
                 GameSystem.Instance.SaveEditEnd();
-                StateManager.Instance.ChangeState("Victory");
-                GamePage.Instance.ChangeState(VictoryPage.class);
+
+                if (GameSystem.Instance.isPlayerDied()) {
+                    StateManager.Instance.ChangeState("GameOver");
+                    GamePage.Instance.ChangeState(GameOver.class);
+                }
+                else {
+                    StateManager.Instance.ChangeState("Victory");
+                    GamePage.Instance.ChangeState(VictoryPage.class);
+                }
+
+
                 AudioManager.Instance.StopAudio(R.raw.gamebg);
                 IsShown = false;
 

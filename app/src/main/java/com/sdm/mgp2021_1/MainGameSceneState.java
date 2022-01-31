@@ -66,6 +66,8 @@ public class MainGameSceneState implements StateBase {
         GameSystem.Instance.SetIntInSave("Score", currScore);
         GameSystem.Instance.SaveEditEnd();
 
+        GameSystem.Instance.setPlayerDied(false);
+
         AudioManager.Instance.PlayAudio(R.raw.gamebg,0.9f);
 
 
@@ -110,8 +112,16 @@ public class MainGameSceneState implements StateBase {
         if (PlayerEntity.Instance.GetHP() <= 0)
         {
 
+            GameSystem.Instance.setPlayerDied(true);
+            if (SaveConfirmDialogFragment.IsShown)
+                return;
+            SaveConfirmDialogFragment newSaveConfirm = new SaveConfirmDialogFragment();
+            newSaveConfirm.show(GamePage.Instance.getSupportFragmentManager(), "SaveConfirm");
+
+
+
             //StateManager.Instance.ChangeState("GameOver");
-            //GamePage.Instance.ChangeState(GameOver.class);
+           // GamePage.Instance.ChangeState(GameOver.class);
 
         }
         if (WaveManager.Instance.TimeToExit())
@@ -121,6 +131,8 @@ public class MainGameSceneState implements StateBase {
 
             SaveConfirmDialogFragment newSaveConfirm = new SaveConfirmDialogFragment();
             newSaveConfirm.show(GamePage.Instance.getSupportFragmentManager(), "SaveConfirm");
+
+
 
         }
 

@@ -133,7 +133,7 @@ public class PlayerEntity implements EntityBase, Collidable,SensorEventListener 
                     y =  (float)Math.toDegrees ( Math.atan(ry / Math.sqrt(rx * rx + rz * rz))),
                     z =  (float)Math.toDegrees(Math.atan(rz / Math.sqrt(ry * ry + rx * rx)));
 
-            Log.d("Acceloremter test", "X: " + x + " Y: " + y + " Z: " + z);
+            //Log.d("Acceloremter test", "X: " + x + " Y: " + y + " Z: " + z);
 
 
             int offset = 30;

@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.SurfaceView;
 
+import java.util.HashMap;
+
 
 // Created by TanSiewLan2021
 
@@ -19,6 +21,10 @@ public class GameSystem {
     SharedPreferences sharedPref = null;
     SharedPreferences.Editor editor = null;
     int waves = 1;
+
+    private HashMap scoreboard = new HashMap();
+
+    private boolean playerDied = false;
 
     // Game stuff
     public boolean isPaused = false;
@@ -85,6 +91,7 @@ public class GameSystem {
             return;
 
         editor.putInt(_key, _value);
+        scoreboard.put(_key,_value);
     }
 
     public int GetIntFromSave(String _key)
@@ -92,12 +99,16 @@ public class GameSystem {
         return sharedPref.getInt(_key, 10);
     }
 
+    public HashMap GetScoreboard() { return scoreboard;}
+
     public void SetUserInSave(String _key, String _name)
     {
         if (editor == null)
             return;
 
         editor.putString(_key, _name);
+
+
 
     }
 
@@ -143,4 +154,9 @@ public class GameSystem {
     }
 
 
+    public boolean isPlayerDied() { return playerDied;}
+
+    public void setPlayerDied(boolean playerDied) {
+        this.playerDied = playerDied;
+    }
 }
